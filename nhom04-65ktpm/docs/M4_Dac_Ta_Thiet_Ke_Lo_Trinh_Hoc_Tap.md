@@ -17,7 +17,7 @@ Module M4 chịu trách nhiệm biến dữ liệu đầu vào của sinh viên 
 
 | Giai đoạn | Công việc chính | Kết quả bàn giao |
 | :--- | :--- | :--- |
-| **Tuần 1** (16/11 – 22/11) | - Thiết kế bài khảo sát đầu vào B1<br>- Thiết kế thuật toán sinh lộ trình tuần/ngày<br>- Thiết kế khung UI lộ trình học tập B1 | Tài liệu đặc tả thiết kế M4; khung màn hình và logic sinh lộ trình sẵn sàng tích hợp vào `src/` của M1 |
+| **Tuần 1** (18/11 – 22/11) | - Thiết kế bài khảo sát đầu vào B1<br>- Thiết kế thuật toán sinh lộ trình tuần/ngày<br>- Thiết kế khung UI lộ trình học tập B1 | Tài liệu đặc tả thiết kế M4; khung màn hình và logic sinh lộ trình sẵn sàng tích hợp vào `src/` của M1 |
 | **Tuần 2** (23/11 – 29/11) | - Liên kết nhiệm vụ ngày sang M2 (tài liệu) & M3 (bài tập)<br>- Tự động cập nhật tiến độ/lộ trình theo điểm M3<br>- (Tùy chọn) Danh sách tour dẫn tiếng Anh / CLB giao lưu & lưu quan tâm | Luồng M4 chạy hoàn chỉnh, đồng bộ Firestore & điều hướng liên module |
 | **Tuần 3** (30/11 – 06/12) | - Viết unit test cho thuật toán & kiểm thử luồng M4<br>- Làm mượt UX, sửa lỗi liên kết với M2/M3/M5<br>- Viết phần báo cáo M4 & kịch bản demo | Kiểm thử đạt, kịch bản demo và tài liệu báo cáo M4 |
 
