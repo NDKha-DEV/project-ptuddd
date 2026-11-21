@@ -16,8 +16,20 @@
 
 ## Hướng Dẫn Thiết Lập Môi Trường
 
-[Chưa cập nhật]
+1. Cài Flutter stable 3.47 trở lên và Android Studio (Android SDK, máy ảo Android).
+2. Chạy `flutter doctor` để kiểm tra môi trường.
+3. Cài thư viện:
+   ```bash
+   cd nhom04-65ktpm/src
+   flutter pub get
+   ```
+4. (Khi có Firebase project) chạy `flutterfire configure` để sinh `lib/firebase_options.dart`.
 
 ## Các Bước Khởi Chạy Ứng Dụng
 
-[Chưa cập nhật]
+```bash
+cd nhom04-65ktpm/src
+flutter run
+```
+
+Chi tiết cấu trúc mã nguồn và quy trình làm việc: xem `README.md` của nhóm.
