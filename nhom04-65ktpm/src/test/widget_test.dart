@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:tlu_b1_daily/app.dart';
 import 'package:tlu_b1_daily/features/auth/presentation/providers/auth_provider.dart';
+import 'package:tlu_b1_daily/features/learning_path/data/repositories/learning_path_repository.dart';
+import 'package:tlu_b1_daily/features/learning_path/presentation/providers/learning_path_provider.dart';
 
-Widget _buildApp() => ChangeNotifierProvider(
-  create: (_) => AuthProvider(firebaseReady: false),
+Widget _buildApp() => MultiProvider(
+  providers: [
+    ChangeNotifierProvider(create: (_) => AuthProvider(firebaseReady: false)),
+    ChangeNotifierProvider(
+      create: (_) => LearningPathProvider(
+        repository: LearningPathRepository(firebaseReady: false),
+      ),
+    ),
+  ],
   child: const TluB1DailyApp(),
 );
 
 void main() {
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
+
   testWidgets('Chưa đăng nhập thì vào màn Login', (tester) async {
     await tester.pumpWidget(_buildApp());
     await tester.pumpAndSettle();
@@ -36,7 +50,7 @@ void main() {
 
     await tester.tap(find.text('Lộ trình'));
     await tester.pumpAndSettle();
-    expect(find.text('M4 - Lộ trình học tập'), findsOneWidget);
+    expect(find.text('Lộ trình học tập'), findsOneWidget);
 
     await tester.tap(find.text('Cá nhân'));
     await tester.pumpAndSettle();
