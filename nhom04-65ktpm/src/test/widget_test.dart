@@ -56,4 +56,37 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('M1 - Nền tảng và tài khoản'), findsOneWidget);
   });
+
+  testWidgets('Luồng M4 đầy đủ qua GoRouter: Khảo sát -> Lộ trình -> Tour tiếng Anh', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_buildApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byType(FilledButton));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Lộ trình'));
+    await tester.pumpAndSettle();
+    expect(find.text('Chưa có lộ trình B1 cá nhân'), findsOneWidget);
+
+    await tester.tap(find.text('Bắt đầu khảo sát tạo lộ trình'));
+    await tester.pumpAndSettle();
+    expect(find.text('Khảo sát đầu vào B1'), findsOneWidget);
+
+    final skipBtn = find.text('Bỏ qua & tạo lộ trình nền tảng');
+    await tester.scrollUntilVisible(
+      skipBtn,
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(skipBtn);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Tiến độ tổng thể: 0%'), findsOneWidget);
+
+    await tester.tap(find.textContaining('Tour dẫn tiếng Anh'));
+    await tester.pumpAndSettle();
+    expect(find.text('Tour dẫn tiếng Anh & CLB'), findsOneWidget);
+  });
 }

@@ -20,6 +20,18 @@ class TourDetailScreen extends StatefulWidget {
 class _TourDetailScreenState extends State<TourDetailScreen> {
   String? _reminderNote;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || widget.tour != null) return;
+      final provider = context.read<LearningPathProvider>();
+      if (provider.tours.isEmpty && !provider.isLoading) {
+        provider.loadInitialData();
+      }
+    });
+  }
+
   EnglishTour? _resolveTour(LearningPathProvider provider) {
     if (widget.tour != null) return widget.tour;
     for (final item in provider.tours) {

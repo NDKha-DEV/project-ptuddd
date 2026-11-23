@@ -11,6 +11,7 @@ import '../providers/learning_path_provider.dart';
 import '../widgets/day_task_card.dart';
 import '../widgets/skill_summary_card.dart';
 import '../widgets/week_selector.dart';
+import 'english_tours_screen.dart';
 import 'onboarding_survey_screen.dart';
 
 /// M4 - Màn hình chính Tab Lộ trình học tập B1.
@@ -61,6 +62,10 @@ class _LearningPathScreenState extends State<LearningPathScreen> {
       widget.onOpenSurvey!();
       return;
     }
+    if (GoRouter.maybeOf(context) != null) {
+      context.push(AppRoutes.learningPathSurvey);
+      return;
+    }
     Navigator.of(context).push(
       MaterialPageRoute<bool>(
         builder: (_) => const OnboardingSurveyScreen(),
@@ -73,9 +78,13 @@ class _LearningPathScreenState extends State<LearningPathScreen> {
       widget.onOpenTours!();
       return;
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Danh sách Tour dẫn tiếng Anh đang được hoàn thiện.'),
+    if (GoRouter.maybeOf(context) != null) {
+      context.push(AppRoutes.learningPathTours);
+      return;
+    }
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => const EnglishToursScreen(),
       ),
     );
   }

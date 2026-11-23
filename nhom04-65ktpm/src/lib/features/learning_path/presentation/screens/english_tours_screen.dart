@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../data/models/english_tour_model.dart';
 import '../providers/learning_path_provider.dart';
 import 'tour_detail_screen.dart';
@@ -31,6 +33,10 @@ class _EnglishToursScreenState extends State<EnglishToursScreen> {
   void _openDetail(BuildContext context, EnglishTour tour) {
     if (widget.onOpenTour != null) {
       widget.onOpenTour!(tour);
+      return;
+    }
+    if (GoRouter.maybeOf(context) != null) {
+      context.push(AppRoutes.learningPathTourDetail(tour.tourId));
       return;
     }
     Navigator.of(context).push(

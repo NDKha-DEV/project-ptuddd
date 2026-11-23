@@ -245,9 +245,9 @@ nhom04-65ktpm/src/
 
 ---
 
-## 8. Tiến Độ Hiện Tại & Kế Hoạch Tiếp Theo (Cập nhật 22/11/2026)
+## 8. Tiến Độ Hiện Tại & Kế Hoạch Tiếp Theo (Cập nhật 23/11/2026)
 
-### 8.1. Phần đã hoàn thành (PR #1 – Data & Domain Layer)
+### 8.1. Phần đã hoàn thành
 - **Data Models (`lib/features/learning_path/data/models/`):**
   - `skill_scores.dart` (`SkillType`, `SkillScores`)
   - `daily_task_model.dart` (`TaskStatus`, `TargetModule`, `DailyTask`)
@@ -258,20 +258,16 @@ nhom04-65ktpm/src/
   - `learning_path_generator.dart`: Chia 3 chặng (`foundation` / `focus` / `review`, xử lý biên `< 7 ngày`), phân bổ trọng số kỹ năng yếu, đóng gói nhiệm vụ khớp `30/45/60` phút/ngày, tái cân bằng ngày `pending` khi có điểm M3 hoặc đổi cấu hình M1 mà vẫn bảo toàn ngày `completed`.
 - **Repository (`lib/features/learning_path/data/repositories/`):**
   - `learning_path_repository.dart`: Đọc/ghi Firestore (`learning_paths`, `english_tours`) kèm fallback cục bộ qua `SharedPreferences` và dữ liệu mẫu M2/M3/Tour khi chạy offline/guest.
-- **Unit Tests (`test/features/learning_path/`):**
-  - `models_test.dart` (6 tests), `learning_path_generator_test.dart` (7 tests), `learning_path_repository_test.dart` (3 tests). `flutter analyze` sạch và `flutter test` đạt 18/18.
+- **Presentation Layer (`lib/features/learning_path/presentation/`):**
+  - `providers/learning_path_provider.dart` (`LearningPathProvider`): quản lý trạng thái khảo sát, lộ trình, hoàn thành nhiệm vụ, tái cân bằng, lưu tour và đồng bộ `uid`.
+  - `widgets/`: `SkillSummaryCard`, `WeekSelector`, `DayTaskCard`.
+  - `screens/`: `OnboardingSurveyScreen` (2 bước + bỏ qua), `LearningPathScreen` (thay `PlaceholderView`, điều hướng sang M2/M3 qua `AppRoutes`, phân tích 4 kỹ năng & điều chỉnh lịch), `EnglishToursScreen` & `TourDetailScreen`.
+- **Tích hợp & Kiểm thử (`test/features/learning_path/` & `test/widget_test.dart`):**
+  - Đăng ký `LearningPathProvider` trong `main.dart` và các sub-route M4 (`/learning-path/survey`, `/learning-path/tours`, `/learning-path/tours/:tourId`) trong `app_routes.dart` / `app_router.dart`.
+  - Tổng cộng **39/39 tests đạt** (`models_test`, `learning_path_generator_test`, `learning_path_repository_test`, `learning_path_provider_test`, `learning_path_widgets_test`, `onboarding_survey_screen_test`, `learning_path_screen_test`, `english_tours_screen_test`, `widget_test`) và `flutter analyze` sạch.
 
-### 8.2. Kế hoạch tiếp theo (Presentation Layer & Tích hợp liên module)
-1. **State Management (`presentation/providers/`):**
-   - `learning_path_provider.dart` (`ChangeNotifier`) quản lý trạng thái khảo sát, lộ trình hiện tại, đánh dấu hoàn thành `DailyTask`, và lưu quan tâm tour.
-2. **Giao diện M4 (`presentation/screens/` & `presentation/widgets/`):**
-   - `OnboardingSurveyScreen`: Khảo sát đầu vào 2 bước + nút bỏ qua.
-   - `LearningPathScreen` + `WeekSelector`, `DayTaskCard`, `SkillSummaryCard`: Thay `PlaceholderView`, hiển thị lộ trình tuần/ngày và nút **"Học ngay"** điều hướng qua `AppRoutes.materialDetail(...)` / `AppRoutes.exerciseDetail(...)`.
-   - `EnglishToursScreen` & `TourDetailScreen`: Danh sách tour dẫn tiếng Anh / CLB tại Hà Nội, mẫu câu giao tiếp và lưu quan tâm.
-3. **Widget Tests (`test/features/learning_path/`):**
-   - Kiểm thử luồng `OnboardingSurveyScreen` và `LearningPathScreen`.
-4. **Điểm cần phối hợp với các module khác khi tích hợp:**
-   - **M1:** Chốt nơi lưu `examDate`, `dailyMinutes` của user; báo nhóm khi đăng ký `LearningPathProvider` vào `main.dart`, thêm sub-route vào `app_router.dart` / `app_routes.dart` và cập nhật `widget_test.dart`.
-   - **M2:** Chốt danh sách `materialId` và schema `b1_materials`.
-   - **M3:** Chốt danh sách `exerciseId` và schema `users/{uid}/attempts/{attemptId}` (`skill`, `scorePercent`, `durationMinutes`).
-   - **M5:** Chốt schema `users/{uid}/daily_logs/{date}` để cộng dồn phút học & streak khi hoàn thành nhiệm vụ ở M4.
+### 8.2. Điểm cần phối hợp với các module khác khi tích hợp sâu
+1. **M1:** Chốt nơi lưu `examDate`, `dailyMinutes` của user trên Firestore/Profile để gọi `LearningPathProvider.rescheduleSettings` khi user thay đổi ở màn Cá nhân.
+2. **M2:** Chốt danh sách `materialId` và schema `b1_materials`.
+3. **M3:** Chốt danh sách `exerciseId` và schema `users/{uid}/attempts/{attemptId}` (`skill`, `scorePercent`, `durationMinutes`) để gọi `LearningPathProvider.applyExerciseAttempt`.
+4. **M5:** Chốt schema `users/{uid}/daily_logs/{date}` để truyền callback `onTaskToggled` cộng dồn phút học & streak khi hoàn thành nhiệm vụ ở M4.
