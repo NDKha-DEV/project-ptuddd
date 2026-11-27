@@ -242,3 +242,36 @@ nhom04-65ktpm/src/
 └── test/features/learning_path/
     └── learning_path_generator_test.dart
 ```
+
+---
+
+## 8. Tiến Độ Hiện Tại & Kế Hoạch Tiếp Theo (Cập nhật 22/11/2026)
+
+### 8.1. Phần đã hoàn thành (PR #1 – Data & Domain Layer)
+- **Data Models (`lib/features/learning_path/data/models/`):**
+  - `skill_scores.dart` (`SkillType`, `SkillScores`)
+  - `daily_task_model.dart` (`TaskStatus`, `TargetModule`, `DailyTask`)
+  - `learning_path_model.dart` (`LearningPhase`, `DayPlan`, `WeekPlan`, `LearningPath`)
+  - `assessment_result_model.dart` (`SkillLevelTier`, `MiniDiagnosticQuestion`, `InitialAssessmentResult`)
+  - `english_tour_model.dart` (`EnglishTour`)
+- **Domain Service (`lib/features/learning_path/domain/services/`):**
+  - `learning_path_generator.dart`: Chia 3 chặng (`foundation` / `focus` / `review`, xử lý biên `< 7 ngày`), phân bổ trọng số kỹ năng yếu, đóng gói nhiệm vụ khớp `30/45/60` phút/ngày, tái cân bằng ngày `pending` khi có điểm M3 hoặc đổi cấu hình M1 mà vẫn bảo toàn ngày `completed`.
+- **Repository (`lib/features/learning_path/data/repositories/`):**
+  - `learning_path_repository.dart`: Đọc/ghi Firestore (`learning_paths`, `english_tours`) kèm fallback cục bộ qua `SharedPreferences` và dữ liệu mẫu M2/M3/Tour khi chạy offline/guest.
+- **Unit Tests (`test/features/learning_path/`):**
+  - `models_test.dart` (6 tests), `learning_path_generator_test.dart` (7 tests), `learning_path_repository_test.dart` (3 tests). `flutter analyze` sạch và `flutter test` đạt 18/18.
+
+### 8.2. Kế hoạch tiếp theo (Presentation Layer & Tích hợp liên module)
+1. **State Management (`presentation/providers/`):**
+   - `learning_path_provider.dart` (`ChangeNotifier`) quản lý trạng thái khảo sát, lộ trình hiện tại, đánh dấu hoàn thành `DailyTask`, và lưu quan tâm tour.
+2. **Giao diện M4 (`presentation/screens/` & `presentation/widgets/`):**
+   - `OnboardingSurveyScreen`: Khảo sát đầu vào 2 bước + nút bỏ qua.
+   - `LearningPathScreen` + `WeekSelector`, `DayTaskCard`, `SkillSummaryCard`: Thay `PlaceholderView`, hiển thị lộ trình tuần/ngày và nút **"Học ngay"** điều hướng qua `AppRoutes.materialDetail(...)` / `AppRoutes.exerciseDetail(...)`.
+   - `EnglishToursScreen` & `TourDetailScreen`: Danh sách tour dẫn tiếng Anh / CLB tại Hà Nội, mẫu câu giao tiếp và lưu quan tâm.
+3. **Widget Tests (`test/features/learning_path/`):**
+   - Kiểm thử luồng `OnboardingSurveyScreen` và `LearningPathScreen`.
+4. **Điểm cần phối hợp với các module khác khi tích hợp:**
+   - **M1:** Chốt nơi lưu `examDate`, `dailyMinutes` của user; báo nhóm khi đăng ký `LearningPathProvider` vào `main.dart`, thêm sub-route vào `app_router.dart` / `app_routes.dart` và cập nhật `widget_test.dart`.
+   - **M2:** Chốt danh sách `materialId` và schema `b1_materials`.
+   - **M3:** Chốt danh sách `exerciseId` và schema `users/{uid}/attempts/{attemptId}` (`skill`, `scorePercent`, `durationMinutes`).
+   - **M5:** Chốt schema `users/{uid}/daily_logs/{date}` để cộng dồn phút học & streak khi hoàn thành nhiệm vụ ở M4.
