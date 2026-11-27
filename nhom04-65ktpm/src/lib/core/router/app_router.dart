@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/providers/auth_provider.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
+import '../../features/auth/presentation/screens/register_screen.dart';
 import '../../features/b1_materials/presentation/screens/material_detail_screen.dart';
 import '../../features/b1_materials/presentation/screens/materials_screen.dart';
 import '../../features/exercises/presentation/screens/exercise_detail_screen.dart';
@@ -19,14 +20,21 @@ GoRouter createAppRouter(AuthProvider auth) {
     refreshListenable: auth,
     redirect: (context, state) {
       final atLogin = state.matchedLocation == AppRoutes.login;
-      if (!auth.isSignedIn) return atLogin ? null : AppRoutes.login;
-      if (atLogin) return AppRoutes.home;
+      final atRegister = state.matchedLocation == AppRoutes.register;
+      final atAuthScreen = atLogin || atRegister;
+      if (auth.isInitializing) return atAuthScreen ? null : AppRoutes.login;
+      if (!auth.isSignedIn) return atAuthScreen ? null : AppRoutes.login;
+      if (atAuthScreen) return AppRoutes.home;
       return null;
     },
     routes: [
       GoRoute(
         path: AppRoutes.login,
         builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.register,
+        builder: (context, state) => const RegisterScreen(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => HomeShell(navigationShell: shell),
