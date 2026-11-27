@@ -2,7 +2,7 @@
 
 ## 1. Scope M1-01 — Supabase Foundation
 
-Trạng thái: **Done** (chưa commit).
+Trạng thái: **Done** (đã commit trong `a8d9001`).
 
 Mục tiêu: thay nền tảng Firebase tạm bằng Supabase Flutter SDK, khởi tạo `SupabaseClient` từ cấu hình môi trường, giữ nguyên Provider, GoRouter, theme và UI hiện tại.
 
@@ -63,7 +63,7 @@ Chỉ dùng **publishable key**. Không dùng service_role key/secret key và kh
 
 ## 4. Scope M1-02 — Auth State Foundation
 
-Trạng thái: **Done** (chưa commit).
+Trạng thái: **Done** (đã commit trong `a8d9001`).
 
 ### Đã làm
 
@@ -90,13 +90,41 @@ Không triển khai Login/Register UI, Google OAuth, Forgot Password, schema/RLS
 | Routing/UI | Giữ `AppRoutes`, `GoRouter`, `HomeShell`, `LoginScreen`, `ProfileScreen`; chỉ sửa redirect lúc initializing và nút guest. |
 | Secret | Không có URL/key thật trong file tracked. |
 
-## 6. Danh sách task M1 (đề xuất, cập nhật theo thực tế)
+## 6. Scope M1-03 — Login/Register email/password
+
+Trạng thái: **Done** (chưa commit).
+
+### Đã làm
+
+- `AuthProvider` thêm `signInWithPassword({email, password})` và `signUp({email, password})`: loading/error/notice, chặn submit lặp, map lỗi Supabase thường gặp.
+- `signUp()` phân biệt có session (đăng ký xong vào app) và `session == null` (cần xác nhận email); thông báo qua `notice`.
+- Thêm `AuthFormMode` và `AuthForm` dùng chung cho login/register: validate email, mật khẩu >= 6, xác nhận mật khẩu, hiển thị error/notice, vô hiệu hóa nút khi loading.
+- `LoginScreen` dùng `AuthForm` thay placeholder; thêm `RegisterScreen`.
+- Thêm `AppRoutes.register`; `GoRouter` cho phép `/login` và `/register` khi chưa signed in, redirect cả hai về home khi đã signed in.
+- Thêm test form/provider/navigation và test signIn thật với thông tin sai (có dart-define); cập nhật widget test cũ.
+
+### Ngoài phạm vi M1-03
+
+Không triển khai Google OAuth, Forgot Password, Profile/Settings, schema/RLS, Storage.
+
+## 7. Kiểm tra M1-03
+
+| Kiểm tra | Kết quả |
+|---|---|
+| `flutter analyze` | `No issues found!` |
+| `flutter test` | `All tests passed!` — 10 tests (bootstrap, signIn thật với sai thông tin, provider, auth form, redirect/navigation, 5 tab). |
+| `flutter run -d windows` với dart-define | Build `tlu_b1_daily.exe` thành công; log `Supabase init completed`; app chạy ổn định đến khi tool ngắt phiên. |
+| SignIn qua Supabase thật với sai thông tin | `All tests passed!`: trả `false`, có error, không throw. |
+| Đăng ký/đăng nhập thành công bằng tài khoản thật | Chưa chạy: không có credentials và không tạo tài khoản thật để tránh side effect; luồng đã gọi `signUp`/`signInWithPassword`, xử lý error/notice. |
+| Secret trong source/Git | Không có URL/key thật nào được ghi vào file tracked. |
+
+## 8. Danh sách task M1 (đề xuất, cập nhật theo thực tế)
 
 | Task | Mục tiêu | Trạng thái | Phụ thuộc |
 |---|---|---|---|
 | M1-01 | Supabase SDK + client bootstrap + env config | **Done** | — |
 | M1-02 | Auth state thật trên Supabase Auth; thay guest uid bằng `User?`, loading/error | **Done** | M1-01 |
-| M1-03 | Register + Login email/password, route và form | Not started | M1-02 |
+| M1-03 | Register + Login email/password, route và form | **Done** | M1-02 |
 | M1-04 | Session persistence + logout thật qua Supabase | Partial — SDK giữ session và `signOut()` đã dùng Supabase; chưa test flow logout riêng | M1-02 |
 | M1-05 | Google OAuth + cấu hình native redirect | Not started | M1-01, M1-02 |
 | M1-06 | Forgot password | Not started | M1-03 |
@@ -105,9 +133,9 @@ Không triển khai Login/Register UI, Google OAuth, Forgot Password, schema/RLS
 | M1-09 | Settings: mục tiêu 30/45/60, giờ nhắc, sáng/tối | Not started | M1-02, M1-07 |
 | M1-10 | Shared UI: dùng `LoadingView`/`ErrorView`, thêm button/card/dialog dùng chung | Partial | M1-02 |
 | M1-11 | Security Rules/RLS + schema tối thiểu | Not started | Quyết định data model |
-| M1-12 | Unit/widget test cho auth, redirect, logout, settings | Partial — có bootstrap/provider/redirect; chưa có login/register/settings | M1-02 trở đi |
+| M1-12 | Unit/widget test cho auth, redirect, logout, settings | Partial — có bootstrap/provider/redirect/login/register; chưa có settings | M1-02 trở đi |
 
-## 7. Nguyên tắc khi triển khai tiếp
+## 9. Nguyên tắc khi triển khai tiếp
 
 - Giữ `provider`, `GoRouter`, `AppRoutes`, `HomeShell`, `AppTheme` hiện tại; chỉ mở rộng.
 - Mọi truy cập Supabase đi qua `Supabase.instance.client` sau `SupabaseBootstrap.init()`.

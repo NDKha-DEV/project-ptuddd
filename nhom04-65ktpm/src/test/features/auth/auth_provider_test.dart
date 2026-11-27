@@ -67,4 +67,25 @@ void main() {
     expect(auth.error, 'stream failed');
     controller.close();
   });
+
+  test('SignIn/SignUp trả false khi chưa cấu hình Supabase', () async {
+    final auth = AuthProvider(supabaseReady: false);
+    await auth.initialize();
+
+    final signedIn = await auth.signInWithPassword(
+      email: 'user@example.com',
+      password: '123456',
+    );
+    expect(signedIn, isFalse);
+    expect(auth.error, 'Chưa cấu hình Supabase.');
+    expect(auth.notice, isNull);
+
+    final signedUp = await auth.signUp(
+      email: 'user@example.com',
+      password: '123456',
+    );
+    expect(signedUp, isFalse);
+    expect(auth.error, 'Chưa cấu hình Supabase.');
+    expect(auth.isLoading, isFalse);
+  });
 }

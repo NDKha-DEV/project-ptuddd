@@ -39,7 +39,25 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('TLU B1 Daily'), findsOneWidget);
-    expect(find.text('Đăng nhập sẽ triển khai ở M1-03'), findsOneWidget);
+    expect(find.byType(TextFormField), findsNWidgets(2));
+    expect(find.text('Chưa có tài khoản?'), findsOneWidget);
+  });
+
+  testWidgets('Chuyển qua lại giữa Login và Register', (tester) async {
+    final auth = AuthProvider(supabaseReady: false);
+    await auth.initialize();
+
+    await tester.pumpWidget(_buildApp(auth));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Đăng ký'));
+    await tester.pumpAndSettle();
+    expect(find.byType(TextFormField), findsNWidgets(3));
+    expect(find.text('Xác nhận mật khẩu'), findsOneWidget);
+
+    await tester.tap(find.text('Đăng nhập'));
+    await tester.pumpAndSettle();
+    expect(find.byType(TextFormField), findsNWidgets(2));
   });
 
   testWidgets('Session Supabase cập nhật thì vào được 5 tab', (tester) async {
