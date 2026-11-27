@@ -17,7 +17,7 @@ Module M4 chịu trách nhiệm biến dữ liệu đầu vào của sinh viên 
 
 | Giai đoạn | Công việc chính | Kết quả bàn giao |
 | :--- | :--- | :--- |
-| **Tuần 1** (16/11 – 22/11) | - Thiết kế bài khảo sát đầu vào B1<br>- Thiết kế thuật toán sinh lộ trình tuần/ngày<br>- Thiết kế khung UI lộ trình học tập B1 | Tài liệu đặc tả thiết kế M4; khung màn hình và logic sinh lộ trình sẵn sàng tích hợp vào `src/` của M1 |
+| **Tuần 1** (18/11 – 22/11) | - Thiết kế bài khảo sát đầu vào B1<br>- Thiết kế thuật toán sinh lộ trình tuần/ngày<br>- Thiết kế khung UI lộ trình học tập B1 | Tài liệu đặc tả thiết kế M4; khung màn hình và logic sinh lộ trình sẵn sàng tích hợp vào `src/` của M1 |
 | **Tuần 2** (23/11 – 29/11) | - Liên kết nhiệm vụ ngày sang M2 (tài liệu) & M3 (bài tập)<br>- Tự động cập nhật tiến độ/lộ trình theo điểm M3<br>- (Tùy chọn) Danh sách tour dẫn tiếng Anh / CLB giao lưu & lưu quan tâm | Luồng M4 chạy hoàn chỉnh, đồng bộ Firestore & điều hướng liên module |
 | **Tuần 3** (30/11 – 06/12) | - Viết unit test cho thuật toán & kiểm thử luồng M4<br>- Làm mượt UX, sửa lỗi liên kết với M2/M3/M5<br>- Viết phần báo cáo M4 & kịch bản demo | Kiểm thử đạt, kịch bản demo và tài liệu báo cáo M4 |
 
@@ -242,3 +242,32 @@ nhom04-65ktpm/src/
 └── test/features/learning_path/
     └── learning_path_generator_test.dart
 ```
+
+---
+
+## 8. Tiến Độ Hiện Tại & Kế Hoạch Tiếp Theo (Cập nhật 23/11/2026)
+
+### 8.1. Phần đã hoàn thành
+- **Data Models (`lib/features/learning_path/data/models/`):**
+  - `skill_scores.dart` (`SkillType`, `SkillScores`)
+  - `daily_task_model.dart` (`TaskStatus`, `TargetModule`, `DailyTask`)
+  - `learning_path_model.dart` (`LearningPhase`, `DayPlan`, `WeekPlan`, `LearningPath`)
+  - `assessment_result_model.dart` (`SkillLevelTier`, `MiniDiagnosticQuestion`, `InitialAssessmentResult`)
+  - `english_tour_model.dart` (`EnglishTour`)
+- **Domain Service (`lib/features/learning_path/domain/services/`):**
+  - `learning_path_generator.dart`: Chia 3 chặng (`foundation` / `focus` / `review`, xử lý biên `< 7 ngày`), phân bổ trọng số kỹ năng yếu, đóng gói nhiệm vụ khớp `30/45/60` phút/ngày, tái cân bằng ngày `pending` khi có điểm M3 hoặc đổi cấu hình M1 mà vẫn bảo toàn ngày `completed`.
+- **Repository (`lib/features/learning_path/data/repositories/`):**
+  - `learning_path_repository.dart`: Đọc/ghi Firestore (`learning_paths`, `english_tours`) kèm fallback cục bộ qua `SharedPreferences` và dữ liệu mẫu M2/M3/Tour khi chạy offline/guest.
+- **Presentation Layer (`lib/features/learning_path/presentation/`):**
+  - `providers/learning_path_provider.dart` (`LearningPathProvider`): quản lý trạng thái khảo sát, lộ trình, hoàn thành nhiệm vụ, tái cân bằng, lưu tour và đồng bộ `uid`.
+  - `widgets/`: `SkillSummaryCard`, `WeekSelector`, `DayTaskCard`.
+  - `screens/`: `OnboardingSurveyScreen` (2 bước + bỏ qua), `LearningPathScreen` (thay `PlaceholderView`, điều hướng sang M2/M3 qua `AppRoutes`, phân tích 4 kỹ năng & điều chỉnh lịch), `EnglishToursScreen` & `TourDetailScreen`.
+- **Tích hợp & Kiểm thử (`test/features/learning_path/` & `test/widget_test.dart`):**
+  - Đăng ký `LearningPathProvider` trong `main.dart` và các sub-route M4 (`/learning-path/survey`, `/learning-path/tours`, `/learning-path/tours/:tourId`) trong `app_routes.dart` / `app_router.dart`.
+  - Tổng cộng **39/39 tests đạt** (`models_test`, `learning_path_generator_test`, `learning_path_repository_test`, `learning_path_provider_test`, `learning_path_widgets_test`, `onboarding_survey_screen_test`, `learning_path_screen_test`, `english_tours_screen_test`, `widget_test`) và `flutter analyze` sạch.
+
+### 8.2. Điểm cần phối hợp với các module khác khi tích hợp sâu
+1. **M1:** Chốt nơi lưu `examDate`, `dailyMinutes` của user trên Firestore/Profile để gọi `LearningPathProvider.rescheduleSettings` khi user thay đổi ở màn Cá nhân.
+2. **M2:** Chốt danh sách `materialId` và schema `b1_materials`.
+3. **M3:** Chốt danh sách `exerciseId` và schema `users/{uid}/attempts/{attemptId}` (`skill`, `scorePercent`, `durationMinutes`) để gọi `LearningPathProvider.applyExerciseAttempt`.
+4. **M5:** Chốt schema `users/{uid}/daily_logs/{date}` để truyền callback `onTaskToggled` cộng dồn phút học & streak khi hoàn thành nhiệm vụ ở M4.
