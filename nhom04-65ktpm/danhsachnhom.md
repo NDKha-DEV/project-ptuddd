@@ -23,7 +23,7 @@
    cd nhom04-65ktpm/src
    flutter pub get
    ```
-4. (Khi có Firebase project) chạy `flutterfire configure` để sinh `lib/firebase_options.dart`.
+4. (M1-01) Cung cấp `SUPABASE_URL` và `SUPABASE_PUBLISHABLE_KEY` qua `--dart-define`; xem `docs/M1_IMPLEMENTATION_PLAN.md`.
 
 ## Các Bước Khởi Chạy Ứng Dụng
 

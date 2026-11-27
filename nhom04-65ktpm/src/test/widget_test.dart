@@ -6,7 +6,7 @@ import 'package:tlu_b1_daily/app.dart';
 import 'package:tlu_b1_daily/features/auth/presentation/providers/auth_provider.dart';
 
 Widget _buildApp() => ChangeNotifierProvider(
-  create: (_) => AuthProvider(firebaseReady: false),
+  create: (_) => AuthProvider(supabaseReady: false),
   child: const TluB1DailyApp(),
 );
 

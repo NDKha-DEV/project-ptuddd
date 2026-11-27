@@ -1,13 +1,9 @@
 import 'package:flutter/foundation.dart';
 
-/// Trạng thái đăng nhập dùng cho go_router redirect.
-///
-/// Hiện là bản tạm: `signInAsGuest` cho phép vào app khi chưa có Firebase.
-/// M1 thay bằng FirebaseAuth (email/mật khẩu, Google, quên mật khẩu).
 class AuthProvider extends ChangeNotifier {
-  AuthProvider({required this.firebaseReady});
+  AuthProvider({required this.supabaseReady});
 
-  final bool firebaseReady;
+  final bool supabaseReady;
 
   String? _uid;
 
