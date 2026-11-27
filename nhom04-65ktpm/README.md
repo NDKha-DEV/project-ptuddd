@@ -58,13 +58,13 @@ Test đặt tương ứng trong `src/test/features/<ten_feature>/`.
 
 ### Phân công thư mục
 
-| Module | Thành viên | Thư mục | Route |
-| --- | --- | --- | --- |
-| M1 | Nguyễn Ngọc Thành An | `core/`, `features/auth`, `profile`, `settings` | `/login`, `/profile` |
-| M2 | Trịnh Quốc Bảo | `features/b1_materials` | `/materials`, `/materials/:materialId` |
-| M3 | Nguyễn Huy Hoàng | `features/exercises`, `assessment` | `/exercises`, `/exercises/:exerciseId` |
-| M4 | Nguyễn Tùng Dương | `features/learning_path` | `/learning-path` |
-| M5 | Nguyễn Đình Kha | `features/habit_stats` | `/home` |
+| Module | Thành viên           | Thư mục                                         | Route                                  |
+| ------ | -------------------- | ----------------------------------------------- | -------------------------------------- |
+| M1     | Nguyễn Đình Kha      | `core/`, `features/auth`, `profile`, `settings` | `/login`, `/profile`                   |
+| M2     | Trịnh Quốc Bảo       | `features/b1_materials`                         | `/materials`, `/materials/:materialId` |
+| M3     | Nguyễn Huy Hoàng     | `features/exercises`, `assessment`              | `/exercises`, `/exercises/:exerciseId` |
+| M4     | Nguyễn Tùng Dương    | `features/learning_path`                        | `/learning-path`                       |
+| M5     | Nguyễn Ngọc Thành An | `features/habit_stats`                          | `/home`                                |
 
 Quy ước để tránh xung đột:
 
