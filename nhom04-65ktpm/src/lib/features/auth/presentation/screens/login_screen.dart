@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../core/constants/app_constants.dart';
-import '../providers/auth_provider.dart';
 
 /// M1 - Đăng nhập. Bản tạm, M1 thay bằng form email/mật khẩu và Google.
 class LoginScreen extends StatelessWidget {
@@ -10,7 +8,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth = context.read<AuthProvider>();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -30,9 +27,9 @@ class LoginScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
-              FilledButton(
-                onPressed: auth.signInAsGuest,
-                child: const Text('Vào app (tạm, chưa có đăng nhập)'),
+              const FilledButton(
+                onPressed: null,
+                child: Text('Đăng nhập sẽ triển khai ở M1-03'),
               ),
             ],
           ),

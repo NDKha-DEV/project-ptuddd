@@ -61,24 +61,53 @@ Chỉ dùng **publishable key**. Không dùng service_role key/secret key và kh
 | `flutter build apk --debug` | Chưa chạy được: máy hiện tại không có Android SDK (`ANDROID_HOME`). |
 | Secret trong source/Git | Không có URL/key thật nào được ghi vào file tracked. |
 
-## 4. Danh sách task M1 (đề xuất, cập nhật theo thực tế)
+## 4. Scope M1-02 — Auth State Foundation
+
+Trạng thái: **Done** (chưa commit).
+
+### Đã làm
+
+- `AuthProvider` đăng ký `Supabase.instance.client.auth.onAuthStateChange` và đọc `currentSession` trong `initialize()`.
+- State công khai: `user`, `uid`, `isSignedIn`, `isInitializing`, `isLoading`, `error`.
+- `signOut()` gọi `Supabase.instance.client.auth.signOut()`; bỏ hoàn toàn `signInAsGuest`.
+- `main.dart` tạo `AuthProvider`, `await initialize()` trước `runApp()`.
+- Giữ nguyên GoRouter; chỉ thêm nhánh `isInitializing` để không redirect nhầm lúc session đang được khôi phục.
+- `LoginScreen` vô hiệu hóa nút guest, chờ M1-03; không còn auth giả trong UI.
+- Thêm scaffold Windows (`windows/`) để chạy thử desktop theo nghiệm thu.
+
+### Ngoài phạm vi M1-02
+
+Không triển khai Login/Register UI, Google OAuth, Forgot Password, schema/RLS, Storage, settings/profile UI.
+
+## 5. Kiểm tra M1-02
+
+| Kiểm tra | Kết quả |
+|---|---|
+| `flutter analyze` | `No issues found!` |
+| `flutter test` | `All tests passed!` — 5 tests (bootstrap, khởi tạo provider, stream auth, redirect/login, 5 tab). |
+| `flutter run -d windows` với dart-define | Build `tlu_b1_daily.exe` thành công; log `Supabase init completed`; app chạy đến khi tool ngắt phiên. |
+| Guest/mock auth | Không còn `signInAsGuest`, không còn uid `'guest'`. |
+| Routing/UI | Giữ `AppRoutes`, `GoRouter`, `HomeShell`, `LoginScreen`, `ProfileScreen`; chỉ sửa redirect lúc initializing và nút guest. |
+| Secret | Không có URL/key thật trong file tracked. |
+
+## 6. Danh sách task M1 (đề xuất, cập nhật theo thực tế)
 
 | Task | Mục tiêu | Trạng thái | Phụ thuộc |
 |---|---|---|---|
 | M1-01 | Supabase SDK + client bootstrap + env config | **Done** | — |
-| M1-02 | Auth state thật trên Supabase Auth; thay guest uid bằng `User?`, loading/error | Not started | M1-01 |
+| M1-02 | Auth state thật trên Supabase Auth; thay guest uid bằng `User?`, loading/error | **Done** | M1-01 |
 | M1-03 | Register + Login email/password, route và form | Not started | M1-02 |
-| M1-04 | Session persistence + logout thật qua Supabase | Not started | M1-02 |
+| M1-04 | Session persistence + logout thật qua Supabase | Partial — SDK giữ session và `signOut()` đã dùng Supabase; chưa test flow logout riêng | M1-02 |
 | M1-05 | Google OAuth + cấu hình native redirect | Not started | M1-01, M1-02 |
 | M1-06 | Forgot password | Not started | M1-03 |
 | M1-07 | Profile model + repository Supabase/Postgres (khi có schema) | Not started | M1-02, schema/RLS |
-| M1-08 | Profile UI thay placeholder | Partial — hiện chỉ placeholder + logout tạm | M1-07 |
+| M1-08 | Profile UI thay placeholder | Partial — placeholder, logout đã gọi Supabase | M1-07 |
 | M1-09 | Settings: mục tiêu 30/45/60, giờ nhắc, sáng/tối | Not started | M1-02, M1-07 |
 | M1-10 | Shared UI: dùng `LoadingView`/`ErrorView`, thêm button/card/dialog dùng chung | Partial | M1-02 |
 | M1-11 | Security Rules/RLS + schema tối thiểu | Not started | Quyết định data model |
-| M1-12 | Unit/widget test cho auth, redirect, logout, settings | Partial | M1-02 trở đi |
+| M1-12 | Unit/widget test cho auth, redirect, logout, settings | Partial — có bootstrap/provider/redirect; chưa có login/register/settings | M1-02 trở đi |
 
-## 5. Nguyên tắc khi triển khai tiếp
+## 7. Nguyên tắc khi triển khai tiếp
 
 - Giữ `provider`, `GoRouter`, `AppRoutes`, `HomeShell`, `AppTheme` hiện tại; chỉ mở rộng.
 - Mọi truy cập Supabase đi qua `Supabase.instance.client` sau `SupabaseBootstrap.init()`.

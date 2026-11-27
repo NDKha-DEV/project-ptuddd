@@ -19,6 +19,7 @@ GoRouter createAppRouter(AuthProvider auth) {
     refreshListenable: auth,
     redirect: (context, state) {
       final atLogin = state.matchedLocation == AppRoutes.login;
+      if (auth.isInitializing) return atLogin ? null : AppRoutes.login;
       if (!auth.isSignedIn) return atLogin ? null : AppRoutes.login;
       if (atLogin) return AppRoutes.home;
       return null;
