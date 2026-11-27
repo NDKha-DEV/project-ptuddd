@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,6 +7,8 @@ import 'core/services/firebase_bootstrap.dart';
 import 'features/auth/presentation/providers/auth_provider.dart';
 import 'features/learning_path/data/repositories/learning_path_repository.dart';
 import 'features/learning_path/presentation/providers/learning_path_provider.dart';
+import 'features/habit_stats/data/repositories/habit_repository.dart';
+import 'features/habit_stats/presentation/providers/habit_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +38,9 @@ Future<void> main() async {
             return provider;
           },
         ),
-        // Mỗi module đăng ký provider của mình tại đây.
+        ChangeNotifierProvider(
+          create: (_) => HabitProvider(HabitRepository()),
+        ),
       ],
       child: const TluB1DailyApp(),
     ),
