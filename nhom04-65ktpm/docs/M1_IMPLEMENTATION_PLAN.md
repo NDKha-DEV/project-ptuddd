@@ -89,6 +89,7 @@ Không triển khai Login/Register UI, Google OAuth, Forgot Password, schema/RLS
 | Guest/mock auth | Không còn `signInAsGuest`, không còn uid `'guest'`. |
 | Routing/UI | Giữ `AppRoutes`, `GoRouter`, `HomeShell`, `LoginScreen`, `ProfileScreen`; chỉ sửa redirect lúc initializing và nút guest. |
 | Secret | Không có URL/key thật trong file tracked. |
+| Session persistence/logout | Implementation có từ M1-02; đã xác minh thực tế tại M1-04. |
 
 ## 6. Scope M1-03 — Login/Register email/password
 
@@ -115,17 +116,43 @@ Không triển khai Google OAuth, Forgot Password, Profile/Settings, schema/RLS,
 | `flutter test` | `All tests passed!` — 10 tests (bootstrap, signIn thật với sai thông tin, provider, auth form, redirect/navigation, 5 tab). |
 | `flutter run -d windows` với dart-define | Build `tlu_b1_daily.exe` thành công; log `Supabase init completed`; app chạy ổn định đến khi tool ngắt phiên. |
 | SignIn qua Supabase thật với sai thông tin | `All tests passed!`: trả `false`, có error, không throw. |
-| Đăng ký/đăng nhập thành công bằng tài khoản thật | Chưa chạy: không có credentials và không tạo tài khoản thật để tránh side effect; luồng đã gọi `signUp`/`signInWithPassword`, xử lý error/notice. |
+| Đăng ký thành công bằng tài khoản thật | Chưa chạy: không tạo tài khoản thật để tránh side effect; luồng `signUp` đã được kiểm tra ở mức gọi API/xử lý error/notice. Đăng nhập thành công đã xác minh thực tế tại M1-04. |
 | Secret trong source/Git | Không có URL/key thật nào được ghi vào file tracked. |
 
-## 8. Danh sách task M1 (đề xuất, cập nhật theo thực tế)
+## 8. Scope M1-04 — Session Persistence & Logout
+
+Trạng thái: **Done** — implementation hoàn thành từ M1-02; M1-04 không cần bổ sung code.
+
+### Đã làm
+
+- Session persistence dùng implementation của M1-02: `SupabaseBootstrap.init()`, `currentSession` và `onAuthStateChange` trong `AuthProvider`.
+- Logout dùng `AuthProvider.signOut()` từ M1-02, gọi `Supabase.instance.client.auth.signOut()`.
+- Không phát sinh code mới trong M1-04; chỉ kiểm thử thực tế trên ứng dụng.
+
+### Ngoài phạm vi M1-04
+
+Không thay đổi Login/Register, Google OAuth, Forgot Password, Profile/Settings, schema/RLS, Storage.
+
+## 9. Kiểm tra M1-04
+
+| Kiểm tra | Kết quả |
+|---|---|
+| Đăng nhập thành công | Đã xác minh trên ứng dụng: đăng nhập bằng tài khoản Supabase thành công. |
+| Duy trì session sau khi mở lại app | Đã xác minh: đóng app hoàn toàn rồi mở lại, session vẫn được duy trì. |
+| Logout thành công | Đã xác minh: `signOut()` đăng xuất thành công. |
+| Điều hướng sau logout | Đã xác minh: app điều hướng về màn Login. |
+| Không tự khôi phục sau logout | Đã xác minh: đóng/mở app lại sau logout, không tự khôi phục phiên đăng nhập. |
+
+Tổng kết: M1-04 Done; implementation có từ M1-02, không bổ sung code, đã xác minh hành vi thực tế trên ứng dụng.
+
+## 10. Danh sách task M1 (đề xuất, cập nhật theo thực tế)
 
 | Task | Mục tiêu | Trạng thái | Phụ thuộc |
 |---|---|---|---|
 | M1-01 | Supabase SDK + client bootstrap + env config | **Done** | — |
 | M1-02 | Auth state thật trên Supabase Auth; thay guest uid bằng `User?`, loading/error | **Done** | M1-01 |
 | M1-03 | Register + Login email/password, route và form | **Done** | M1-02 |
-| M1-04 | Session persistence + logout thật qua Supabase | Partial — SDK giữ session và `signOut()` đã dùng Supabase; chưa test flow logout riêng | M1-02 |
+| M1-04 | Session persistence + logout thật qua Supabase | **Done** — Session persistence và logout dùng implementation từ M1-02, đã kiểm thử thực tế thành công. | M1-02 |
 | M1-05 | Google OAuth + cấu hình native redirect | Not started | M1-01, M1-02 |
 | M1-06 | Forgot password | Not started | M1-03 |
 | M1-07 | Profile model + repository Supabase/Postgres (khi có schema) | Not started | M1-02, schema/RLS |
@@ -133,9 +160,9 @@ Không triển khai Google OAuth, Forgot Password, Profile/Settings, schema/RLS,
 | M1-09 | Settings: mục tiêu 30/45/60, giờ nhắc, sáng/tối | Not started | M1-02, M1-07 |
 | M1-10 | Shared UI: dùng `LoadingView`/`ErrorView`, thêm button/card/dialog dùng chung | Partial | M1-02 |
 | M1-11 | Security Rules/RLS + schema tối thiểu | Not started | Quyết định data model |
-| M1-12 | Unit/widget test cho auth, redirect, logout, settings | Partial — có bootstrap/provider/redirect/login/register; chưa có settings | M1-02 trở đi |
+| M1-12 | Unit/widget test cho auth, redirect, logout, settings | Partial — có bootstrap/provider/redirect/login/register; session persistence/logout đã xác minh thực tế tại M1-04; chưa có settings | M1-02 trở đi |
 
-## 9. Nguyên tắc khi triển khai tiếp
+## 11. Nguyên tắc khi triển khai tiếp
 
 - Giữ `provider`, `GoRouter`, `AppRoutes`, `HomeShell`, `AppTheme` hiện tại; chỉ mở rộng.
 - Mọi truy cập Supabase đi qua `Supabase.instance.client` sau `SupabaseBootstrap.init()`.
