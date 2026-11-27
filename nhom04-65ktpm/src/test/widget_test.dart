@@ -40,6 +40,7 @@ void main() {
 
     expect(find.text('TLU B1 Daily'), findsOneWidget);
     expect(find.byType(TextFormField), findsNWidgets(2));
+    expect(find.text('Continue with Google'), findsOneWidget);
     expect(find.text('Chưa có tài khoản?'), findsOneWidget);
   });
 

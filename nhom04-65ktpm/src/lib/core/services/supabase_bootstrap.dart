@@ -16,6 +16,10 @@ class SupabaseBootstrap {
       await Supabase.initialize(
         url: AppEnv.supabaseUrl,
         publishableKey: AppEnv.supabasePublishableKey,
+        authOptions: const FlutterAuthClientOptions(
+          detectSessionInUri: true,
+          authFlowType: AuthFlowType.pkce,
+        ),
       );
       return true;
     } catch (e) {

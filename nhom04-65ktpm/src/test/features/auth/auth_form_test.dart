@@ -60,4 +60,25 @@ void main() {
 
     expect(find.text('Chưa cấu hình Supabase.'), findsOneWidget);
   });
+
+  testWidgets('Google button chỉ xuất hiện ở Login và gọi AuthProvider',
+      (tester) async {
+    final loginAuth = await _buildAuth();
+    await tester.pumpWidget(_buildForm(loginAuth, AuthFormMode.login));
+
+    expect(find.text('OR'), findsOneWidget);
+    expect(find.byType(OutlinedButton), findsOneWidget);
+    expect(find.text('Continue with Google'), findsOneWidget);
+
+    await tester.tap(find.text('Continue with Google'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Chưa cấu hình Supabase.'), findsOneWidget);
+
+    final registerAuth = await _buildAuth();
+    await tester.pumpWidget(_buildForm(registerAuth, AuthFormMode.register));
+
+    expect(find.text('OR'), findsNothing);
+    expect(find.text('Continue with Google'), findsNothing);
+  });
 }

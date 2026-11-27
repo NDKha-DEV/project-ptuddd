@@ -66,6 +66,12 @@ class _AuthFormState extends State<AuthForm> {
     }
   }
 
+  Future<void> _signInWithGoogle() async {
+    if (widget.mode != AuthFormMode.login) return;
+    FocusScope.of(context).unfocus();
+    await context.read<AuthProvider>().signInWithGoogle();
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
@@ -153,8 +159,10 @@ class _AuthFormState extends State<AuthForm> {
                   const SizedBox(height: 12),
                 ],
                 FilledButton(
-                  onPressed: auth.isLoading ? null : _submit,
-                  child: auth.isLoading
+                  onPressed: auth.isLoading || auth.isGoogleSignInPending
+                      ? null
+                      : _submit,
+                  child: auth.isLoading || auth.isGoogleSignInPending
                       ? SizedBox(
                           height: 20,
                           width: 20,
@@ -165,13 +173,46 @@ class _AuthFormState extends State<AuthForm> {
                         )
                       : Text(isRegister ? 'Đăng ký' : 'Đăng nhập'),
                 ),
+                if (!isRegister) ...[
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      const Expanded(child: Divider()),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text(
+                          'OR',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      ),
+                      const Expanded(child: Divider()),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  OutlinedButton.icon(
+                    onPressed: auth.isLoading || auth.isGoogleSignInPending
+                        ? null
+                        : _signInWithGoogle,
+                    icon: const Icon(Icons.account_circle_outlined),
+                    label: auth.isGoogleSignInPending
+                        ? SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: colorScheme.primary,
+                            ),
+                          )
+                        : const Text('Continue with Google'),
+                  ),
+                ],
                 const SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(isRegister ? 'Đã có tài khoản?' : 'Chưa có tài khoản?'),
                     TextButton(
-                      onPressed: auth.isLoading
+                      onPressed: auth.isLoading || auth.isGoogleSignInPending
                           ? null
                           : () => context.go(
                               isRegister ? AppRoutes.login : AppRoutes.register,

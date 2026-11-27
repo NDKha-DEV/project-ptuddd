@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../core/constants/app_constants.dart';
+
 class AuthProvider extends ChangeNotifier {
   AuthProvider({
     required this.supabaseReady,
     Stream<AuthState>? authStateStream,
+    this.oauthTimeout = defaultOauthTimeout,
   }) {
     final stream = authStateStream ??
         (supabaseReady ? Supabase.instance.client.auth.onAuthStateChange : null);
@@ -16,12 +19,17 @@ class AuthProvider extends ChangeNotifier {
     );
   }
 
+  static const defaultOauthTimeout = Duration(minutes: 2);
+
   final bool supabaseReady;
+  final Duration oauthTimeout;
 
   StreamSubscription<AuthState>? _authSubscription;
+  Timer? _oauthTimeoutTimer;
   User? _user;
   bool _isInitializing = true;
   bool _isLoading = true;
+  bool _oauthInFlight = false;
   String? _error;
   String? _notice;
 
@@ -30,6 +38,7 @@ class AuthProvider extends ChangeNotifier {
   bool get isSignedIn => _user != null;
   bool get isInitializing => _isInitializing;
   bool get isLoading => _isLoading;
+  bool get isGoogleSignInPending => _oauthInFlight;
   String? get error => _error;
   String? get notice => _notice;
 
@@ -123,6 +132,40 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> signInWithGoogle() async {
+    if (_isLoading || _oauthInFlight) return false;
+    if (!supabaseReady) {
+      _error = 'Chưa cấu hình Supabase.';
+      _notice = null;
+      notifyListeners();
+      return false;
+    }
+
+    _oauthInFlight = true;
+    _startAction();
+    try {
+      final launched = await Supabase.instance.client.auth.signInWithOAuth(
+        OAuthProvider.google,
+        redirectTo: AppConstants.oauthRedirectTo,
+      );
+      if (!launched) {
+        _error = 'Không mở được trình duyệt để đăng nhập Google.';
+        _clearOAuthPending();
+        return false;
+      }
+      _notice = 'Đã mở Google. Quay lại ứng dụng để hoàn tất đăng nhập.';
+      _oauthTimeoutTimer?.cancel();
+      _oauthTimeoutTimer = Timer(oauthTimeout, _onOAuthTimeout);
+      return true;
+    } catch (e) {
+      _error = _authMessage(e);
+      _clearOAuthPending();
+      return false;
+    } finally {
+      _finishAction();
+    }
+  }
+
   Future<void> signOut() async {
     if (!supabaseReady) return;
 
@@ -143,6 +186,7 @@ class AuthProvider extends ChangeNotifier {
 
   void _applyAuthState(AuthState state) {
     _user = state.session?.user;
+    _clearOAuthPending();
     _clearMessages();
     _isInitializing = false;
     _isLoading = false;
@@ -151,6 +195,7 @@ class AuthProvider extends ChangeNotifier {
 
   void _handleAuthError(Object error) {
     _error = _authMessage(error);
+    _clearOAuthPending();
     _notice = null;
     _isInitializing = false;
     _isLoading = false;
@@ -166,6 +211,21 @@ class AuthProvider extends ChangeNotifier {
   void _finishAction() {
     _isLoading = false;
     notifyListeners();
+  }
+
+  void _onOAuthTimeout() {
+    if (!_oauthInFlight) return;
+    _oauthInFlight = false;
+    _error = null;
+    _notice =
+        'Đã hết thời gian chờ trong ứng dụng. Nếu cửa sổ Google vẫn mở, hãy hoàn tất hoặc đóng; phiên có thể được cập nhật khi quay lại.';
+    notifyListeners();
+  }
+
+  void _clearOAuthPending() {
+    _oauthInFlight = false;
+    _oauthTimeoutTimer?.cancel();
+    _oauthTimeoutTimer = null;
   }
 
   void _clearMessages() {
@@ -186,6 +246,14 @@ class AuthProvider extends ChangeNotifier {
         return 'Mật khẩu quá yếu. Vui lòng chọn mật khẩu khác.';
       case 'over_email_send_rate_limit':
         return 'Gửi email quá nhanh. Vui lòng thử lại sau.';
+      case 'access_denied':
+        return 'Đăng nhập Google đã bị hủy.';
+      case 'bad_oauth_state':
+      case 'bad_oauth_callback':
+        return 'Liên kết đăng nhập Google không hợp lệ. Vui lòng thử lại.';
+      case 'oauth_provider_not_supported':
+      case 'provider_disabled':
+        return 'Google OAuth chưa được cấu hình trên Supabase.';
       default:
         return error.message;
     }
@@ -194,6 +262,7 @@ class AuthProvider extends ChangeNotifier {
   @override
   void dispose() {
     _authSubscription?.cancel();
+    _oauthTimeoutTimer?.cancel();
     super.dispose();
   }
 }

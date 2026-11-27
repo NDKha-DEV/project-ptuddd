@@ -88,4 +88,16 @@ void main() {
     expect(auth.error, 'Chưa cấu hình Supabase.');
     expect(auth.isLoading, isFalse);
   });
+
+  test('SignInGoogle bị chặn lúc loading và khi chưa cấu hình', () async {
+    final auth = AuthProvider(supabaseReady: false);
+
+    expect(await auth.signInWithGoogle(), isFalse);
+    expect(auth.error, isNull);
+
+    await auth.initialize();
+    expect(await auth.signInWithGoogle(), isFalse);
+    expect(auth.error, 'Chưa cấu hình Supabase.');
+    expect(auth.isGoogleSignInPending, isFalse);
+  });
 }
