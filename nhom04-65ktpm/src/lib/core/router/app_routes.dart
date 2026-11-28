@@ -16,4 +16,8 @@ class AppRoutes {
   // Màn hình chi tiết
   static String materialDetail(String materialId) => '$materials/$materialId';
   static String exerciseDetail(String exerciseId) => '$exercises/$exerciseId';
+  static const learningPathSurvey = '$learningPath/survey';
+  static const learningPathTours = '$learningPath/tours';
+  static String learningPathTourDetail(String tourId) =>
+      '$learningPathTours/$tourId';
 }

@@ -8,14 +8,22 @@ import 'package:tlu_b1_daily/features/learning_path/domain/services/learning_pat
 
 void main() {
   late LearningPathRepository repository;
+  const testUid = 'supabase-user-01';
 
   setUp(() {
     SharedPreferences.setMockInitialValues({});
-    repository = LearningPathRepository(firebaseReady: false);
+    repository = LearningPathRepository(supabaseReady: false);
   });
 
-  group('LearningPathRepository - chế độ offline/guest', () {
-    test('lưu, tải và xóa lộ trình qua SharedPreferences', () async {
+  group('LearningPathRepository - lưu trữ cục bộ & trạng thái Supabase', () {
+    test('chưa khởi tạo Supabase thì supabaseClient null và canSyncRemote false', () {
+      expect(repository.supabaseReady, isFalse);
+      expect(repository.supabaseClient, isNull);
+      expect(repository.canSyncRemote(testUid), isFalse);
+      expect(repository.canSyncRemote(''), isFalse);
+    });
+
+    test('lưu, tải và xóa lộ trình qua SharedPreferences theo uid', () async {
       const generator = LearningPathGenerator();
       final plan = generator.generate(
         LearningPathInput(
@@ -26,16 +34,19 @@ void main() {
         ),
       );
 
-      expect(await repository.loadActivePlan('guest'), isNull);
+      expect(await repository.loadActivePlan(testUid), isNull);
 
-      await repository.saveActivePlan('guest', plan);
-      final loaded = await repository.loadActivePlan('guest');
+      await repository.saveActivePlan(testUid, plan);
+      final loaded = await repository.loadActivePlan(testUid);
       expect(loaded, isNotNull);
       expect(loaded!.totalWeeks, plan.totalWeeks);
       expect(loaded.dailyMinutes, 45);
 
-      await repository.clearActivePlan('guest');
-      expect(await repository.loadActivePlan('guest'), isNull);
+      // Tách biệt dữ liệu giữa các tài khoản Supabase khác nhau
+      expect(await repository.loadActivePlan('supabase-user-02'), isNull);
+
+      await repository.clearActivePlan(testUid);
+      expect(await repository.loadActivePlan(testUid), isNull);
     });
 
     test('lưu và tải kết quả khảo sát đầu vào', () async {
@@ -52,8 +63,8 @@ void main() {
         assessedAt: DateTime.utc(2026, 11, 22, 10, 0),
       );
 
-      await repository.saveAssessment('guest', result);
-      final loaded = await repository.loadLatestAssessment('guest');
+      await repository.saveAssessment(testUid, result);
+      final loaded = await repository.loadLatestAssessment(testUid);
       expect(loaded, result);
     });
 
@@ -69,13 +80,13 @@ void main() {
       expect(questions.length, 10);
 
       final afterSave = await repository.toggleSavedTour(
-        'guest',
+        testUid,
         tours.first.tourId,
       );
       expect(afterSave, contains(tours.first.tourId));
 
       final afterRemove = await repository.toggleSavedTour(
-        'guest',
+        testUid,
         tours.first.tourId,
       );
       expect(afterRemove, isNot(contains(tours.first.tourId)));

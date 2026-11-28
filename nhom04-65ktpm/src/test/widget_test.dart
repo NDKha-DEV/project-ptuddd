@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:tlu_b1_daily/app.dart';
 import 'package:tlu_b1_daily/features/auth/presentation/providers/auth_provider.dart';
+import 'package:tlu_b1_daily/features/learning_path/data/repositories/learning_path_repository.dart';
+import 'package:tlu_b1_daily/features/learning_path/presentation/providers/learning_path_provider.dart';
 
 Session _session(String uid) {
   final user = User(
@@ -25,12 +28,32 @@ Session _session(String uid) {
   );
 }
 
-Widget _buildApp(AuthProvider auth) => ChangeNotifierProvider(
-      create: (_) => auth,
-      child: const TluB1DailyApp(),
-    );
+Widget _buildApp(AuthProvider auth) => MultiProvider(
+  providers: [
+    ChangeNotifierProvider(create: (_) => auth),
+    ChangeNotifierProxyProvider<AuthProvider, LearningPathProvider>(
+      create: (_) => LearningPathProvider(
+        repository: LearningPathRepository(supabaseReady: false),
+      ),
+      update: (_, auth, pathProvider) {
+        final provider =
+            pathProvider ??
+            LearningPathProvider(
+              repository: LearningPathRepository(supabaseReady: false),
+            );
+        Future.microtask(() => provider.syncUid(auth.uid));
+        return provider;
+      },
+    ),
+  ],
+  child: const TluB1DailyApp(),
+);
 
 void main() {
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
+
   testWidgets('Không có session Supabase thì vào màn Login', (tester) async {
     final auth = AuthProvider(supabaseReady: false);
     await auth.initialize();
@@ -85,10 +108,50 @@ void main() {
 
     await tester.tap(find.text('Lộ trình'));
     await tester.pumpAndSettle();
-    expect(find.text('M4 - Lộ trình học tập'), findsOneWidget);
+    expect(find.text('Lộ trình học tập'), findsOneWidget);
 
     await tester.tap(find.text('Cá nhân'));
     await tester.pumpAndSettle();
     expect(find.text('M1 - Nền tảng và tài khoản'), findsOneWidget);
   });
+
+  testWidgets(
+    'Luồng M4 đầy đủ qua GoRouter với session Supabase: Khảo sát -> Lộ trình -> Tour tiếng Anh',
+    (tester) async {
+      final auth = AuthProvider(
+        supabaseReady: false,
+        authStateStream: Stream.value(
+          AuthState(AuthChangeEvent.signedIn, _session('test-uid-m4')),
+        ),
+      );
+      await auth.initialize();
+      await tester.pump();
+
+      await tester.pumpWidget(_buildApp(auth));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Lộ trình'));
+      await tester.pumpAndSettle();
+      expect(find.text('Chưa có lộ trình B1 cá nhân'), findsOneWidget);
+
+      await tester.tap(find.text('Bắt đầu khảo sát tạo lộ trình'));
+      await tester.pumpAndSettle();
+      expect(find.text('Khảo sát đầu vào B1'), findsOneWidget);
+
+      final skipBtn = find.text('Bỏ qua & tạo lộ trình nền tảng');
+      await tester.scrollUntilVisible(
+        skipBtn,
+        300,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.tap(skipBtn);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Tiến độ tổng thể: 0%'), findsOneWidget);
+
+      await tester.tap(find.textContaining('Tour dẫn tiếng Anh'));
+      await tester.pumpAndSettle();
+      expect(find.text('Tour dẫn tiếng Anh & CLB'), findsOneWidget);
+    },
+  );
 }

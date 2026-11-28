@@ -9,7 +9,10 @@ import '../../features/b1_materials/presentation/screens/materials_screen.dart';
 import '../../features/exercises/presentation/screens/exercise_detail_screen.dart';
 import '../../features/exercises/presentation/screens/exercises_screen.dart';
 import '../../features/habit_stats/presentation/screens/habit_dashboard_screen.dart';
+import '../../features/learning_path/presentation/screens/english_tours_screen.dart';
 import '../../features/learning_path/presentation/screens/learning_path_screen.dart';
+import '../../features/learning_path/presentation/screens/onboarding_survey_screen.dart';
+import '../../features/learning_path/presentation/screens/tour_detail_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../shell/home_shell.dart';
 import 'app_routes.dart';
@@ -84,6 +87,24 @@ GoRouter createAppRouter(AuthProvider auth) {
               GoRoute(
                 path: AppRoutes.learningPath,
                 builder: (context, state) => const LearningPathScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'survey',
+                    builder: (context, state) => const OnboardingSurveyScreen(),
+                  ),
+                  GoRoute(
+                    path: 'tours',
+                    builder: (context, state) => const EnglishToursScreen(),
+                    routes: [
+                      GoRoute(
+                        path: ':tourId',
+                        builder: (context, state) => TourDetailScreen(
+                          tourId: state.pathParameters['tourId']!,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

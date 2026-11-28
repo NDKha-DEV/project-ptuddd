@@ -18,7 +18,7 @@ Module M4 chịu trách nhiệm biến dữ liệu đầu vào của sinh viên 
 | Giai đoạn | Công việc chính | Kết quả bàn giao |
 | :--- | :--- | :--- |
 | **Tuần 1** (18/11 – 22/11) | - Thiết kế bài khảo sát đầu vào B1<br>- Thiết kế thuật toán sinh lộ trình tuần/ngày<br>- Thiết kế khung UI lộ trình học tập B1 | Tài liệu đặc tả thiết kế M4; khung màn hình và logic sinh lộ trình sẵn sàng tích hợp vào `src/` của M1 |
-| **Tuần 2** (23/11 – 29/11) | - Liên kết nhiệm vụ ngày sang M2 (tài liệu) & M3 (bài tập)<br>- Tự động cập nhật tiến độ/lộ trình theo điểm M3<br>- (Tùy chọn) Danh sách tour dẫn tiếng Anh / CLB giao lưu & lưu quan tâm | Luồng M4 chạy hoàn chỉnh, đồng bộ Firestore & điều hướng liên module |
+| **Tuần 2** (23/11 – 29/11) | - Liên kết nhiệm vụ ngày sang M2 (tài liệu) & M3 (bài tập)<br>- Tự động cập nhật tiến độ/lộ trình theo điểm M3<br>- (Tùy chọn) Danh sách tour dẫn tiếng Anh / CLB giao lưu & lưu quan tâm | Luồng M4 chạy hoàn chỉnh, chuyển đổi từ Firebase sang nền tảng Supabase của M1 & điều hướng liên module |
 | **Tuần 3** (30/11 – 06/12) | - Viết unit test cho thuật toán & kiểm thử luồng M4<br>- Làm mượt UX, sửa lỗi liên kết với M2/M3/M5<br>- Viết phần báo cáo M4 & kịch bản demo | Kiểm thử đạt, kịch bản demo và tài liệu báo cáo M4 |
 
 ### 1.2. Giới hạn ngoài phạm vi
@@ -105,11 +105,11 @@ Mỗi ngày gồm danh sách `DailyTask` có tổng `estimatedMinutes` nằm tro
 
 ---
 
-## 4. Hợp Đồng Dữ Liệu (Data Contract) & Cấu Trúc Firestore
+## 4. Hợp Đồng Dữ Liệu (Data Contract) & Cấu Trúc Lưu Trữ (Supabase / Local)
 
-Khớp theo Mục 9.6 của Đề cương:
+Theo quyết định kiến trúc của M1 (`M1_IMPLEMENTATION_PLAN.md`), dự án đã chuyển từ Firebase/Firestore sang **Supabase Auth + Postgres**. Trong giai đoạn chờ M1-11 chốt schema bảng & RLS trên Postgres, dữ liệu M4 được lưu cục bộ theo `uid` qua `SharedPreferences` với hợp đồng JSON dưới đây (sẵn sàng ánh xạ sang cột `jsonb` / bảng Postgres):
 
-### 4.1. Collection `users/{uid}/learning_paths/{planId}`
+### 4.1. Thực thể lộ trình `learning_paths` (theo `uid` & `planId`)
 ```json
 {
   "planId": "active_plan",
@@ -170,7 +170,7 @@ Khớp theo Mục 9.6 của Đề cương:
 }
 ```
 
-### 4.2. Collection `english_tours/{tourId}` (Tính năng mở rộng Tuần 2)
+### 4.2. Thực thể `english_tours` (Tính năng mở rộng Tuần 2)
 ```json
 {
   "tourId": "tour_hanoi_free_walking_01",
@@ -232,7 +232,7 @@ nhom04-65ktpm/src/
 ├── lib/features/learning_path/
 │   ├── data/
 │   │   ├── models/           # LearningPath, WeekPlan, DayPlan, DailyTask, AssessmentResult, EnglishTour
-│   │   └── repositories/     # LearningPathRepository (Firestore + fallback offline)
+│   │   └── repositories/     # LearningPathRepository (SharedPreferences + Supabase hook chờ M1-11)
 │   ├── domain/
 │   │   └── services/         # LearningPathGenerator (thuật toán sinh & tái cân bằng lộ trình)
 │   └── presentation/
@@ -245,9 +245,9 @@ nhom04-65ktpm/src/
 
 ---
 
-## 8. Tiến Độ Hiện Tại & Kế Hoạch Tiếp Theo (Cập nhật 22/11/2026)
+## 8. Tiến Độ Hiện Tại & Kế Hoạch Tiếp Theo (Cập nhật 28/11/2026)
 
-### 8.1. Phần đã hoàn thành (PR #1 – Data & Domain Layer)
+### 8.1. Phần đã hoàn thành
 - **Data Models (`lib/features/learning_path/data/models/`):**
   - `skill_scores.dart` (`SkillType`, `SkillScores`)
   - `daily_task_model.dart` (`TaskStatus`, `TargetModule`, `DailyTask`)
@@ -257,21 +257,17 @@ nhom04-65ktpm/src/
 - **Domain Service (`lib/features/learning_path/domain/services/`):**
   - `learning_path_generator.dart`: Chia 3 chặng (`foundation` / `focus` / `review`, xử lý biên `< 7 ngày`), phân bổ trọng số kỹ năng yếu, đóng gói nhiệm vụ khớp `30/45/60` phút/ngày, tái cân bằng ngày `pending` khi có điểm M3 hoặc đổi cấu hình M1 mà vẫn bảo toàn ngày `completed`.
 - **Repository (`lib/features/learning_path/data/repositories/`):**
-  - `learning_path_repository.dart`: Đọc/ghi Firestore (`learning_paths`, `english_tours`) kèm fallback cục bộ qua `SharedPreferences` và dữ liệu mẫu M2/M3/Tour khi chạy offline/guest.
-- **Unit Tests (`test/features/learning_path/`):**
-  - `models_test.dart` (6 tests), `learning_path_generator_test.dart` (7 tests), `learning_path_repository_test.dart` (3 tests). `flutter analyze` sạch và `flutter test` đạt 18/18.
+  - `learning_path_repository.dart`: Đã gỡ bỏ hoàn toàn `cloud_firestore` / `FirestoreCollections`, chuyển sang lưu/đọc cục bộ qua `SharedPreferences` theo `uid` thực của Supabase Auth + dữ liệu mẫu M2/M3/Tour, giữ sẵn `supabaseReady` / `supabaseClient` chờ M1-11 chốt schema bảng Postgres.
+- **Presentation Layer (`lib/features/learning_path/presentation/`):**
+  - `providers/learning_path_provider.dart` (`LearningPathProvider`): quản lý trạng thái khảo sát, lộ trình, hoàn thành nhiệm vụ, tái cân bằng, lưu tour và đồng bộ phiên `uid` từ `AuthProvider` của M1 (tự động xóa state bộ nhớ khi đăng xuất).
+  - `widgets/`: `SkillSummaryCard`, `WeekSelector`, `DayTaskCard`.
+  - `screens/`: `OnboardingSurveyScreen` (2 bước + bỏ qua), `LearningPathScreen` (thay `PlaceholderView`, điều hướng sang M2/M3 qua `AppRoutes`, phân tích 4 kỹ năng & điều chỉnh lịch), `EnglishToursScreen` & `TourDetailScreen`.
+- **Tích hợp & Kiểm thử (`test/features/learning_path/` & `test/widget_test.dart`):**
+  - Hợp nhất với nền tảng M1 Supabase Auth (`SupabaseBootstrap.init()`, `/register`, Google OAuth), đăng ký `LearningPathProvider` trong `main.dart` và các sub-route M4 (`/learning-path/survey`, `/learning-path/tours`, `/learning-path/tours/:tourId`) trong `app_routes.dart` / `app_router.dart`.
+  - Toàn bộ unit test & widget test đạt 100% và `flutter analyze` sạch.
 
-### 8.2. Kế hoạch tiếp theo (Presentation Layer & Tích hợp liên module)
-1. **State Management (`presentation/providers/`):**
-   - `learning_path_provider.dart` (`ChangeNotifier`) quản lý trạng thái khảo sát, lộ trình hiện tại, đánh dấu hoàn thành `DailyTask`, và lưu quan tâm tour.
-2. **Giao diện M4 (`presentation/screens/` & `presentation/widgets/`):**
-   - `OnboardingSurveyScreen`: Khảo sát đầu vào 2 bước + nút bỏ qua.
-   - `LearningPathScreen` + `WeekSelector`, `DayTaskCard`, `SkillSummaryCard`: Thay `PlaceholderView`, hiển thị lộ trình tuần/ngày và nút **"Học ngay"** điều hướng qua `AppRoutes.materialDetail(...)` / `AppRoutes.exerciseDetail(...)`.
-   - `EnglishToursScreen` & `TourDetailScreen`: Danh sách tour dẫn tiếng Anh / CLB tại Hà Nội, mẫu câu giao tiếp và lưu quan tâm.
-3. **Widget Tests (`test/features/learning_path/`):**
-   - Kiểm thử luồng `OnboardingSurveyScreen` và `LearningPathScreen`.
-4. **Điểm cần phối hợp với các module khác khi tích hợp:**
-   - **M1:** Chốt nơi lưu `examDate`, `dailyMinutes` của user; báo nhóm khi đăng ký `LearningPathProvider` vào `main.dart`, thêm sub-route vào `app_router.dart` / `app_routes.dart` và cập nhật `widget_test.dart`.
-   - **M2:** Chốt danh sách `materialId` và schema `b1_materials`.
-   - **M3:** Chốt danh sách `exerciseId` và schema `users/{uid}/attempts/{attemptId}` (`skill`, `scorePercent`, `durationMinutes`).
-   - **M5:** Chốt schema `users/{uid}/daily_logs/{date}` để cộng dồn phút học & streak khi hoàn thành nhiệm vụ ở M4.
+### 8.2. Điểm cần phối hợp với các module khác khi tích hợp sâu
+1. **M1 (M1-07 / M1-09 / M1-11):** Chốt schema bảng Supabase Postgres (`profiles`, `learning_paths`, RLS) và nơi lưu `examDate`, `dailyMinutes` để bật truy vấn từ `LearningPathRepository.supabaseClient` và gọi `LearningPathProvider.rescheduleSettings`.
+2. **M2:** Chốt danh sách `materialId` và nguồn dữ liệu học liệu `b1_materials`.
+3. **M3:** Chốt danh sách `exerciseId` từ `ExerciseCatalog` và luồng trả kết quả `attempt` (`skill`, `scorePercent`, `durationMinutes`) để gọi `LearningPathProvider.applyExerciseAttempt`.
+4. **M5:** Kết nối callback `onTaskToggled` sang `HabitProvider` / `StudySessionModel` để cộng dồn phút học & streak khi hoàn thành nhiệm vụ ở M4.
