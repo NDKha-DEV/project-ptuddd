@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:tlu_b1_daily/features/exercises/data/models/exam_models.dart';
 import 'package:tlu_b1_daily/features/exercises/data/repositories/question_bank_repository.dart';
+import 'package:tlu_b1_daily/features/exercises/data/services/audio_controller.dart';
 
 Question _q(String id, int answer) => Question(
   id: id,
@@ -95,3 +96,49 @@ QuestionBankRepository fixtureRepository() => QuestionBankRepository(
     return jsonEncode(fixtureSet(n).toJson());
   },
 );
+
+class FakeAudioController extends AudioController {
+  final calls = <String>[];
+
+  @override
+  Future<void> load(String assetPath) async {
+    calls.add('load $assetPath');
+    value = value.copyWith(duration: const Duration(seconds: 30));
+  }
+
+  @override
+  Future<void> play() async {
+    calls.add('play');
+    value = value.copyWith(playing: true);
+  }
+
+  @override
+  Future<void> pause() async {
+    calls.add('pause');
+    value = value.copyWith(playing: false);
+  }
+
+  @override
+  Future<void> seek(Duration position) async {
+    calls.add('seek ${position.inSeconds}');
+    value = value.copyWith(position: position);
+  }
+
+  @override
+  Future<void> setSpeed(double speed) async {
+    value = value.copyWith(speed: speed);
+  }
+}
+
+class FakeAudioFactory extends AudioControllerFactory {
+  FakeAudioFactory();
+
+  final controllers = <FakeAudioController>[];
+
+  @override
+  AudioController create() {
+    final controller = FakeAudioController();
+    controllers.add(controller);
+    return controller;
+  }
+}
