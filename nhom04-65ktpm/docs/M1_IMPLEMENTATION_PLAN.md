@@ -194,7 +194,50 @@ Không triển khai Profile, Forgot Password, Settings, database schema/RLS ho�
 | Android native redirect | Chưa xác minh trên thiết bị/emulator; chỉ khai báo manifest và redirect URL trong code/config. |
 | build APK | Không chạy theo yêu cầu; môi trường hiện tại cũng không có Android SDK. |
 
-## 13. Danh sách task M1 (đề xuất, cập nhật theo thực tế)
+## 13. Scope M1-06 — Forgot Password / Password Recovery
+
+Trạng thái: **Triển khai xong ở mức code/UI** — chưa xác minh E2E vì cần cấu hình Supabase Dashboard/email provider và thiết bị Android.
+
+### Đã làm
+
+- Login có link `Quên mật khẩu?` dẫn tới `/forgot-password`; form nhập email, validate, loading/error/notice, disable submit lúc đang request và nút quay lại Login.
+- `AuthProvider.sendPasswordResetEmail(email)` gọi `resetPasswordForEmail(email, redirectTo: AppConstants.oauthRedirectTo)`; notice thành công trung tính, không tiết lộ email có tồn tại tài khoản hay không.
+- Dùng lại deep link `vn.edu.tlu.nhom04.tlu-b1-daily://login-callback` của M1-05; không thêm redirect URI hay dependency mới.
+- `AuthProvider` nhận `AuthChangeEvent.passwordRecovery` qua `onAuthStateChange` hiện tại để đánh dấu `isPasswordRecovery`; không tạo session manager mới.
+- Router allowlist `/forgot-password` và `/reset-password`; khi có recovery session, mọi route auth/home chuyển về `/reset-password`; route này tự về `/forgot-password` nếu không còn recovery state để tránh redirect loop.
+- `/reset-password` có password + xác nhận, dùng lại rule tối thiểu 6 ký tự và kiểm tra khớp của AuthForm; `updatePassword` gọi `updateUser(UserAttributes(password: ...))`, sau đó sign out và đưa về `/login` với notice `Mật khẩu đã được cập nhật. Vui lòng đăng nhập lại.`
+- Lỗi recovery được map riêng: link hết hạn (`otp_expired`, `flow_state_expired`), link/session không hợp lệ (`bad_code_verifier`, `flow_state_not_found`), trùng mật khẩu, cần đăng nhập lại; stream error cũng xóa recovery flag.
+
+### Ngoài phạm vi M1-06
+
+Không đổi Login/Register/Google OAuth, session persistence, logout, schema/RLS, Profile/Settings hoặc module M2-M5. Không refactor kiến trúc redirect/auth hiện tại.
+
+## 14. Cấu hình recovery cần thao tác thủ công
+
+### Supabase Dashboard
+
+1. Authentication → URL Configuration → Additional Redirect URLs: đảm bảo có `vn.edu.tlu.nhom04.tlu-b1-daily://login-callback`.
+2. Authentication → Templates → Recovery: dùng link do Supabase sinh (`{{ .ConfirmationURL }}`) với redirect URI trên.
+3. Bật email provider và lưu ý rate limit khi gửi email thật.
+
+### Android/iOS
+
+- Android: giữ nguyên manifest intent filter của M1-05; scheme/host phải khớp `AppConstants.oauthRedirectTo`.
+- PKCE verifier dùng chung storage key giữa OAuth và recovery trên Supabase Flutter; không mở đồng thời Google OAuth và recovery trên cùng thiết bị.
+- iOS: chưa có `CFBundleURLTypes`; recovery trên iOS chưa chạy được khi chưa thêm URL scheme. Không thuộc phạm vi xác minh hiện tại.
+
+## 15. Kiểm tra M1-06
+
+| Kiểm tra | Kết quả |
+|---|---|
+| `flutter analyze` | `No issues found!` |
+| `flutter test` | `All tests passed!` — 20 tests (bootstrap, signIn thật với sai thông tin, provider/Google guard, OAuth pending/timeout/auth state, forgot/reset validation, recovery state/routing, login/register/redirect/5 tab). |
+| `flutter test` với dart-define Supabase | `All tests passed!` — 20 tests; OAuth pending/timeout chạy thật, recovery vẫn dùng fake/stream injected. |
+| Recovery email → click link → đổi mật khẩu → login lại | **Chưa verified**: cần Supabase Dashboard/email provider cấu hình và thiết bị Android để mở link thật. |
+| Android native callback cho recovery | **Chưa verified** trên thiết bị/emulator; chỉ dùng lại cấu hình đã khai báo ở M1-05. |
+| build APK | Không chạy theo yêu cầu. |
+
+## 16. Danh sách task M1 (đề xuất, cập nhật theo thực tế)
 
 | Task | Mục tiêu | Trạng thái | Phụ thuộc |
 |---|---|---|---|
@@ -203,15 +246,15 @@ Không triển khai Profile, Forgot Password, Settings, database schema/RLS ho�
 | M1-03 | Register + Login email/password, route và form | **Done** | M1-02 |
 | M1-04 | Session persistence + logout thật qua Supabase | **Done** — Session persistence và logout dùng implementation từ M1-02, đã kiểm thử thực tế thành công. | M1-02 |
 | M1-05 | Google OAuth + cấu hình native redirect | **Done (code/UI)** — tích hợp Supabase OAuth, UI và Android redirect; chưa xác minh callback trên Android device | M1-01, M1-02 |
-| M1-06 | Forgot password | Not started | M1-03 |
+| M1-06 | Forgot password | **Done (code/UI)** — reset request, recovery callback, reset password và routing; chưa xác minh email link E2E trên Android | M1-03, M1-05 |
 | M1-07 | Profile model + repository Supabase/Postgres (khi có schema) | Not started | M1-02, schema/RLS |
 | M1-08 | Profile UI thay placeholder | Partial — placeholder, logout đã gọi Supabase | M1-07 |
 | M1-09 | Settings: mục tiêu 30/45/60, giờ nhắc, sáng/tối | Not started | M1-02, M1-07 |
 | M1-10 | Shared UI: dùng `LoadingView`/`ErrorView`, thêm button/card/dialog dùng chung | Partial | M1-02 |
 | M1-11 | Security Rules/RLS + schema tối thiểu | Not started | Quyết định data model |
-| M1-12 | Unit/widget test cho auth, redirect, logout, settings | Partial — có bootstrap/provider/redirect/login/register/Google UI; session persistence/logout đã xác minh thực tế tại M1-04; chưa có settings | M1-02 trở đi |
+| M1-12 | Unit/widget test cho auth, redirect, logout, settings | Partial — có bootstrap/provider/redirect/login/register/Google UI, OAuth pending/timeout, forgot/reset validation và recovery routing; session persistence/logout đã xác minh thực tế tại M1-04; chưa có settings | M1-02 trở đi |
 
-## 14. Nguyên tắc khi triển khai tiếp
+## 17. Nguyên tắc khi triển khai tiếp
 
 - Giữ `provider`, `GoRouter`, `AppRoutes`, `HomeShell`, `AppTheme` hiện tại; chỉ mở rộng.
 - Mọi truy cập Supabase đi qua `Supabase.instance.client` sau `SupabaseBootstrap.init()`.

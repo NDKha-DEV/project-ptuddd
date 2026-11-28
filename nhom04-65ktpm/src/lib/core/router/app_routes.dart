@@ -5,6 +5,8 @@ class AppRoutes {
 
   static const login = '/login';
   static const register = '/register';
+  static const forgotPassword = '/forgot-password';
+  static const resetPassword = '/reset-password';
 
   // Tab chính
   static const home = '/home'; // M5 - Daily You

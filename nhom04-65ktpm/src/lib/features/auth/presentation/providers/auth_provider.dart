@@ -30,6 +30,7 @@ class AuthProvider extends ChangeNotifier {
   bool _isInitializing = true;
   bool _isLoading = true;
   bool _oauthInFlight = false;
+  bool _isPasswordRecovery = false;
   String? _error;
   String? _notice;
 
@@ -39,6 +40,7 @@ class AuthProvider extends ChangeNotifier {
   bool get isInitializing => _isInitializing;
   bool get isLoading => _isLoading;
   bool get isGoogleSignInPending => _oauthInFlight;
+  bool get isPasswordRecovery => _isPasswordRecovery;
   String? get error => _error;
   String? get notice => _notice;
 
@@ -166,7 +168,71 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> sendPasswordResetEmail(String email) async {
+    if (_isLoading || _oauthInFlight) return false;
+    if (!supabaseReady) {
+      _error = 'Chưa cấu hình Supabase.';
+      _notice = null;
+      notifyListeners();
+      return false;
+    }
+
+    _startAction();
+    try {
+      await Supabase.instance.client.auth.resetPasswordForEmail(
+        email.trim(),
+        redirectTo: AppConstants.oauthRedirectTo,
+      );
+      _error = null;
+      _notice =
+          'Nếu email tồn tại, liên kết đặt lại mật khẩu đã được gửi. Vui lòng kiểm tra hộp thư.';
+      return true;
+    } catch (e) {
+      _error = _authMessage(e);
+      _notice = null;
+      return false;
+    } finally {
+      _finishAction();
+    }
+  }
+
+  Future<bool> updatePassword(String password) async {
+    if (_isLoading || _oauthInFlight) return false;
+    if (!supabaseReady) {
+      _error = 'Chưa cấu hình Supabase.';
+      _notice = null;
+      notifyListeners();
+      return false;
+    }
+    if (!_isPasswordRecovery || _user == null) {
+      _error =
+          'Phiên đặt lại mật khẩu không hợp lệ hoặc đã hết hạn. Vui lòng yêu cầu email mới.';
+      _notice = null;
+      notifyListeners();
+      return false;
+    }
+
+    _startAction();
+    try {
+      await Supabase.instance.client.auth.updateUser(
+        UserAttributes(password: password),
+      );
+      _isPasswordRecovery = false;
+      await signOut();
+      _error = null;
+      _notice = 'Mật khẩu đã được cập nhật. Vui lòng đăng nhập lại.';
+      return true;
+    } catch (e) {
+      _error = _authMessage(e);
+      _notice = null;
+      return false;
+    } finally {
+      _finishAction();
+    }
+  }
+
   Future<void> signOut() async {
+    _isPasswordRecovery = false;
     if (!supabaseReady) return;
 
     _isLoading = true;
@@ -186,6 +252,14 @@ class AuthProvider extends ChangeNotifier {
 
   void _applyAuthState(AuthState state) {
     _user = state.session?.user;
+    if (state.event == AuthChangeEvent.passwordRecovery &&
+        state.session != null) {
+      _isPasswordRecovery = true;
+    } else if (state.event == AuthChangeEvent.signedOut ||
+        state.event == AuthChangeEvent.signedIn ||
+        state.session == null) {
+      _isPasswordRecovery = false;
+    }
     _clearOAuthPending();
     _clearMessages();
     _isInitializing = false;
@@ -195,6 +269,7 @@ class AuthProvider extends ChangeNotifier {
 
   void _handleAuthError(Object error) {
     _error = _authMessage(error);
+    _isPasswordRecovery = false;
     _clearOAuthPending();
     _notice = null;
     _isInitializing = false;
@@ -254,6 +329,18 @@ class AuthProvider extends ChangeNotifier {
       case 'oauth_provider_not_supported':
       case 'provider_disabled':
         return 'Google OAuth chưa được cấu hình trên Supabase.';
+      case 'otp_expired':
+      case 'flow_state_expired':
+        return 'Liên kết khôi phục mật khẩu đã hết hạn. Vui lòng yêu cầu email mới.';
+      case 'bad_code_verifier':
+      case 'flow_state_not_found':
+        return 'Liên kết khôi phục mật khẩu không hợp lệ. Vui lòng yêu cầu email mới.';
+      case 'session_expired':
+        return 'Phiên làm việc đã hết hạn. Vui lòng thử lại.';
+      case 'same_password':
+        return 'Mật khẩu mới phải khác mật khẩu hiện tại.';
+      case 'reauthentication_needed':
+        return 'Vui lòng đăng nhập lại trước khi đổi mật khẩu.';
       default:
         return error.message;
     }

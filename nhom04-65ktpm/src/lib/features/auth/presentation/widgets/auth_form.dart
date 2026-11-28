@@ -6,7 +6,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../../../../core/router/app_routes.dart';
 import '../providers/auth_provider.dart';
 
-enum AuthFormMode { login, register }
+enum AuthFormMode { login, register, forgotPassword, resetPassword }
 
 class AuthForm extends StatefulWidget {
   const AuthForm({super.key, required this.mode});
@@ -61,22 +61,51 @@ class _AuthFormState extends State<AuthForm> {
 
     if (widget.mode == AuthFormMode.login) {
       await auth.signInWithPassword(email: email, password: password);
-    } else {
+    } else if (widget.mode == AuthFormMode.register) {
       await auth.signUp(email: email, password: password);
+    } else if (widget.mode == AuthFormMode.forgotPassword) {
+      await auth.sendPasswordResetEmail(email);
+    } else {
+      final updated = await auth.updatePassword(password);
+      if (updated && mounted) context.go(AppRoutes.login);
     }
   }
 
-  Future<void> _signInWithGoogle() async {
-    if (widget.mode != AuthFormMode.login) return;
-    FocusScope.of(context).unfocus();
-    await context.read<AuthProvider>().signInWithGoogle();
+  Future<void> _backToLogin() async {
+    if (widget.mode == AuthFormMode.resetPassword) {
+      await context.read<AuthProvider>().signOut();
+    }
+    if (mounted) context.go(AppRoutes.login);
   }
 
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
+    final isLogin = widget.mode == AuthFormMode.login;
     final isRegister = widget.mode == AuthFormMode.register;
+    final isForgotPassword = widget.mode == AuthFormMode.forgotPassword;
+    final isResetPassword = widget.mode == AuthFormMode.resetPassword;
+    final busy = auth.isLoading || auth.isGoogleSignInPending;
     final colorScheme = Theme.of(context).colorScheme;
+    final title = switch (widget.mode) {
+      AuthFormMode.login => 'Chào mừng trở lại',
+      AuthFormMode.register => 'Tạo tài khoản mới',
+      AuthFormMode.forgotPassword => 'Khôi phục mật khẩu',
+      AuthFormMode.resetPassword => 'Đặt mật khẩu mới',
+    };
+    final subtitle = switch (widget.mode) {
+      AuthFormMode.login => 'Ôn luyện tiếng Anh B1 mỗi ngày.',
+      AuthFormMode.register => 'Đăng ký để bắt đầu ôn luyện tiếng Anh B1.',
+      AuthFormMode.forgotPassword =>
+        'Nhập email để nhận liên kết đặt lại mật khẩu.',
+      AuthFormMode.resetPassword => 'Chọn mật khẩu mới cho tài khoản của bạn.',
+    };
+    final submitLabel = switch (widget.mode) {
+      AuthFormMode.login => 'Đăng nhập',
+      AuthFormMode.register => 'Đăng ký',
+      AuthFormMode.forgotPassword => 'Gửi liên kết',
+      AuthFormMode.resetPassword => 'Cập nhật mật khẩu',
+    };
 
     return SafeArea(
       child: Center(
@@ -94,42 +123,53 @@ class _AuthFormState extends State<AuthForm> {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  isRegister ? 'Tạo tài khoản mới' : 'Chào mừng trở lại',
+                  title,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  isRegister
-                      ? 'Đăng ký để bắt đầu ôn luyện tiếng Anh B1.'
-                      : 'Ôn luyện tiếng Anh B1 mỗi ngày.',
-                  textAlign: TextAlign.center,
-                ),
+                Text(subtitle, textAlign: TextAlign.center),
                 const SizedBox(height: 32),
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  autocorrect: false,
-                  validator: _validateEmail,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.email_outlined),
+                if (!isResetPassword) ...[
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    autocorrect: false,
+                    validator: _validateEmail,
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.email_outlined),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  autocorrect: false,
-                  validator: _validatePassword,
-                  decoration: const InputDecoration(
-                    labelText: 'Mật khẩu',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.lock_outline),
+                  const SizedBox(height: 16),
+                ],
+                if (!isForgotPassword) ...[
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    autocorrect: false,
+                    validator: _validatePassword,
+                    decoration: const InputDecoration(
+                      labelText: 'Mật khẩu',
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.lock_outline),
+                    ),
                   ),
-                ),
-                if (isRegister) ...[
+                  if (isLogin) ...[
+                    const SizedBox(height: 4),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: busy
+                            ? null
+                            : () => context.go(AppRoutes.forgotPassword),
+                        child: const Text('Quên mật khẩu?'),
+                      ),
+                    ),
+                  ],
+                ],
+                if (isRegister || isResetPassword) ...[
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: _confirmController,
@@ -159,10 +199,8 @@ class _AuthFormState extends State<AuthForm> {
                   const SizedBox(height: 12),
                 ],
                 FilledButton(
-                  onPressed: auth.isLoading || auth.isGoogleSignInPending
-                      ? null
-                      : _submit,
-                  child: auth.isLoading || auth.isGoogleSignInPending
+                  onPressed: busy ? null : _submit,
+                  child: busy
                       ? SizedBox(
                           height: 20,
                           width: 20,
@@ -171,9 +209,9 @@ class _AuthFormState extends State<AuthForm> {
                             color: colorScheme.onPrimary,
                           ),
                         )
-                      : Text(isRegister ? 'Đăng ký' : 'Đăng nhập'),
+                      : Text(submitLabel),
                 ),
-                if (!isRegister) ...[
+                if (isLogin) ...[
                   const SizedBox(height: 16),
                   Row(
                     children: [
@@ -190,9 +228,7 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   const SizedBox(height: 16),
                   OutlinedButton.icon(
-                    onPressed: auth.isLoading || auth.isGoogleSignInPending
-                        ? null
-                        : _signInWithGoogle,
+                    onPressed: busy ? null : _signInWithGoogle,
                     icon: const Icon(Icons.account_circle_outlined),
                     label: auth.isGoogleSignInPending
                         ? SizedBox(
@@ -207,25 +243,51 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                 ],
                 const SizedBox(height: 12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(isRegister ? 'Đã có tài khoản?' : 'Chưa có tài khoản?'),
-                    TextButton(
-                      onPressed: auth.isLoading || auth.isGoogleSignInPending
-                          ? null
-                          : () => context.go(
-                              isRegister ? AppRoutes.login : AppRoutes.register,
-                            ),
-                      child: Text(isRegister ? 'Đăng nhập' : 'Đăng ký'),
-                    ),
-                  ],
-                ),
+                if (isForgotPassword || isResetPassword)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        isResetPassword
+                            ? 'Hủy và đăng nhập?'
+                            : 'Đã nhớ mật khẩu?',
+                      ),
+                      TextButton(
+                        onPressed: busy ? null : _backToLogin,
+                        child: const Text('Đăng nhập'),
+                      ),
+                    ],
+                  )
+                else
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        isRegister
+                            ? 'Đã có tài khoản?'
+                            : 'Chưa có tài khoản?',
+                      ),
+                      TextButton(
+                        onPressed: busy
+                            ? null
+                            : () => context.go(
+                                isRegister ? AppRoutes.login : AppRoutes.register,
+                              ),
+                        child: Text(isRegister ? 'Đăng nhập' : 'Đăng ký'),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _signInWithGoogle() async {
+    if (widget.mode != AuthFormMode.login) return;
+    FocusScope.of(context).unfocus();
+    await context.read<AuthProvider>().signInWithGoogle();
   }
 }

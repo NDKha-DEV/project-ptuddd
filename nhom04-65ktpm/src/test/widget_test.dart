@@ -91,4 +91,53 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('M1 - Nền tảng và tài khoản'), findsOneWidget);
   });
+
+  testWidgets('Login có entry Forgot Password và quay lại được', (tester) async {
+    final auth = AuthProvider(supabaseReady: false);
+    await auth.initialize();
+
+    await tester.pumpWidget(_buildApp(auth));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Quên mật khẩu?'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Khôi phục mật khẩu'), findsOneWidget);
+    expect(find.byType(TextFormField), findsOneWidget);
+
+    await tester.tap(find.text('Đăng nhập'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Chào mừng trở lại'), findsOneWidget);
+  });
+
+  testWidgets('Recovery state mở Reset Password và không gây redirect loop',
+      (tester) async {
+    final controller = StreamController<AuthState>();
+    final auth = AuthProvider(
+      supabaseReady: false,
+      authStateStream: controller.stream,
+    );
+    await auth.initialize();
+
+    controller.add(
+      AuthState(AuthChangeEvent.passwordRecovery, _session('recovery-uid')),
+    );
+    await tester.pump();
+
+    await tester.pumpWidget(_buildApp(auth));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Đặt mật khẩu mới'), findsOneWidget);
+    expect(find.byType(TextFormField), findsNWidgets(2));
+    expect(find.text('M5 - Thói quen và thống kê tiến độ'), findsNothing);
+
+    controller.add(AuthState(AuthChangeEvent.signedOut, null));
+    await tester.pump();
+    await tester.pumpAndSettle();
+
+    expect(find.text('Khôi phục mật khẩu'), findsOneWidget);
+    expect(find.text('Đặt mật khẩu mới'), findsNothing);
+    await controller.close();
+  });
 }

@@ -11,6 +11,48 @@ Future<AuthProvider> _buildAuth() async {
   return auth;
 }
 
+class FakeRecoveryAuthProvider extends AuthProvider {
+  FakeRecoveryAuthProvider({required this.shouldSucceed})
+      : super(supabaseReady: false);
+
+  final bool shouldSucceed;
+  String? _fakeNotice;
+  String? _fakeError;
+
+  @override
+  String? get notice => _fakeNotice ?? super.notice;
+
+  @override
+  String? get error => _fakeError ?? super.error;
+
+  @override
+  Future<bool> sendPasswordResetEmail(String email) async {
+    _fakeNotice = shouldSucceed
+        ? 'Nếu email tồn tại, liên kết đặt lại mật khẩu đã được gửi. Vui lòng kiểm tra hộp thư.'
+        : null;
+    _fakeError =
+        shouldSucceed ? null : 'Không gửi được email. Vui lòng thử lại.';
+    notifyListeners();
+    return shouldSucceed;
+  }
+
+  @override
+  Future<bool> updatePassword(String password) async {
+    _fakeNotice = shouldSucceed
+        ? 'Mật khẩu đã được cập nhật. Vui lòng đăng nhập lại.'
+        : null;
+    _fakeError = shouldSucceed ? null : 'Không cập nhật được mật khẩu.';
+    notifyListeners();
+    return shouldSucceed;
+  }
+}
+
+Future<FakeRecoveryAuthProvider> _buildRecoveryAuth(bool shouldSucceed) async {
+  final auth = FakeRecoveryAuthProvider(shouldSucceed: shouldSucceed);
+  await auth.initialize();
+  return auth;
+}
+
 Widget _buildForm(AuthProvider auth, AuthFormMode mode) {
   return ChangeNotifierProvider<AuthProvider>(
     create: (_) => auth,
@@ -80,5 +122,65 @@ void main() {
 
     expect(find.text('OR'), findsNothing);
     expect(find.text('Continue with Google'), findsNothing);
+  });
+
+  testWidgets('Forgot Password validate email và hiển thị thông báo trung tính',
+      (tester) async {
+    final auth = await _buildRecoveryAuth(true);
+    await tester.pumpWidget(_buildForm(auth, AuthFormMode.forgotPassword));
+
+    expect(find.byType(TextFormField), findsOneWidget);
+
+    await tester.tap(find.byType(FilledButton));
+    await tester.pump();
+    expect(find.text('Vui lòng nhập email.'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextFormField), 'not-an-email');
+    await tester.tap(find.byType(FilledButton));
+    await tester.pump();
+    expect(find.text('Email không hợp lệ.'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextFormField), 'user@example.com');
+    await tester.tap(find.byType(FilledButton));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(
+        'Nếu email tồn tại, liên kết đặt lại mật khẩu đã được gửi. Vui lòng kiểm tra hộp thư.',
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('Submit bị vô hiệu hóa khi AuthProvider đang loading',
+      (tester) async {
+    final auth = AuthProvider(supabaseReady: false);
+    await tester.pumpWidget(_buildForm(auth, AuthFormMode.forgotPassword));
+
+    final button = tester.widget<FilledButton>(find.byType(FilledButton));
+    expect(button.onPressed, isNull);
+  });
+
+  testWidgets('Reset Password validate xác nhận và hiển thị lỗi cập nhật',
+      (tester) async {
+    final auth = await _buildRecoveryAuth(false);
+    await tester.pumpWidget(_buildForm(auth, AuthFormMode.resetPassword));
+
+    final fields = find.byType(TextFormField);
+    expect(fields, findsNWidgets(2));
+    expect(find.text('Email'), findsNothing);
+
+    await tester.enterText(fields.at(0), '123456');
+    await tester.enterText(fields.at(1), '654321');
+    await tester.tap(find.byType(FilledButton));
+    await tester.pump();
+
+    expect(find.text('Mật khẩu xác nhận không khớp.'), findsOneWidget);
+
+    await tester.enterText(fields.at(1), '123456');
+    await tester.tap(find.byType(FilledButton));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Không cập nhật được mật khẩu.'), findsOneWidget);
   });
 }

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/providers/auth_provider.dart';
+import '../../features/auth/presentation/screens/forgot_password_screen.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/auth/presentation/screens/register_screen.dart';
+import '../../features/auth/presentation/screens/reset_password_screen.dart';
 import '../../features/b1_materials/presentation/screens/material_detail_screen.dart';
 import '../../features/b1_materials/presentation/screens/materials_screen.dart';
 import '../../features/exercises/presentation/screens/exercise_detail_screen.dart';
@@ -21,8 +23,16 @@ GoRouter createAppRouter(AuthProvider auth) {
     redirect: (context, state) {
       final atLogin = state.matchedLocation == AppRoutes.login;
       final atRegister = state.matchedLocation == AppRoutes.register;
-      final atAuthScreen = atLogin || atRegister;
+      final atForgotPassword =
+          state.matchedLocation == AppRoutes.forgotPassword;
+      final atResetPassword = state.matchedLocation == AppRoutes.resetPassword;
+      final atAuthScreen =
+          atLogin || atRegister || atForgotPassword || atResetPassword;
       if (auth.isInitializing) return atAuthScreen ? null : AppRoutes.login;
+      if (auth.isPasswordRecovery) {
+        return atResetPassword ? null : AppRoutes.resetPassword;
+      }
+      if (atResetPassword) return AppRoutes.forgotPassword;
       if (!auth.isSignedIn) return atAuthScreen ? null : AppRoutes.login;
       if (atAuthScreen) return AppRoutes.home;
       return null;
@@ -35,6 +45,14 @@ GoRouter createAppRouter(AuthProvider auth) {
       GoRoute(
         path: AppRoutes.register,
         builder: (context, state) => const RegisterScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.forgotPassword,
+        builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.resetPassword,
+        builder: (context, state) => const ResetPasswordScreen(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => HomeShell(navigationShell: shell),

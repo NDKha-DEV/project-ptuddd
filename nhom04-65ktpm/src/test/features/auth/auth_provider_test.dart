@@ -68,6 +68,42 @@ void main() {
     controller.close();
   });
 
+  test('Recovery state được giữ đến khi cập nhật mật khẩu hoặc kết thúc',
+      () async {
+    final controller = StreamController<AuthState>();
+    final auth = AuthProvider(
+      supabaseReady: false,
+      authStateStream: controller.stream,
+    );
+    await auth.initialize();
+
+    expect(auth.isPasswordRecovery, isFalse);
+
+    controller.add(
+      AuthState(AuthChangeEvent.passwordRecovery, _session('recovery-user')),
+    );
+    await pumpEventQueue();
+
+    expect(auth.isPasswordRecovery, isTrue);
+    expect(auth.uid, 'recovery-user');
+    expect(auth.isSignedIn, isTrue);
+
+    controller.add(
+      AuthState(AuthChangeEvent.userUpdated, _session('recovery-user')),
+    );
+    await pumpEventQueue();
+    expect(auth.isPasswordRecovery, isTrue);
+
+    controller.addError(
+      const AuthException('expired', code: 'otp_expired'),
+    );
+    await pumpEventQueue();
+
+    expect(auth.isPasswordRecovery, isFalse);
+    expect(auth.error, contains('hết hạn'));
+    await controller.close();
+  });
+
   test('SignIn/SignUp trả false khi chưa cấu hình Supabase', () async {
     final auth = AuthProvider(supabaseReady: false);
     await auth.initialize();
