@@ -32,7 +32,12 @@ void main() {
 
   test('mã bài tập mẫu của M4 mở được', () {
     final catalog = ExerciseCatalog(sets);
-    for (final id in ['ex_listen_01', 'ex_read_01', 'ex_write_01', 'ex_speak_01']) {
+    for (final id in [
+      'ex_listen_01',
+      'ex_read_01',
+      'ex_write_01',
+      'ex_speak_01',
+    ]) {
       expect(catalog.byId(id), isNotNull, reason: id);
     }
   });
@@ -46,7 +51,11 @@ void main() {
           expect(question.options.length, 4, reason: question.id);
           expect(question.answerIndex, inInclusiveRange(0, 3));
           expect(question.prompt.trim(), isNotEmpty, reason: question.id);
-          expect(question.explanationVi.trim(), isNotEmpty, reason: question.id);
+          expect(
+            question.explanationVi.trim(),
+            isNotEmpty,
+            reason: question.id,
+          );
           expect(question.options.toSet().length, 4, reason: question.id);
         }
       }
