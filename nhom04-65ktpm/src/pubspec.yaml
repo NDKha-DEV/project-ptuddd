@@ -62,6 +62,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  # M3 - ngân hàng đề B1 và audio phần Nghe
+  assets:
+    - assets/data/m3/
+    - assets/audio/m3/
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

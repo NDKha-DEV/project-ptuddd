@@ -1,0 +1,361 @@
+{
+  "id": "set_04",
+  "title": "Đề mẫu số 4",
+  "topic": "Môi trường và công nghệ",
+  "description": "Đề luyện tập B1 đầy đủ 4 kỹ năng về rác thải, tiết kiệm tài nguyên, thiết bị công nghệ và mạng xã hội.",
+  "sections": [
+    {
+      "id": "ex_listen_04",
+      "skill": "listening",
+      "title": "Listening",
+      "instructionsVi": "Bạn sẽ nghe 4 đoạn hội thoại ngắn (mỗi đoạn 1 câu hỏi) và 1 bài nói về chiến dịch môi trường (4 câu hỏi). Chú ý phân biệt điều đang xảy ra với kế hoạch trong tương lai.",
+      "durationMinutes": 20,
+      "groups": [
+        {
+          "id": "set_04_l1",
+          "title": "Part 1 – Conversation 1",
+          "audio": "assets/audio/m3/set_04_l1.m4a",
+          "transcript": [
+            {"speaker": "M", "text": "Hi, can you help me? My new phone keeps switching off."},
+            {"speaker": "W", "text": "Is the battery low when it happens?"},
+            {"speaker": "M", "text": "No, it's usually at about fifty percent. And the screen is fine."},
+            {"speaker": "W", "text": "It may be a software problem. Have you updated it recently?"},
+            {"speaker": "M", "text": "Not yet."},
+            {"speaker": "W", "text": "Try updating it first. If it still switches off, bring it back and we'll replace it."}
+          ],
+          "questions": [
+            {
+              "id": "set_04_l01",
+              "prompt": "What is the problem with the man's phone?",
+              "options": ["It turns itself off.", "Its battery is broken.", "Its screen is cracked.", "It cannot be updated."],
+              "answerIndex": 0,
+              "explanationVi": "Anh ấy nói 'My new phone keeps switching off', tức điện thoại tự tắt. Pin vẫn còn khoảng 50% và màn hình bình thường ('the screen is fine'), còn việc cập nhật thì anh ấy chưa thử."
+            }
+          ]
+        },
+        {
+          "id": "set_04_l2",
+          "title": "Part 1 – Conversation 2",
+          "audio": "assets/audio/m3/set_04_l2.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "Where should I put these plastic bottles? The bin in our kitchen is full."},
+            {"speaker": "M", "text": "Not in the kitchen bin anyway. That one's only for food waste."},
+            {"speaker": "W", "text": "Oh, really? I didn't know that."},
+            {"speaker": "M", "text": "Take them to the blue bins next to the entrance of the building. The green ones are for paper."},
+            {"speaker": "W", "text": "OK, I'll do it on my way out."}
+          ],
+          "questions": [
+            {
+              "id": "set_04_l02",
+              "prompt": "Where will the woman put the plastic bottles?",
+              "options": ["In the kitchen bin", "In the green bin", "In the blue bin by the entrance", "In a bin in the car park"],
+              "answerIndex": 2,
+              "explanationVi": "Người đàn ông bảo 'Take them to the blue bins next to the entrance'. Thùng trong bếp chỉ dành cho rác thức ăn, còn thùng xanh lá ('green') dành cho giấy."
+            }
+          ]
+        },
+        {
+          "id": "set_04_l3",
+          "title": "Part 1 – Conversation 3",
+          "audio": "assets/audio/m3/set_04_l3.m4a",
+          "transcript": [
+            {"speaker": "M", "text": "Why weren't you in the online class this morning?"},
+            {"speaker": "W", "text": "I tried to join, but my Wi-Fi stopped working at about eight."},
+            {"speaker": "M", "text": "Couldn't you use your phone data?"},
+            {"speaker": "W", "text": "I'd already used it all up watching videos last night!"},
+            {"speaker": "M", "text": "Oh dear. Well, the teacher recorded the lesson, so you can watch it later."}
+          ],
+          "questions": [
+            {
+              "id": "set_04_l03",
+              "prompt": "Why did the woman miss the online class?",
+              "options": ["She got up too late.", "She had no internet connection.", "She forgot what time it started.", "Her laptop was broken."],
+              "answerIndex": 1,
+              "explanationVi": "Wi-Fi bị hỏng ('my Wi-Fi stopped working') và dữ liệu di động cũng đã hết ('I'd already used it all up'), nên cô ấy không có mạng để vào lớp. Cô ấy có cố vào ('I tried to join') nên không phải do ngủ quên."
+            }
+          ]
+        },
+        {
+          "id": "set_04_l4",
+          "title": "Part 1 – Conversation 4",
+          "audio": "assets/audio/m3/set_04_l4.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "You're always on your phone. How long do you spend on social media every day?"},
+            {"speaker": "M", "text": "My phone says about four hours, which is shocking."},
+            {"speaker": "W", "text": "Four hours! That's far too much."},
+            {"speaker": "M", "text": "I know. So from next week I'm going to set a limit of one hour a day."},
+            {"speaker": "W", "text": "Good luck. I tried two hours, and even that was hard."}
+          ],
+          "questions": [
+            {
+              "id": "set_04_l04",
+              "prompt": "How long does the man plan to spend on social media each day?",
+              "options": ["Four hours", "Two hours", "Three hours", "One hour"],
+              "answerIndex": 3,
+              "explanationVi": "Câu hỏi về dự định ('plan'), và anh ấy nói 'I'm going to set a limit of one hour a day'. Bốn tiếng là thời gian hiện tại, còn hai tiếng là giới hạn mà cô gái từng thử."
+            }
+          ]
+        },
+        {
+          "id": "set_04_l5",
+          "title": "Part 2 – Talk",
+          "audio": "assets/audio/m3/set_04_l5.m4a",
+          "transcript": [
+            {"speaker": "N", "text": "Hi everyone, I'm Phuong, and I lead the Green Campus Club. I'd like to tell you about our No Plastic November campaign."},
+            {"speaker": "N", "text": "Last year, the university canteen used more than ten thousand plastic cups a month, and most of them ended up in the rubbish. This year, we want to change that. From the first of November, the canteen will stop selling drinks in plastic cups. Instead, you can bring your own bottle or cup, and you'll get a discount of two thousand dong on every drink. If you forget your cup, you can borrow a glass one, but you must return it to the counter."},
+            {"speaker": "N", "text": "Our club is also organising a clean-up day on the riverbank on Sunday the twentieth. We'll meet at the main gate at seven in the morning, and we'll provide gloves and bags. You only need to bring a hat and some water."},
+            {"speaker": "N", "text": "Finally, we're looking for volunteers to design posters for the campaign. If you're good at drawing or graphic design, please send a message to our club page before Friday. Thank you!"}
+          ],
+          "questions": [
+            {
+              "id": "set_04_l05",
+              "prompt": "What is the main aim of the campaign?",
+              "options": ["To sell more drinks in the canteen", "To raise money for the club", "To find new club members", "To reduce plastic waste on campus"],
+              "answerIndex": 3,
+              "explanationVi": "Tên chiến dịch là 'No Plastic November' và mục tiêu là giảm hơn mười nghìn cốc nhựa bị vứt bỏ mỗi tháng ('we want to change that'). Câu lạc bộ có tìm tình nguyện viên vẽ poster nhưng đó không phải mục đích chính."
+            },
+            {
+              "id": "set_04_l06",
+              "prompt": "What will students get if they bring their own cup?",
+              "options": ["A free drink", "A small discount", "A glass cup to keep", "A free bag"],
+              "answerIndex": 1,
+              "explanationVi": "Mang cốc riêng sẽ được 'a discount of two thousand dong on every drink'. Cốc thủy tinh chỉ cho mượn và phải trả lại quầy, không được giữ."
+            },
+            {
+              "id": "set_04_l07",
+              "prompt": "What should people bring to the clean-up day?",
+              "options": ["Gloves and bags", "Their own cups", "A hat and some water", "Drawing materials"],
+              "answerIndex": 2,
+              "explanationVi": "Câu lạc bộ đã chuẩn bị găng tay và túi ('we'll provide gloves and bags'), người tham gia chỉ cần 'bring a hat and some water'."
+            },
+            {
+              "id": "set_04_l08",
+              "prompt": "Why should some students contact the club before Friday?",
+              "options": ["To help design posters", "To book a place on the clean-up day", "To borrow a glass cup", "To buy a reusable bottle"],
+              "answerIndex": 0,
+              "explanationVi": "Người nói kêu gọi ai giỏi vẽ hoặc thiết kế đồ họa 'send a message to our club page before Friday' để làm poster. Bài nói không yêu cầu đăng ký trước cho ngày dọn rác, chỉ hẹn gặp ở cổng chính lúc 7 giờ sáng."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex_read_04",
+      "skill": "reading",
+      "title": "Reading",
+      "instructionsVi": "Phần 1: chọn từ hoặc cụm từ đúng để hoàn thành câu. Phần 2: đọc 4 văn bản ngắn (biển báo, tin nhắn, thông báo, email) và chọn ý đúng. Phần 3: đọc bài viết về rác thải điện tử và trả lời 4 câu hỏi.",
+      "durationMinutes": 25,
+      "groups": [
+        {
+          "id": "set_04_r1",
+          "title": "Part 1 – Choose the best word or phrase",
+          "passage": null,
+          "questions": [
+            {
+              "id": "set_04_r01",
+              "prompt": "This laptop is _____ expensive for me to buy right now.",
+              "options": ["enough", "so", "too", "very much"],
+              "answerIndex": 2,
+              "explanationVi": "Cấu trúc 'too + tính từ + for somebody + to V' nghĩa là quá... đến nỗi không thể làm gì. 'So' phải đi với mệnh đề 'that', còn 'enough' đứng sau tính từ."
+            },
+            {
+              "id": "set_04_r02",
+              "prompt": "Millions of plastic bottles _____ into the ocean every year.",
+              "options": ["are thrown", "throw", "are throwing", "have thrown"],
+              "answerIndex": 0,
+              "explanationVi": "Chai nhựa không tự ném mà bị con người ném đi, nên dùng câu bị động thì hiện tại đơn 'are thrown' (có 'every year' chỉ sự việc lặp lại)."
+            },
+            {
+              "id": "set_04_r03",
+              "prompt": "Please turn _____ the lights when you leave the room to save energy.",
+              "options": ["on", "off", "up", "over"],
+              "answerIndex": 1,
+              "explanationVi": "'Turn off' là tắt (đèn, máy móc), hợp với ý 'to save energy' và 'when you leave the room'. 'Turn on' nghĩa ngược lại là bật."
+            },
+            {
+              "id": "set_04_r04",
+              "prompt": "I don't know _____ to fix this printer. Can you help me?",
+              "options": ["what", "which", "where", "how"],
+              "answerIndex": 3,
+              "explanationVi": "'How to + V' nghĩa là cách làm gì: 'how to fix this printer' (cách sửa máy in). 'What to fix' không đi được với tân ngữ 'this printer' ngay sau."
+            }
+          ]
+        },
+        {
+          "id": "set_04_r2a",
+          "title": "Part 2 – Sign",
+          "passage": "COMPUTER LAB\nPlease log out before you leave. Do not save files on the desktop because they are deleted every night. Use your student cloud account instead. No drinks near the computers.",
+          "questions": [
+            {
+              "id": "set_04_r05",
+              "prompt": "What does the sign tell students to do?",
+              "options": ["Keep files on the desktop for a week", "Save their work in their cloud account", "Bring drinks into the lab", "Stay logged in when they leave"],
+              "answerIndex": 1,
+              "explanationVi": "Biển báo viết 'Use your student cloud account instead', vì file trên desktop bị xóa mỗi đêm. Sinh viên phải đăng xuất trước khi về và không được để đồ uống gần máy."
+            }
+          ]
+        },
+        {
+          "id": "set_04_r2b",
+          "title": "Part 2 – Text message",
+          "passage": "Hi Tam, my laptop has crashed and I lost my part of the report. Could you send me the file you have? I'll redo the charts tonight and send everything back by 9. Sorry! An",
+          "questions": [
+            {
+              "id": "set_04_r06",
+              "prompt": "Why is An writing to Tam?",
+              "options": ["To ask Tam to repair his laptop", "To say he has finished the report", "To say the report has been cancelled", "To ask Tam for a copy of the file"],
+              "answerIndex": 3,
+              "explanationVi": "An bị mất dữ liệu nên nhờ 'Could you send me the file you have?'. Bạn ấy tự làm lại biểu đồ chứ không nhờ Tâm sửa máy, và báo cáo vẫn chưa xong."
+            }
+          ]
+        },
+        {
+          "id": "set_04_r2c",
+          "title": "Part 2 – Notice",
+          "passage": "WATER SAVING\nBecause of the dry season, the water supply in the dormitory will be turned off from 13:00 to 16:00 every day this week. Please store some water before 13:00. We are sorry for any inconvenience.",
+          "questions": [
+            {
+              "id": "set_04_r07",
+              "prompt": "What does the notice say?",
+              "options": ["There will be no water in the dormitory all week.", "Students must pay more for water.", "The water will be off for three hours every afternoon.", "The water will be turned off only at night."],
+              "answerIndex": 2,
+              "explanationVi": "Nước bị cắt 'from 13:00 to 16:00 every day this week', tức 3 tiếng mỗi buổi chiều. Phương án A sai vì chỉ cắt theo giờ chứ không phải cả tuần liền."
+            }
+          ]
+        },
+        {
+          "id": "set_04_r2d",
+          "title": "Part 2 – Email",
+          "passage": "Dear users,\nWe will update the student app on Saturday from 22:00 to 02:00. During this time, you will not be able to see your timetable or exam results. You do not need to do anything.\nIT Support",
+          "questions": [
+            {
+              "id": "set_04_r08",
+              "prompt": "What does the email tell students?",
+              "options": ["The app will not work for a few hours.", "They must download a new app.", "Their exam results will be deleted.", "They need to change their password."],
+              "answerIndex": 0,
+              "explanationVi": "Trong lúc cập nhật từ 22:00 đến 02:00, sinh viên 'will not be able to see your timetable or exam results'. Email ghi rõ 'You do not need to do anything', nên không phải tải app mới hay đổi mật khẩu."
+            }
+          ]
+        },
+        {
+          "id": "set_04_r3",
+          "title": "Part 3 – Reading passage",
+          "passage": "Every year, people around the world throw away tens of millions of tonnes of electronic waste, or e-waste. This includes old phones, laptops, chargers, televisions and even electric toothbrushes. It is one of the fastest-growing types of rubbish, and only a small part of it is recycled properly.\n\nOne reason is that many devices are designed to be replaced rather than repaired. Batteries are often glued inside, and spare parts can be hard to find or very expensive. As a result, when a phone stops working after two or three years, many owners simply buy a new one. Clever advertising, which makes last year's model look old-fashioned, also encourages people to upgrade more often than they need to.\n\nE-waste is not just a problem of space. Electronic devices contain harmful materials such as lead and mercury. When they are burned or left in open rubbish tips, these materials can get into the soil and water and damage people's health. At the same time, the devices also contain valuable metals, including gold and copper, which are lost when they are not recycled.\n\nThere are several things ordinary people can do. First, keep your devices for longer and protect them with a case. Second, try a local repair shop before replacing a broken item. Third, if you must get rid of an old device, take it to an official collection point instead of putting it in the normal rubbish. Some shops even give you a discount on a new product when you return an old one.\n\nSmall changes like these, if millions of people make them, could make a real difference.",
+          "questions": [
+            {
+              "id": "set_04_r09",
+              "prompt": "What is the passage mainly about?",
+              "options": ["How to choose a new phone", "Why gold and copper are valuable", "How advertising for electronics works", "The problem of e-waste and what people can do"],
+              "answerIndex": 3,
+              "explanationVi": "Bài viết nêu vấn đề rác thải điện tử (nguyên nhân, tác hại) rồi đưa ra việc mỗi người có thể làm. Vàng, đồng hay quảng cáo chỉ là chi tiết trong từng đoạn."
+            },
+            {
+              "id": "set_04_r10",
+              "prompt": "According to the passage, why do many people replace their phones instead of repairing them?",
+              "options": ["Repairing phones is against the law.", "Devices are difficult or expensive to repair.", "Old phones contain gold.", "Collection points are often closed."],
+              "answerIndex": 1,
+              "explanationVi": "Đoạn 2 giải thích pin thường bị dán chết bên trong và 'spare parts can be hard to find or very expensive', nên người ta mua máy mới cho nhanh."
+            },
+            {
+              "id": "set_04_r11",
+              "prompt": "The word 'harmful' in paragraph 3 is closest in meaning to:",
+              "options": ["dangerous", "expensive", "heavy", "useful"],
+              "answerIndex": 0,
+              "explanationVi": "'Harmful' nghĩa là có hại, nguy hiểm. Ngay sau đó bài viết nói các chất này 'damage people's health', xác nhận nghĩa của từ."
+            },
+            {
+              "id": "set_04_r12",
+              "prompt": "What is the writer's main purpose?",
+              "options": ["To sell protective phone cases", "To criticise local repair shops", "To inform readers about a problem and suggest solutions", "To explain how gold is recycled"],
+              "answerIndex": 2,
+              "explanationVi": "Tác giả vừa cung cấp thông tin về rác thải điện tử, vừa đưa ra ba lời khuyên ('There are several things ordinary people can do'). Bài khuyên dùng tiệm sửa chữa chứ không chỉ trích họ."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex_write_04",
+      "skill": "writing",
+      "title": "Writing",
+      "instructionsVi": "Làm 2 bài viết. Bài 1: viết email 80–100 từ trả lời đủ 3 ý. Bài 2: viết đoạn văn 120–150 từ trình bày quan điểm đồng ý hay không đồng ý.",
+      "durationMinutes": 40,
+      "tasks": [
+        {
+          "id": "set_04_w1",
+          "title": "Task 1 – Email",
+          "prompt": "Your class is organising a tree-planting day. Your classmate Khanh missed the meeting. Write an email to Khanh. In your email:\n- tell him when and where the event will take place\n- explain what he needs to bring\n- say why he should join",
+          "minWords": 80,
+          "maxWords": 100,
+          "tipsVi": [
+            "Đưa thông tin thời gian, địa điểm thật rõ ràng: 'on Sunday 15 March at 7 a.m. at...'.",
+            "Liệt kê đồ cần mang ngắn gọn, có thể giải thích vì sao cần (trời nắng, đất bẩn).",
+            "Lý do nên tham gia có thể gồm lợi ích cho môi trường và cơ hội gắn kết với lớp."
+          ],
+          "sampleAnswer": "Hi Khanh,\n\nYou missed the class meeting yesterday, so here's the news. We're going to plant trees on Sunday, 15 March, along the road behind the stadium. We'll meet at the main gate at seven in the morning and finish around eleven. Please bring a hat, a bottle of water and some old clothes, because it will be hot and muddy. The school will give us the young trees and tools. I really hope you can come. It's a good way to help the environment, and it'll be fun to work together as a class.\n\nCheers,\nLinh"
+        },
+        {
+          "id": "set_04_w2",
+          "title": "Task 2 – Paragraph",
+          "prompt": "Write a paragraph (120–150 words) on the following topic:\n'Social media does more harm than good to young people.'\nDo you agree or disagree? Give reasons and examples.",
+          "minWords": 120,
+          "maxWords": 150,
+          "tipsVi": [
+            "Nêu rõ mức độ đồng ý ngay câu đầu: 'I partly agree...' hoặc 'I strongly disagree...'.",
+            "Mỗi lý do kèm một ví dụ cụ thể từ trải nghiệm của bạn hoặc bạn bè.",
+            "Dùng từ nối tương phản 'However', 'On the other hand' nếu bạn nhắc cả hai mặt."
+          ],
+          "sampleAnswer": "I partly agree that social media does more harm than good to young people. On the negative side, it takes up a huge amount of time. Many of my friends scroll through short videos for hours every night, and then they feel tired and cannot concentrate in class the next day. Social media can also make young people unhappy, because they compare their own lives with the perfect photos they see online. On the other hand, it has real benefits. It helps us keep in touch with friends who live far away, and many students use it to join study groups or find free online courses. In my opinion, the problem is not social media itself but how we use it. If young people set time limits and follow useful pages, it can be a helpful tool."
+        }
+      ]
+    },
+    {
+      "id": "ex_speak_04",
+      "skill": "speaking",
+      "title": "Speaking",
+      "instructionsVi": "Phần thi nói gồm 3 phần: trả lời câu hỏi về thói quen dùng công nghệ và bảo vệ môi trường, chọn thiết bị phù hợp cho ông bà, và trình bày chủ đề về bảo vệ môi trường.",
+      "durationMinutes": 12,
+      "tasks": [
+        {
+          "id": "set_04_s1",
+          "title": "Part 1 – Social interaction",
+          "prompt": "The examiner asks you some questions about technology and the environment.\n- How much time do you spend on your phone each day?\n- Which apps do you use the most? Why?\n- What do you do to protect the environment in your daily life?",
+          "prepSeconds": 0,
+          "speakSeconds": 120,
+          "tipsVi": [
+            "Đưa ra con số ước lượng cụ thể cho thời gian dùng điện thoại, kèm việc bạn thường làm.",
+            "Khi nói về ứng dụng, giải thích mục đích sử dụng (học, liên lạc, giải trí).",
+            "Với câu về môi trường, nêu 2–3 hành động nhỏ có thật như mang bình nước, tắt điện."
+          ],
+          "sampleAnswer": "Honestly, I spend around five hours a day on my phone, but not all of it is for fun. I use it to read lecture notes, check my timetable and chat with my group about assignments. Still, I think I watch too many short videos before bed. The apps I use the most are a messaging app and a dictionary app. The messaging app is how my whole class communicates, so I have to check it all the time. The dictionary helps me a lot with English, especially pronunciation. To protect the environment, I try to do small things. I always carry a water bottle, so I don't buy plastic bottles. I also turn off the lights and the fan when I leave my room, and I sort my rubbish in the dormitory. It's not much, but I think small habits matter."
+        },
+        {
+          "id": "set_04_s2",
+          "title": "Part 2 – Solution discussion",
+          "prompt": "Situation: Your grandparents live in the countryside and want to use technology to keep in touch with the family. There are three options:\n- buying them a smartphone\n- buying them a tablet\n- buying them a laptop\nWhich option do you think is the best? Explain why, and say why the other options are less suitable.",
+          "prepSeconds": 60,
+          "speakSeconds": 120,
+          "tipsVi": [
+            "Đặt mình vào vị trí người lớn tuổi: mắt kém, ít kinh nghiệm công nghệ, cần dễ dùng.",
+            "So sánh các thiết bị bằng kích thước màn hình, độ dễ sử dụng và giá cả.",
+            "Có thể bổ sung ý bạn sẽ làm gì để giúp ông bà làm quen với thiết bị."
+          ],
+          "sampleAnswer": "I think a tablet is the best choice for my grandparents. The main reason is the screen. It's much bigger than a phone screen, so they can see our faces clearly on video calls and read messages without their glasses. Tablets are also really simple to use. You just touch the picture of the person you want to call, and that's it. A smartphone is cheaper and easier to carry, but the screen and the buttons are small, and my grandmother often presses the wrong thing. A laptop has a big screen, but it's too complicated for them. They'd have to use a keyboard and a mouse, and there are too many programs and updates. So I'd buy a tablet, put the family's video call app on the home screen, and spend a weekend teaching them how to use it."
+        },
+        {
+          "id": "set_04_s3",
+          "title": "Part 3 – Topic development",
+          "prompt": "Topic: Protecting the environment is everyone's responsibility.\nYou can use the following ideas:\n- using less plastic\n- saving electricity and water\n- planting more trees\nFollow-up questions:\n- Who should do more to protect the environment, individuals or the government?\n- Is it difficult for students to live in an environmentally friendly way?",
+          "prepSeconds": 60,
+          "speakSeconds": 150,
+          "tipsVi": [
+            "Mở bài bằng một câu khẳng định quan điểm, sau đó trình bày lần lượt từng ý gợi ý.",
+            "Đưa ví dụ cụ thể ở Việt Nam: túi ni lông ở chợ, ống hút nhựa, điều hòa trong ký túc xá.",
+            "Câu hỏi phụ có thể trả lời cân bằng: 'Both are important, but...'."
+          ],
+          "sampleAnswer": "I totally agree that protecting the environment is everyone's job, not just the job of scientists or the government. First of all, we can use less plastic. In Vietnam, people still use lots of plastic bags at markets, and we throw away plastic straws after a few minutes. If everyone brought a cloth bag and refused straws, it would make a big difference. Secondly, we should save electricity and water. Turning off the air conditioner when we leave the room or taking shorter showers seems small, but it adds up across millions of homes. Thirdly, planting trees helps keep our cities cooler and the air cleaner. As for who should do more, I think both are important, but the government has more power. It can make laws about rubbish and support recycling. For students, living green isn't really difficult. It's mostly about building good habits and reminding each other."
+        }
+      ]
+    }
+  ]
+}

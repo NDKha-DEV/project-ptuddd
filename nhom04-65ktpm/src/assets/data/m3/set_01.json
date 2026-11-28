@@ -1,0 +1,362 @@
+{
+  "id": "set_01",
+  "title": "Đề mẫu số 1",
+  "topic": "Học tập và đời sống sinh viên",
+  "description": "Đề luyện tập B1 đầy đủ 4 kỹ năng xoay quanh chuyện học, ký túc xá và việc làm thêm của sinh viên.",
+  "sections": [
+    {
+      "id": "ex_listen_01",
+      "skill": "listening",
+      "title": "Listening",
+      "instructionsVi": "Bạn sẽ nghe 4 đoạn hội thoại ngắn (mỗi đoạn 1 câu hỏi) và 1 bài nói dài hơn (4 câu hỏi). Đọc câu hỏi trước khi nghe, sau đó chọn đáp án đúng nhất.",
+      "durationMinutes": 20,
+      "groups": [
+        {
+          "id": "set_01_l1",
+          "title": "Part 1 – Conversation 1",
+          "audio": "assets/audio/m3/set_01_l1.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "Hi Tuan, are we still studying together for the statistics test tomorrow?"},
+            {"speaker": "M", "text": "Yes. I wanted to use the library, but it's closed for repairs this week."},
+            {"speaker": "W", "text": "Oh no. What about the café near the main gate?"},
+            {"speaker": "M", "text": "It's too noisy in the afternoon. How about the study room on the third floor of Building A?"},
+            {"speaker": "W", "text": "Good idea. It's quiet and it has a big whiteboard."},
+            {"speaker": "M", "text": "Great. See you there at two."}
+          ],
+          "questions": [
+            {
+              "id": "set_01_l01",
+              "prompt": "Where will they study together?",
+              "options": ["In the library", "In the café near the main gate", "In a study room in Building A", "In the dormitory"],
+              "answerIndex": 2,
+              "explanationVi": "Tuấn đề xuất 'the study room on the third floor of Building A' và bạn nữ đồng ý ('Good idea'). Thư viện đang đóng cửa sửa chữa, còn quán cà phê thì bị chê là quá ồn nên đều bị loại."
+            }
+          ]
+        },
+        {
+          "id": "set_01_l2",
+          "title": "Part 1 – Conversation 2",
+          "audio": "assets/audio/m3/set_01_l2.m4a",
+          "transcript": [
+            {"speaker": "M", "text": "Excuse me, I'm in room 204 and I'd like to report a problem."},
+            {"speaker": "W", "text": "Is it the air conditioner again? Several students have complained about it."},
+            {"speaker": "M", "text": "No, that's working fine now. It's the shower. There's been no hot water since yesterday morning."},
+            {"speaker": "W", "text": "I see. I'll ask the technician to come this afternoon. Will you be in?"},
+            {"speaker": "M", "text": "I have classes until four, but my roommate will be there."}
+          ],
+          "questions": [
+            {
+              "id": "set_01_l02",
+              "prompt": "What problem does the man report?",
+              "options": ["There is no hot water in the shower.", "The air conditioner is broken.", "The light in his room doesn't work.", "His roommate is too noisy."],
+              "answerIndex": 0,
+              "explanationVi": "Anh ấy nói rõ 'It's the shower. There's been no hot water since yesterday morning.' Điều hòa là bẫy: người quản lý đoán vậy nhưng anh ấy trả lời 'that's working fine now'."
+            }
+          ]
+        },
+        {
+          "id": "set_01_l3",
+          "title": "Part 1 – Conversation 3",
+          "audio": "assets/audio/m3/set_01_l3.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "I heard you got a part-time job at the bookshop."},
+            {"speaker": "M", "text": "Yes, I started last week. They wanted me to work twenty hours a week, but that's too much with my classes."},
+            {"speaker": "W", "text": "So what did you agree on?"},
+            {"speaker": "M", "text": "Twelve hours. Four hours on Tuesday and Thursday evenings, and four on Saturday morning."},
+            {"speaker": "W", "text": "That sounds manageable."}
+          ],
+          "questions": [
+            {
+              "id": "set_01_l03",
+              "prompt": "How many hours a week will the man work?",
+              "options": ["Twenty", "Four", "Eight", "Twelve"],
+              "answerIndex": 3,
+              "explanationVi": "Anh ấy trả lời 'Twelve hours', tức 4 giờ tối thứ Ba, 4 giờ tối thứ Năm và 4 giờ sáng thứ Bảy. Con số 'twenty' là số giờ cửa hàng muốn ban đầu nhưng anh ấy đã từ chối."
+            }
+          ]
+        },
+        {
+          "id": "set_01_l4",
+          "title": "Part 1 – Conversation 4",
+          "audio": "assets/audio/m3/set_01_l4.m4a",
+          "transcript": [
+            {"speaker": "M", "text": "Ms Lan, is the essay for our English class still due on Friday?"},
+            {"speaker": "W", "text": "Actually, many students asked for more time, so I've moved it to next Monday."},
+            {"speaker": "M", "text": "That's a relief. Should we send it to you by email?"},
+            {"speaker": "W", "text": "No, please upload it to the course website before nine a.m. I won't accept emails this time."},
+            {"speaker": "M", "text": "OK, thank you."}
+          ],
+          "questions": [
+            {
+              "id": "set_01_l04",
+              "prompt": "How should students hand in the essay?",
+              "options": ["By email to the teacher", "By uploading it to the course website", "By bringing a printed copy to class", "By giving it to the class monitor"],
+              "answerIndex": 1,
+              "explanationVi": "Cô Lan nói 'please upload it to the course website before nine a.m.' Phương án email là bẫy vì sinh viên hỏi đến nhưng cô trả lời 'I won't accept emails this time'."
+            }
+          ]
+        },
+        {
+          "id": "set_01_l5",
+          "title": "Part 2 – Talk",
+          "audio": "assets/audio/m3/set_01_l5.m4a",
+          "transcript": [
+            {"speaker": "N", "text": "Good morning, everyone, and welcome to the university. My name is Hoa, and I'm a third-year student from the Student Union. I'd like to give you some useful information for your first weeks here."},
+            {"speaker": "N", "text": "First, your student card. You will need it to borrow books, enter the library and use the sports centre. Cards will be ready on Wednesday, and you can collect them from the Student Office in Building C, not from your faculty office as some of you might expect."},
+            {"speaker": "N", "text": "Second, accommodation. If you live in the dormitory, remember that the main gate closes at eleven p.m. on weekdays and at midnight on Saturdays."},
+            {"speaker": "N", "text": "Third, clubs. The university has more than thirty clubs, from music and photography to volunteering. Our Club Fair takes place next Saturday on the football field. Many students say that joining a club was the best way to make friends, so I really recommend it."},
+            {"speaker": "N", "text": "Finally, if you feel stressed or homesick, our counselling service is free and completely confidential. You can book an appointment online. Thank you, and enjoy your first semester."}
+          ],
+          "questions": [
+            {
+              "id": "set_01_l05",
+              "prompt": "Who is the speaker?",
+              "options": ["A teacher from the English faculty", "A third-year student from the Student Union", "A dormitory manager", "A university counsellor"],
+              "answerIndex": 1,
+              "explanationVi": "Ngay câu mở đầu người nói giới thiệu 'I'm a third-year student from the Student Union.' Cô ấy có nhắc đến ký túc xá và dịch vụ tư vấn nhưng không phải người làm ở đó."
+            },
+            {
+              "id": "set_01_l06",
+              "prompt": "Where can new students collect their student cards?",
+              "options": ["From their faculty office", "From the library", "From the sports centre", "From the Student Office in Building C"],
+              "answerIndex": 3,
+              "explanationVi": "Bài nói ghi rõ 'collect them from the Student Office in Building C, not from your faculty office'. Thư viện và nhà thể thao chỉ là những nơi cần dùng thẻ, không phải nơi nhận thẻ."
+            },
+            {
+              "id": "set_01_l07",
+              "prompt": "What time does the dormitory gate close on Saturdays?",
+              "options": ["At midnight", "At eleven p.m.", "At ten p.m.", "At one a.m."],
+              "answerIndex": 0,
+              "explanationVi": "Cổng đóng 'at eleven p.m. on weekdays and at midnight on Saturdays'. Cần phân biệt ngày thường (11 giờ đêm) với thứ Bảy (12 giờ đêm)."
+            },
+            {
+              "id": "set_01_l08",
+              "prompt": "Why does the speaker recommend joining a club?",
+              "options": ["It helps students get better marks.", "It is required for all new students.", "It is a good way to make friends.", "It gives students free accommodation."],
+              "answerIndex": 2,
+              "explanationVi": "Hoa nói 'joining a club was the best way to make friends, so I really recommend it'. Bài nói không hề nhắc đến điểm số hay việc tham gia câu lạc bộ là bắt buộc."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex_read_01",
+      "skill": "reading",
+      "title": "Reading",
+      "instructionsVi": "Phần 1: chọn từ hoặc cụm từ đúng để hoàn thành câu. Phần 2: đọc 4 văn bản ngắn và chọn ý đúng. Phần 3: đọc bài văn và trả lời 4 câu hỏi.",
+      "durationMinutes": 25,
+      "groups": [
+        {
+          "id": "set_01_r1",
+          "title": "Part 1 – Choose the best word or phrase",
+          "passage": null,
+          "questions": [
+            {
+              "id": "set_01_r01",
+              "prompt": "If I _____ more free time, I would join the university volleyball team.",
+              "options": ["have", "will have", "had had", "had"],
+              "answerIndex": 3,
+              "explanationVi": "Mệnh đề chính dùng 'would join' nên đây là câu điều kiện loại 2 (giả định ở hiện tại), mệnh đề 'if' phải chia quá khứ đơn: 'had'. 'Had had' là của câu điều kiện loại 3."
+            },
+            {
+              "id": "set_01_r02",
+              "prompt": "My roommate is used to _____ up early because she has classes at 7 a.m.",
+              "options": ["get", "getting", "got", "gets"],
+              "answerIndex": 1,
+              "explanationVi": "Cấu trúc 'be used to + V-ing' nghĩa là đã quen với việc gì, nên dùng 'getting'. Đừng nhầm với 'used to + V nguyên mẫu' (từng làm gì trong quá khứ)."
+            },
+            {
+              "id": "set_01_r03",
+              "prompt": "The lecturer _____ taught us last semester has moved to another university.",
+              "options": ["which", "whose", "who", "where"],
+              "answerIndex": 2,
+              "explanationVi": "Danh từ đứng trước là người ('the lecturer') và đóng vai trò chủ ngữ của 'taught', nên dùng đại từ quan hệ 'who'. 'Which' dùng cho vật, 'whose' chỉ sở hữu."
+            },
+            {
+              "id": "set_01_r04",
+              "prompt": "I'm thinking of dropping _____ the economics course because it clashes with my part-time job.",
+              "options": ["out of", "off with", "in on", "away from"],
+              "answerIndex": 0,
+              "explanationVi": "Cụm động từ 'drop out of (a course)' nghĩa là bỏ, rút khỏi một khóa học. Các tổ hợp còn lại không mang nghĩa này hoặc không dùng với 'course'."
+            }
+          ]
+        },
+        {
+          "id": "set_01_r2a",
+          "title": "Part 2 – Notice 1",
+          "passage": "LIBRARY NOTICE\nFrom 1 December, the library will open from 7:00 to 21:00 on weekdays. During the exam period (15–30 December), it will stay open until 23:00. Students must show their student card at the entrance. Food is not allowed, but water bottles are fine.",
+          "questions": [
+            {
+              "id": "set_01_r05",
+              "prompt": "What does the notice say?",
+              "options": ["The library will close later during the exam period.", "Students can eat in the library.", "The library will close at 21:00 every day in December.", "Students do not need a card to enter."],
+              "answerIndex": 0,
+              "explanationVi": "Thông báo viết 'During the exam period... it will stay open until 23:00', tức mùa thi thư viện đóng cửa muộn hơn. Phương án C sai vì từ 15 đến 30/12 thư viện mở đến 23:00 chứ không phải 21:00."
+            }
+          ]
+        },
+        {
+          "id": "set_01_r2b",
+          "title": "Part 2 – Text message",
+          "passage": "Hi Minh, it's Duc. I can't make the group meeting at 3 today because my bus broke down. Could you start without me? I'll read the notes tonight and finish my slides on Part 2 by tomorrow morning.",
+          "questions": [
+            {
+              "id": "set_01_r06",
+              "prompt": "Why is Duc writing to Minh?",
+              "options": ["To ask Minh to finish the slides for him", "To cancel the group project", "To say he will miss the meeting but still do his part", "To move the meeting to tomorrow morning"],
+              "answerIndex": 2,
+              "explanationVi": "Đức báo không đến họp được ('I can't make the group meeting') nhưng hứa 'finish my slides on Part 2 by tomorrow morning'. Cậu ấy tự làm phần của mình chứ không nhờ Minh, cũng không dời buổi họp."
+            }
+          ]
+        },
+        {
+          "id": "set_01_r2c",
+          "title": "Part 2 – Sign",
+          "passage": "LAUNDRY ROOM\nMachines may be used between 6:00 and 22:00. Please remove your clothes as soon as the machine stops. Clothes left for more than one hour will be moved to the basket by the door.",
+          "questions": [
+            {
+              "id": "set_01_r07",
+              "prompt": "What does the sign tell students to do?",
+              "options": ["Use the machines at any time of day", "Take their clothes out quickly", "Leave dirty clothes in the basket", "Dry their clothes outside"],
+              "answerIndex": 1,
+              "explanationVi": "Biển báo yêu cầu 'remove your clothes as soon as the machine stops', tức lấy quần áo ra ngay. Cái giỏ chỉ để chứa đồ bị bỏ quên quá một tiếng, không phải chỗ để đồ bẩn."
+            }
+          ]
+        },
+        {
+          "id": "set_01_r2d",
+          "title": "Part 2 – Email",
+          "passage": "Dear students,\nThe Career Centre is offering free CV-writing workshops every Thursday at 4 p.m. in Room 105. Places are limited to 20 per session, so please register on the student portal at least two days before.\nCareer Centre",
+          "questions": [
+            {
+              "id": "set_01_r08",
+              "prompt": "What must students do to attend a workshop?",
+              "options": ["Pay a small fee", "Bring a finished CV", "Go to Room 105 on Tuesday", "Register online at least two days before"],
+              "answerIndex": 3,
+              "explanationVi": "Email ghi 'please register on the student portal at least two days before'. Hội thảo miễn phí ('free') nên phương án trả phí sai, và buổi học diễn ra vào thứ Năm chứ không phải thứ Ba."
+            }
+          ]
+        },
+        {
+          "id": "set_01_r3",
+          "title": "Part 3 – Reading passage",
+          "passage": "Many university students in Vietnam now work part-time while they study. Some work as tutors or shop assistants, while others deliver food or help in cafés. For many of them, the main reason is money: rent, food and transport in big cities are expensive, and students do not want to depend completely on their parents.\n\nHowever, a part-time job brings more than just money. Students who work learn how to manage their time, talk to customers and solve problems quickly. These are skills that employers often look for. A recent survey of final-year students at one university found that those with work experience felt more confident in job interviews than those without it.\n\nOn the other hand, working too many hours can cause serious problems. Students who work late at night often feel tired in morning classes, and some miss lectures or even fail exams. Experts usually suggest that students should not work more than fifteen hours a week during term time. It is also wise to choose a job that is related to your major, if possible, because it can help you understand what you learn in class.\n\nIn my opinion, a part-time job can be a valuable part of student life, as long as studying remains the top priority. Before accepting a job, students should think carefully about their timetable and be honest with their employer about how much time they really have. A good employer will understand that exams come first.",
+          "questions": [
+            {
+              "id": "set_01_r09",
+              "prompt": "What is the main idea of the passage?",
+              "options": ["Students should never work during the semester.", "Food delivery is the most popular job for students.", "Part-time jobs are useful, but students need to balance them with study.", "Employers only hire students with good marks."],
+              "answerIndex": 2,
+              "explanationVi": "Bài viết nêu cả lợi ích (kỹ năng, sự tự tin) lẫn tác hại (mệt mỏi, trượt môn) và kết luận việc làm thêm có giá trị 'as long as studying remains the top priority'. Phương án A quá cực đoan, trái với quan điểm tác giả."
+            },
+            {
+              "id": "set_01_r10",
+              "prompt": "According to the passage, what did the survey find?",
+              "options": ["Final-year students with work experience felt more confident in interviews.", "Most students work more than fifteen hours a week.", "Students who work get higher marks.", "Employers prefer students who have never worked."],
+              "answerIndex": 0,
+              "explanationVi": "Đoạn 2 viết 'those with work experience felt more confident in job interviews than those without it'. Con số 15 giờ là lời khuyên của chuyên gia, không phải kết quả khảo sát."
+            },
+            {
+              "id": "set_01_r11",
+              "prompt": "The word 'priority' in the last paragraph is closest in meaning to:",
+              "options": ["something you do quickly", "a difficult problem", "a reward for hard work", "the most important thing"],
+              "answerIndex": 3,
+              "explanationVi": "'Top priority' là điều quan trọng nhất cần ưu tiên. Câu tiếp theo 'exams come first' (thi cử là trên hết) giúp đoán nghĩa của từ này."
+            },
+            {
+              "id": "set_01_r12",
+              "prompt": "What is the writer's attitude towards part-time jobs?",
+              "options": ["They are a waste of students' time.", "They are good if studying stays the most important thing.", "Students should work as many hours as possible.", "The writer does not give a clear opinion."],
+              "answerIndex": 1,
+              "explanationVi": "Tác giả nói rõ 'In my opinion, a part-time job can be a valuable part of student life, as long as studying remains the top priority', tức ủng hộ có điều kiện. Vì có câu 'In my opinion' nên phương án D sai."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex_write_01",
+      "skill": "writing",
+      "title": "Writing",
+      "instructionsVi": "Làm 2 bài viết. Bài 1: viết email 80–100 từ, trả lời đủ 3 ý gợi ý. Bài 2: viết đoạn văn 120–150 từ nêu quan điểm và lý do.",
+      "durationMinutes": 40,
+      "tasks": [
+        {
+          "id": "set_01_w1",
+          "title": "Task 1 – Email",
+          "prompt": "You have just moved into the university dormitory. Write an email to your friend Lan. In your email:\n- describe your room and your roommate\n- tell her what you like and dislike about dormitory life\n- invite her to visit you",
+          "minWords": 80,
+          "maxWords": 100,
+          "tipsVi": [
+            "Mở đầu thân mật bằng 'Hi Lan,' và kết bằng 'Love,' hoặc 'Best wishes,' vì đây là thư gửi bạn.",
+            "Mỗi ý gợi ý viết 1–2 câu, dùng tính từ cụ thể (small, tidy, noisy) thay vì chỉ 'good' hay 'bad'.",
+            "Lời mời nên có thời gian cụ thể và lý do, ví dụ: 'Would you like to visit me next Saturday? I can show you around.'"
+          ],
+          "sampleAnswer": "Hi Lan,\n\nI moved into the dormitory last Sunday, and I wanted to tell you about it. My room is on the fourth floor. It's quite small, but it has a big window with a nice view of the football field. My roommate, Thu, comes from Nghe An. She's friendly and very tidy, so we get on well. I love living so close to my classes, but the canteen food is a bit boring. Would you like to visit me next Saturday? I can show you around the campus.\n\nLove,\nMai"
+        },
+        {
+          "id": "set_01_w2",
+          "title": "Task 2 – Paragraph",
+          "prompt": "Write a paragraph (120–150 words) on the following topic:\n'Should first-year students live in the dormitory or rent a room outside the campus?'\nGive your opinion and support it with reasons and examples.",
+          "minWords": 120,
+          "maxWords": 150,
+          "tipsVi": [
+            "Câu chủ đề nêu thẳng quan điểm, ví dụ: 'In my opinion, first-year students should live in the dormitory.'",
+            "Đưa ra 2 lý do, mỗi lý do kèm một ví dụ, nối bằng 'Firstly', 'In addition', 'For example'.",
+            "Có thể thừa nhận một mặt hạn chế bằng 'Although...' rồi kết bằng câu khẳng định lại quan điểm."
+          ],
+          "sampleAnswer": "In my opinion, first-year students should live in the dormitory rather than rent a room outside. Firstly, it is much cheaper. A shared room in the dormitory costs only a few hundred thousand dong a month, while a private room in the city can cost three or four times more. Secondly, living on campus helps new students adapt to university life. They are close to the library and lecture halls, so they do not waste time in traffic. In addition, they can easily make friends with students from other provinces and join clubs in the evening. Although dormitory rooms are often small and the rules can be strict, these are minor problems for the first year. After a year, when students know the city better, they can decide whether to move out."
+        }
+      ]
+    },
+    {
+      "id": "ex_speak_01",
+      "skill": "speaking",
+      "title": "Speaking",
+      "instructionsVi": "Phần thi nói gồm 3 phần: trả lời câu hỏi về bản thân, thảo luận chọn giải pháp và trình bày một chủ đề. Hãy nói tự nhiên, trả lời đầy đủ và có lý do.",
+      "durationMinutes": 12,
+      "tasks": [
+        {
+          "id": "set_01_s1",
+          "title": "Part 1 – Social interaction",
+          "prompt": "The examiner asks you some questions about your studies and daily life.\n- What is your major, and why did you choose it?\n- What do you usually do after class?\n- Which subject do you find the most difficult? Why?",
+          "prepSeconds": 0,
+          "speakSeconds": 120,
+          "tipsVi": [
+            "Mỗi câu trả lời 2–4 câu: trả lời thẳng rồi thêm lý do hoặc ví dụ.",
+            "Dùng thì hiện tại đơn với trạng từ tần suất (usually, often, sometimes) khi nói về thói quen.",
+            "Nếu chưa nghĩ ra, dùng câu đệm như 'Well, let me think...' thay vì im lặng."
+          ],
+          "sampleAnswer": "Well, I'm studying software engineering. I chose it because I've loved computers since I was a kid, and I think there are lots of good jobs in IT right now. My parents also encouraged me, so it was an easy choice. After class, I usually have lunch with my friends in the canteen, then I go back to the dormitory and take a short nap. In the evening I often go to the library to do my assignments, and twice a week I play badminton with my roommate. The subject I find the most difficult is probably discrete mathematics. There are so many formulas, and the exercises need a lot of logical thinking. To be honest, I failed the first mid-term test. Now I join a study group every Thursday, and it's getting a bit easier."
+        },
+        {
+          "id": "set_01_s2",
+          "title": "Part 2 – Solution discussion",
+          "prompt": "Situation: Your class wants to celebrate the end of the semester. There are three options:\n- a picnic at a park outside the city\n- a party in a classroom on campus\n- a dinner at a local restaurant\nWhich option do you think is the best? Explain why, and say why the other options are less suitable.",
+          "prepSeconds": 60,
+          "speakSeconds": 120,
+          "tipsVi": [
+            "Nói rõ lựa chọn ngay câu đầu: 'I think the best option is...'.",
+            "Đưa ra 2–3 lý do cho lựa chọn của mình (chi phí, thời gian, mức độ vui).",
+            "Dành vài câu giải thích vì sao hai phương án còn lại kém phù hợp hơn, dùng 'However', 'whereas'."
+          ],
+          "sampleAnswer": "In my opinion, the best choice is a picnic at a park outside the city. First of all, after a long semester, everyone needs some fresh air and a change of scene. We can play team games, take photos and really relax together. Secondly, it doesn't have to be expensive. If each person brings some food and drinks, we only need to pay for the bus, so even students on a tight budget can join. As for a party in a classroom, it's cheap and convenient, but it doesn't feel special. We sit in that room every day, so it won't feel like a real celebration. A dinner at a restaurant sounds nice, however it can be quite expensive, and in a noisy restaurant we can only talk to the people next to us. So I'd definitely choose the picnic."
+        },
+        {
+          "id": "set_01_s3",
+          "title": "Part 3 – Topic development",
+          "prompt": "Topic: Students should take part in extracurricular activities.\nYou can use the following ideas:\n- improving soft skills\n- making new friends\n- reducing stress after studying\nFollow-up questions:\n- Do extracurricular activities take too much time away from studying?\n- What activity would you recommend to a new student?",
+          "prepSeconds": 60,
+          "speakSeconds": 150,
+          "tipsVi": [
+            "Mở bài bằng một câu nêu quan điểm, sau đó phát triển từng ý gợi ý với một ví dụ của bản thân.",
+            "Dùng từ nối như 'First of all', 'Another benefit is', 'Finally' để bài nói mạch lạc.",
+            "Chuẩn bị sẵn câu trả lời cho câu hỏi phụ: có thể đồng ý một phần ('It depends on...')."
+          ],
+          "sampleAnswer": "I strongly believe that students should take part in extracurricular activities. First of all, these activities help us improve soft skills. For example, when I joined the English club, I had to organise events and speak in front of a crowd, and that made me much more confident. Another benefit is making new friends. In class we usually only talk to the people sitting near us, but in a club we meet students from different faculties and years. Some of my closest friends now are people I met in the volunteer club. Finally, activities like sport or music are a great way to reduce stress after long hours of studying. Of course, some people worry that clubs take too much time. I think it depends on how you plan. One or two activities a week is fine. For a new student, I'd recommend a volunteering club, because you help others and make friends at the same time."
+        }
+      ]
+    }
+  ]
+}
