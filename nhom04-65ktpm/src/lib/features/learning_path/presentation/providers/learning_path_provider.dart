@@ -14,9 +14,11 @@ class LearningPathProvider extends ChangeNotifier {
     required this._repository,
     this._generator = const LearningPathGenerator(),
     DateTime Function()? nowProvider,
-    String initialUid = 'guest',
+    String initialUid = LearningPathRepository.defaultLocalUid,
   }) : _nowProvider = nowProvider ?? DateTime.now,
-       _uid = initialUid.isEmpty ? 'guest' : initialUid;
+       _uid = initialUid.trim().isEmpty
+           ? LearningPathRepository.defaultLocalUid
+           : initialUid.trim();
 
   final LearningPathRepository _repository;
   final LearningPathGenerator _generator;
@@ -121,11 +123,30 @@ class LearningPathProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Đồng bộ `uid` từ `AuthProvider` và tải dữ liệu tương ứng nếu thay đổi.
+  /// Đồng bộ `uid` từ `AuthProvider` (Supabase Auth) và tải dữ liệu tương ứng khi đổi phiên.
   Future<void> syncUid(String? nextUid) async {
-    final normalized = (nextUid == null || nextUid.isEmpty) ? 'guest' : nextUid;
-    if (normalized == _uid && _hasLoadedForCurrentUid) return;
-    _uid = normalized;
+    final trimmed = nextUid?.trim() ?? '';
+    if (trimmed.isEmpty) {
+      if (_uid == LearningPathRepository.defaultLocalUid &&
+          _activePlan == null &&
+          _latestAssessment == null &&
+          _savedTourIds.isEmpty &&
+          !_hasLoadedForCurrentUid) {
+        return;
+      }
+      _uid = LearningPathRepository.defaultLocalUid;
+      _hasLoadedForCurrentUid = false;
+      _activePlan = null;
+      _latestAssessment = null;
+      _savedTourIds = const {};
+      _selectedWeekNumber = 1;
+      _errorMessage = null;
+      notifyListeners();
+      return;
+    }
+
+    if (trimmed == _uid && (_hasLoadedForCurrentUid || _isLoading)) return;
+    _uid = trimmed;
     _hasLoadedForCurrentUid = false;
     await loadInitialData();
   }

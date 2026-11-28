@@ -13,7 +13,7 @@ void main() {
 
   setUp(() {
     SharedPreferences.setMockInitialValues({});
-    repository = LearningPathRepository(firebaseReady: false);
+    repository = LearningPathRepository(supabaseReady: false);
     provider = LearningPathProvider(
       repository: repository,
       nowProvider: () => DateTime(2026, 11, 23, 9, 0),

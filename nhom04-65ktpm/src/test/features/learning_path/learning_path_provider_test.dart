@@ -12,11 +12,11 @@ void main() {
 
   setUp(() {
     SharedPreferences.setMockInitialValues({});
-    repository = LearningPathRepository(firebaseReady: false);
+    repository = LearningPathRepository(supabaseReady: false);
     fakeNow = DateTime(2026, 11, 23, 9, 0);
   });
 
-  LearningPathProvider createProvider({String uid = 'guest'}) {
+  LearningPathProvider createProvider({String uid = 'supabase-user-01'}) {
     return LearningPathProvider(
       repository: repository,
       nowProvider: () => fakeNow,
@@ -221,6 +221,12 @@ void main() {
       await provider.syncUid('user_b');
       expect(provider.uid, 'user_b');
       expect(provider.isTourSaved(firstTourId), isFalse);
+
+      // Khi đăng xuất Supabase (uid == null), xóa sạch state phiên hiện tại trong bộ nhớ
+      await provider.syncUid(null);
+      expect(provider.uid, LearningPathRepository.defaultLocalUid);
+      expect(provider.hasActivePlan, isFalse);
+      expect(provider.savedTourIds, isEmpty);
     });
   });
 }

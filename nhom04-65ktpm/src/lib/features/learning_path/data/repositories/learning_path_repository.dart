@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../core/constants/app_constants.dart';
 import '../../domain/services/learning_path_generator.dart';
 import '../models/assessment_result_model.dart';
 import '../models/daily_task_model.dart';
@@ -11,48 +10,52 @@ import '../models/english_tour_model.dart';
 import '../models/learning_path_model.dart';
 import '../models/skill_scores.dart';
 
-/// Kho lưu trữ dữ liệu cho M4 (Firestore khi online + SharedPreferences fallback khi offline/guest).
+/// Kho lưu trữ dữ liệu cho M4.
+/// Hiện tại lưu/đọc cục bộ qua `SharedPreferences` và dữ liệu mẫu, đồng thời
+/// giữ sẵn `supabaseReady` / `supabaseClient` chờ M1-11 chốt schema bảng Postgres.
 class LearningPathRepository {
   LearningPathRepository({
-    this.firebaseReady = false,
-    this.firestore,
+    this.supabaseReady = false,
+    this._supabaseClient,
   });
 
-  final bool firebaseReady;
-  final FirebaseFirestore? firestore;
+  static const String defaultLocalUid = 'local';
 
-  bool _canUseFirestore(String uid) =>
-      firebaseReady && uid.isNotEmpty && uid != 'guest';
+  final bool supabaseReady;
+  final SupabaseClient? _supabaseClient;
 
-  FirebaseFirestore get _db => firestore ?? FirebaseFirestore.instance;
+  /// Trả về `SupabaseClient` khi nền tảng Supabase đã khởi tạo (phục vụ tích hợp M1-11).
+  SupabaseClient? get supabaseClient {
+    if (_supabaseClient != null) return _supabaseClient;
+    if (!supabaseReady) return null;
+    try {
+      return Supabase.instance.client;
+    } catch (_) {
+      return null;
+    }
+  }
 
-  String _planKey(String uid, String planId) => 'm4_plan_${uid}_$planId';
-  String _assessmentKey(String uid) => 'm4_assessment_$uid';
-  String _savedToursKey(String uid) => 'm4_saved_tours_$uid';
+  /// Kiểm tra điều kiện sẵn sàng đồng bộ lên Supabase Postgres cho `uid` thực.
+  bool canSyncRemote(String uid) {
+    final normalized = _normalizeUid(uid);
+    return normalized != defaultLocalUid && supabaseClient != null;
+  }
 
-  /// Tải lộ trình đang hoạt động của sinh viên.
+  String _normalizeUid(String uid) {
+    final trimmed = uid.trim();
+    return trimmed.isEmpty ? defaultLocalUid : trimmed;
+  }
+
+  String _planKey(String uid, String planId) =>
+      'm4_plan_${_normalizeUid(uid)}_$planId';
+  String _assessmentKey(String uid) => 'm4_assessment_${_normalizeUid(uid)}';
+  String _savedToursKey(String uid) => 'm4_saved_tours_${_normalizeUid(uid)}';
+
+  /// Tải lộ trình đang hoạt động của sinh viên từ bộ nhớ cục bộ.
   Future<LearningPath?> loadActivePlan(
     String uid, {
     String planId = 'active_plan',
   }) async {
-    if (_canUseFirestore(uid)) {
-      try {
-        final doc = await _db
-            .collection(FirestoreCollections.users)
-            .doc(uid)
-            .collection(FirestoreCollections.learningPaths)
-            .doc(planId)
-            .get();
-        if (doc.exists && doc.data() != null) {
-          final plan = LearningPath.fromJson(doc.data()!);
-          await _savePlanLocally(uid, plan);
-          return plan;
-        }
-      } catch (_) {
-        // Fallback sang bộ nhớ cục bộ nếu mất mạng hoặc chưa cấu hình rules.
-      }
-    }
-
     final prefs = await SharedPreferences.getInstance();
     final raw = prefs.getString(_planKey(uid, planId));
     if (raw == null || raw.isEmpty) return null;
@@ -61,25 +64,8 @@ class LearningPathRepository {
     );
   }
 
-  /// Lưu lộ trình vào local cache và đồng bộ Firestore nếu đã đăng nhập Firebase.
+  /// Lưu lộ trình vào bộ nhớ cục bộ theo `uid` của phiên đăng nhập.
   Future<void> saveActivePlan(String uid, LearningPath plan) async {
-    await _savePlanLocally(uid, plan);
-
-    if (_canUseFirestore(uid)) {
-      try {
-        await _db
-            .collection(FirestoreCollections.users)
-            .doc(uid)
-            .collection(FirestoreCollections.learningPaths)
-            .doc(plan.planId)
-            .set(plan.toJson());
-      } catch (_) {
-        // Giữ bản local để không làm gián đoạn trải nghiệm offline.
-      }
-    }
-  }
-
-  Future<void> _savePlanLocally(String uid, LearningPath plan) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_planKey(uid, plan.planId), jsonEncode(plan.toJson()));
   }
@@ -91,19 +77,6 @@ class LearningPathRepository {
   }) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_planKey(uid, planId));
-
-    if (_canUseFirestore(uid)) {
-      try {
-        await _db
-            .collection(FirestoreCollections.users)
-            .doc(uid)
-            .collection(FirestoreCollections.learningPaths)
-            .doc(planId)
-            .delete();
-      } catch (_) {
-        // Bỏ qua lỗi mạng khi xóa bản remote.
-      }
-    }
   }
 
   /// Lưu và tải kết quả khảo sát đầu vào gần nhất.
@@ -124,79 +97,18 @@ class LearningPathRepository {
     );
   }
 
-  /// Lấy danh sách học liệu M2 phục vụ gắn link nhiệm vụ.
+  /// Lấy danh sách học liệu M2 mẫu phục vụ gắn link nhiệm vụ (chờ schema M2/M1-11).
   Future<List<LearningResourceRef>> fetchAvailableMaterials() async {
-    if (firebaseReady) {
-      try {
-        final snapshot = await _db
-            .collection(FirestoreCollections.b1Materials)
-            .limit(30)
-            .get();
-        if (snapshot.docs.isNotEmpty) {
-          return snapshot.docs.map((doc) {
-            final data = doc.data();
-            return LearningResourceRef(
-              id: doc.id,
-              title: data['title'] as String? ?? 'Tài liệu B1',
-              skill: SkillType.fromKey(data['skill'] as String?),
-              targetModule: TargetModule.m2,
-            );
-          }).toList();
-        }
-      } catch (_) {
-        // Fallback sang bộ tài liệu mẫu.
-      }
-    }
     return _sampleMaterials;
   }
 
-  /// Lấy danh sách bài tập M3 phục vụ gắn link nhiệm vụ.
+  /// Lấy danh sách bài tập M3 mẫu phục vụ gắn link nhiệm vụ (chờ tích hợp M3/M1-11).
   Future<List<LearningResourceRef>> fetchAvailableExercises() async {
-    if (firebaseReady) {
-      try {
-        final snapshot = await _db
-            .collection(FirestoreCollections.b1Exercises)
-            .limit(30)
-            .get();
-        if (snapshot.docs.isNotEmpty) {
-          return snapshot.docs.map((doc) {
-            final data = doc.data();
-            return LearningResourceRef(
-              id: doc.id,
-              title: data['title'] as String? ?? 'Bài tập B1',
-              skill: SkillType.fromKey(data['skill'] as String?),
-              targetModule: TargetModule.m3,
-            );
-          }).toList();
-        }
-      } catch (_) {
-        // Fallback sang bộ bài tập mẫu.
-      }
-    }
     return _sampleExercises;
   }
 
   /// Lấy danh sách tour dẫn tiếng Anh / CLB giao lưu tại Hà Nội.
   Future<List<EnglishTour>> fetchEnglishTours() async {
-    if (firebaseReady) {
-      try {
-        final snapshot = await _db
-            .collection(FirestoreCollections.englishTours)
-            .get();
-        if (snapshot.docs.isNotEmpty) {
-          return snapshot.docs
-              .map(
-                (doc) => EnglishTour.fromJson({
-                  'tourId': doc.id,
-                  ...doc.data(),
-                }),
-              )
-              .toList();
-        }
-      } catch (_) {
-        // Fallback sang danh sách tour mẫu.
-      }
-    }
     return _sampleTours;
   }
 
