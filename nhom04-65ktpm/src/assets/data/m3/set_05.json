@@ -1,0 +1,367 @@
+{
+  "id": "set_05",
+  "title": "Đề mẫu số 5",
+  "topic": "Công việc, mua sắm và giải trí",
+  "description": "Đề luyện tập B1 đầy đủ 4 kỹ năng về tìm việc, thực tập, mua sắm, đổi trả hàng và các hoạt động giải trí.",
+  "sections": [
+    {
+      "id": "ex_listen_05",
+      "skill": "listening",
+      "title": "Listening",
+      "instructionsVi": "Bạn sẽ nghe 4 đoạn hội thoại ngắn (mỗi đoạn 1 câu hỏi) và 1 cuộc điện thoại hỏi về chương trình thực tập (4 câu hỏi). Chú ý giá tiền, thời gian và những thông tin bị thay đổi.",
+      "durationMinutes": 20,
+      "groups": [
+        {
+          "id": "set_05_l1",
+          "title": "Part 1 – Conversation 1",
+          "audio": "assets/audio/m3/set_05_l1.m4a",
+          "transcript": [
+            {"speaker": "M", "text": "That's a nice jacket. Was it expensive?"},
+            {"speaker": "W", "text": "It was eight hundred thousand dong originally, but it was on sale for half price."},
+            {"speaker": "M", "text": "So you paid four hundred thousand?"},
+            {"speaker": "W", "text": "Even better. I showed my student card, so they took another fifty thousand off."},
+            {"speaker": "M", "text": "Wow, three hundred and fifty thousand. That's a real bargain."}
+          ],
+          "questions": [
+            {
+              "id": "set_05_l01",
+              "prompt": "How much did the woman pay for the jacket?",
+              "options": ["800,000 dong", "400,000 dong", "350,000 dong", "50,000 dong"],
+              "answerIndex": 2,
+              "explanationVi": "Giá gốc 800.000 đồng, giảm nửa giá còn 400.000, rồi trừ thêm 50.000 nhờ thẻ sinh viên, nên còn 350.000 đồng. Người đàn ông cũng nhắc lại 'three hundred and fifty thousand'."
+            }
+          ]
+        },
+        {
+          "id": "set_05_l2",
+          "title": "Part 1 – Conversation 2",
+          "audio": "assets/audio/m3/set_05_l2.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "Hi Long, did you hear back from the hotel about the receptionist job?"},
+            {"speaker": "M", "text": "Yes! They called this morning. They want me to come in for an interview."},
+            {"speaker": "W", "text": "Great! When is it?"},
+            {"speaker": "M", "text": "They first said Wednesday, but I have an exam then, so we changed it to Thursday at ten."},
+            {"speaker": "W", "text": "Good luck. Remember to wear something smart."}
+          ],
+          "questions": [
+            {
+              "id": "set_05_l02",
+              "prompt": "When is the man's job interview?",
+              "options": ["On Wednesday morning", "On Thursday at ten", "This morning", "On Wednesday at ten"],
+              "answerIndex": 1,
+              "explanationVi": "Ban đầu khách sạn hẹn thứ Tư nhưng anh ấy có bài thi, nên 'we changed it to Thursday at ten'. 'This morning' là lúc khách sạn gọi điện, không phải giờ phỏng vấn."
+            }
+          ]
+        },
+        {
+          "id": "set_05_l3",
+          "title": "Part 1 – Conversation 3",
+          "audio": "assets/audio/m3/set_05_l3.m4a",
+          "transcript": [
+            {"speaker": "M", "text": "Shall we go to the cinema tonight? There's a new action film everyone's talking about."},
+            {"speaker": "W", "text": "I'm not really into action films. What about that comedy?"},
+            {"speaker": "M", "text": "I saw it last week. There's also a Vietnamese horror film."},
+            {"speaker": "W", "text": "No way, I'd have nightmares. OK, let's see the action film, then. I'll give it a try."},
+            {"speaker": "M", "text": "Great, I'll book two seats for half past seven."}
+          ],
+          "questions": [
+            {
+              "id": "set_05_l03",
+              "prompt": "Which film will they watch?",
+              "options": ["The action film", "The comedy", "The horror film", "A cartoon"],
+              "answerIndex": 0,
+              "explanationVi": "Dù không thích phim hành động, cô ấy vẫn chốt 'let's see the action film, then', vì anh bạn đã xem phim hài còn cô thì sợ phim kinh dị."
+            }
+          ]
+        },
+        {
+          "id": "set_05_l4",
+          "title": "Part 1 – Conversation 4",
+          "audio": "assets/audio/m3/set_05_l4.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "Excuse me, I bought these headphones here last week, but the left side doesn't work."},
+            {"speaker": "M", "text": "I'm sorry about that. Would you like to exchange them for a new pair?"},
+            {"speaker": "W", "text": "Actually, I'd prefer my money back. I've found a better model online."},
+            {"speaker": "M", "text": "No problem. Do you have the receipt?"},
+            {"speaker": "W", "text": "Yes, here it is."}
+          ],
+          "questions": [
+            {
+              "id": "set_05_l04",
+              "prompt": "What does the woman want?",
+              "options": ["A new pair of the same headphones", "A different model from the shop", "To have the headphones repaired", "Her money back"],
+              "answerIndex": 3,
+              "explanationVi": "Nhân viên đề nghị đổi cặp mới nhưng cô ấy nói 'I'd prefer my money back', tức muốn hoàn tiền. Mẫu tốt hơn cô ấy tìm được là trên mạng, không phải ở cửa hàng này."
+            }
+          ]
+        },
+        {
+          "id": "set_05_l5",
+          "title": "Part 2 – Phone conversation",
+          "audio": "assets/audio/m3/set_05_l5.m4a",
+          "transcript": [
+            {"speaker": "M", "text": "Hello, I'm calling about the summer internship at your marketing company. I saw the advertisement on the university website."},
+            {"speaker": "W", "text": "Ah yes. We're looking for two interns for June and July. Are you a marketing student?"},
+            {"speaker": "M", "text": "I'm studying business administration. I'm in my third year."},
+            {"speaker": "W", "text": "That's fine. The internship is mainly about social media. You'd help write posts, take photos of our products and answer customers' messages."},
+            {"speaker": "M", "text": "That sounds interesting. Is it full-time?"},
+            {"speaker": "W", "text": "It's four days a week, Monday to Thursday, from nine to five. Fridays are free so that interns can take summer classes if they need to."},
+            {"speaker": "M", "text": "And is it paid?"},
+            {"speaker": "W", "text": "Yes, interns receive three million dong a month, plus lunch on working days. It's not a lot, but many of our interns get a full-time job with us after they graduate."},
+            {"speaker": "M", "text": "That's great. How do I apply?"},
+            {"speaker": "W", "text": "Please email us your CV and a short video, about one minute long, introducing yourself in English. The deadline is the fifteenth of May."},
+            {"speaker": "M", "text": "A video? OK, I'll start preparing it. Thank you very much."}
+          ],
+          "questions": [
+            {
+              "id": "set_05_l05",
+              "prompt": "What will the interns mainly work on?",
+              "options": ["Selling products in a shop", "Social media", "Designing new products", "Translating documents"],
+              "answerIndex": 1,
+              "explanationVi": "Người phụ nữ nói 'The internship is mainly about social media': viết bài, chụp ảnh sản phẩm và trả lời tin nhắn khách hàng. Chụp ảnh sản phẩm không có nghĩa là thiết kế sản phẩm."
+            },
+            {
+              "id": "set_05_l06",
+              "prompt": "Why are Fridays free for the interns?",
+              "options": ["The office is closed on Fridays.", "Interns work from home on Fridays.", "Interns can take summer classes.", "The company wants to pay less."],
+              "answerIndex": 2,
+              "explanationVi": "Lý do được nêu rõ: 'Fridays are free so that interns can take summer classes if they need to'. Bài không nói văn phòng đóng cửa hay thực tập sinh làm việc ở nhà."
+            },
+            {
+              "id": "set_05_l07",
+              "prompt": "What does the woman say about pay?",
+              "options": ["Interns are not paid.", "Interns get five million dong a month.", "Interns get a free dinner every day.", "Interns get three million dong a month and lunch."],
+              "answerIndex": 3,
+              "explanationVi": "Thực tập sinh nhận 'three million dong a month, plus lunch on working days'. Công ty bao bữa trưa chứ không phải bữa tối."
+            },
+            {
+              "id": "set_05_l08",
+              "prompt": "What must applicants send together with their CV?",
+              "options": ["A short video in English", "A letter from their teacher", "Photos of products", "Their exam results"],
+              "answerIndex": 0,
+              "explanationVi": "Hồ sơ gồm 'your CV and a short video, about one minute long, introducing yourself in English'. Chụp ảnh sản phẩm là việc làm khi đi thực tập, không phải giấy tờ ứng tuyển."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex_read_05",
+      "skill": "reading",
+      "title": "Reading",
+      "instructionsVi": "Phần 1: chọn từ hoặc cụm từ đúng để hoàn thành câu. Phần 2: đọc 4 văn bản ngắn (biển báo, tin nhắn, tin tuyển dụng, email) và chọn ý đúng. Phần 3: đọc bài viết về mua sắm trực tuyến và trả lời 4 câu hỏi.",
+      "durationMinutes": 25,
+      "groups": [
+        {
+          "id": "set_05_r1",
+          "title": "Part 1 – Choose the best word or phrase",
+          "passage": null,
+          "questions": [
+            {
+              "id": "set_05_r01",
+              "prompt": "I'm looking forward to _____ from you about the job.",
+              "options": ["hear", "heard", "be hearing", "hearing"],
+              "answerIndex": 3,
+              "explanationVi": "Trong 'look forward to', 'to' là giới từ nên theo sau phải là V-ing: 'looking forward to hearing from you'. Đây là câu kết rất hay gặp trong thư xin việc."
+            },
+            {
+              "id": "set_05_r02",
+              "prompt": "She has worked as a shop assistant _____ she left school.",
+              "options": ["since", "for", "when", "until"],
+              "answerIndex": 0,
+              "explanationVi": "Thì hiện tại hoàn thành 'has worked' đi với 'since + mốc/mệnh đề quá khứ' (since she left school). 'For' chỉ đi với khoảng thời gian như 'for two years'."
+            },
+            {
+              "id": "set_05_r03",
+              "prompt": "If you buy two T-shirts, you will get the third one _____ free.",
+              "options": ["on", "by", "for", "in"],
+              "answerIndex": 2,
+              "explanationVi": "Cụm cố định 'for free' nghĩa là miễn phí. Câu này cũng là câu điều kiện loại 1: 'If + hiện tại đơn, will + V'."
+            },
+            {
+              "id": "set_05_r04",
+              "prompt": "The concert was _____ boring that we left before the end.",
+              "options": ["such", "so", "too", "very"],
+              "answerIndex": 1,
+              "explanationVi": "Cấu trúc 'so + tính từ + that + mệnh đề' (quá... đến nỗi). 'Such' phải đi với danh từ, ví dụ 'such a boring concert that...'."
+            }
+          ]
+        },
+        {
+          "id": "set_05_r2a",
+          "title": "Part 2 – Shop sign",
+          "passage": "SALE – UP TO 50% OFF\nAll summer clothes and swimwear are reduced this week. Please note that sale items cannot be returned or exchanged, so try them on before you pay. Offer ends Sunday.",
+          "questions": [
+            {
+              "id": "set_05_r05",
+              "prompt": "What does the sign say?",
+              "options": ["Clothes bought in the sale cannot be returned.", "Every item is half price.", "The sale starts on Sunday.", "Winter clothes are also on sale."],
+              "answerIndex": 0,
+              "explanationVi": "Biển ghi 'Sale items cannot be returned or exchanged'. 'Up to 50%' nghĩa là giảm tối đa 50% chứ không phải món nào cũng nửa giá, và chương trình kết thúc (không phải bắt đầu) vào Chủ nhật."
+            }
+          ]
+        },
+        {
+          "id": "set_05_r2b",
+          "title": "Part 2 – Text message",
+          "passage": "Hi Mai, I've got two free tickets for the music show at the Youth Theatre on Saturday at 8. My brother can't come. Do you want to go? Text me by Thursday, or I'll give the other ticket to someone else. Thao",
+          "questions": [
+            {
+              "id": "set_05_r06",
+              "prompt": "What does Thao want Mai to do?",
+              "options": ["Buy a ticket for the show", "Go to the show with Thao's brother", "Give a ticket to another friend", "Tell Thao by Thursday if she wants to come"],
+              "answerIndex": 3,
+              "explanationVi": "Thảo rủ Mai đi xem và dặn 'Text me by Thursday', nếu không sẽ đưa vé cho người khác. Vé miễn phí nên không cần mua, còn em trai Thảo thì không đi được."
+            }
+          ]
+        },
+        {
+          "id": "set_05_r2c",
+          "title": "Part 2 – Job advertisement",
+          "passage": "PART-TIME WAITER / WAITRESS WANTED\nEvenings and weekends. No experience needed – training provided. Must be friendly and speak basic English. Apply in person at Lotus Café, 12 Tran Phu Street, with your ID card.",
+          "questions": [
+            {
+              "id": "set_05_r07",
+              "prompt": "What does the advertisement say?",
+              "options": ["Applicants need experience in a restaurant.", "The café will train new staff.", "Staff only work in the mornings.", "People should apply by email."],
+              "answerIndex": 1,
+              "explanationVi": "Quảng cáo ghi 'No experience needed – training provided', tức quán sẽ đào tạo. Ca làm là buổi tối và cuối tuần, và phải đến nộp đơn trực tiếp ('Apply in person')."
+            }
+          ]
+        },
+        {
+          "id": "set_05_r2d",
+          "title": "Part 2 – Email",
+          "passage": "Dear Ms Huong,\nThank you for your order. Unfortunately, the blue bag you ordered is out of stock. We can send you the same bag in black at no extra cost, or give you a full refund. Please reply to let us know.\nCustomer Service",
+          "questions": [
+            {
+              "id": "set_05_r08",
+              "prompt": "Why has the shop written to Ms Huong?",
+              "options": ["To say her bag has been delivered", "To ask her to pay extra money", "To offer her two choices because her item is not available", "To thank her for returning a bag"],
+              "answerIndex": 2,
+              "explanationVi": "Túi màu xanh đã hết hàng ('out of stock'), nên cửa hàng cho chọn nhận túi màu đen hoặc hoàn tiền. Đổi sang màu đen không mất thêm phí ('at no extra cost')."
+            }
+          ]
+        },
+        {
+          "id": "set_05_r3",
+          "title": "Part 3 – Reading passage",
+          "passage": "Online shopping has changed the way many young Vietnamese people spend their money. With just a few taps on a phone, you can order clothes, snacks or a new phone case and have them delivered to your door the next day. Big shopping festivals, with huge discounts on special dates, have made it even more popular.\n\nHowever, this convenience has a hidden cost. Because buying online is so quick, many people make impulse purchases: they buy things they did not plan to buy and often do not need. Flash sales that last only a few minutes, and countdown clocks on the screen, create a feeling that you must act now or lose the chance. Later, the same buyers may find that the product is of poor quality or simply stays in the cupboard, unused.\n\nSome students say that online shopping has also made them worse at managing money. When you pay by card or e-wallet, you do not see the money leaving your hand, so it is easy to lose track of how much you have spent.\n\nThere are a few simple ways to shop more wisely. One is to wait 24 hours before buying anything expensive. If you still want it the next day, it is probably a real need. Another is to remove saved card details from shopping apps, which makes buying a little slower. It also helps to set a monthly shopping budget and check your spending every week.\n\nOnline shopping is not bad in itself. It saves time and often money. The key is to stay in control and make sure that you, not the app, decide what you buy.",
+          "questions": [
+            {
+              "id": "set_05_r09",
+              "prompt": "What is the main idea of the passage?",
+              "options": ["Online shops sell poor-quality products.", "Students should stop shopping online.", "Online shopping is convenient but can lead to unwise spending.", "Shopping festivals started in Vietnam."],
+              "answerIndex": 2,
+              "explanationVi": "Bài viết thừa nhận sự tiện lợi rồi phân tích việc mua sắm bốc đồng, khó quản lý tiền và đưa ra cách mua sắm khôn ngoan. Tác giả không khuyên bỏ hẳn mua online ('not bad in itself')."
+            },
+            {
+              "id": "set_05_r10",
+              "prompt": "According to the passage, why do flash sales lead to impulse buying?",
+              "options": ["The products are always very cheap.", "They make people feel they must buy quickly.", "They always offer free delivery.", "They only sell things people need."],
+              "answerIndex": 1,
+              "explanationVi": "Đoạn 2 viết flash sale và đồng hồ đếm ngược 'create a feeling that you must act now or lose the chance', khiến người ta vội vàng mua. Bài không nói hàng luôn rẻ hay miễn phí vận chuyển."
+            },
+            {
+              "id": "set_05_r11",
+              "prompt": "The phrase 'lose track of' in paragraph 3 is closest in meaning to:",
+              "options": ["become angry about", "save a lot of", "pay too much for", "stop knowing exactly"],
+              "answerIndex": 3,
+              "explanationVi": "'Lose track of how much you have spent' nghĩa là không còn nắm rõ mình đã tiêu bao nhiêu. Vế trước 'you do not see the money leaving your hand' giải thích vì sao lại như vậy."
+            },
+            {
+              "id": "set_05_r12",
+              "prompt": "What is the writer's attitude towards online shopping?",
+              "options": ["Balanced: it is useful if people stay in control.", "Strongly negative: it should be banned.", "Very positive: people should shop online more.", "Uninterested: the writer gives no opinion."],
+              "answerIndex": 0,
+              "explanationVi": "Đoạn cuối viết 'Online shopping is not bad in itself... The key is to stay in control', cho thấy thái độ cân bằng: thấy cả lợi ích lẫn rủi ro."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex_write_05",
+      "skill": "writing",
+      "title": "Writing",
+      "instructionsVi": "Làm 2 bài viết. Bài 1: viết email khiếu nại 80–100 từ với giọng lịch sự, trả lời đủ 3 ý. Bài 2: viết đoạn văn 120–150 từ nêu lựa chọn của bạn và lý do.",
+      "durationMinutes": 40,
+      "tasks": [
+        {
+          "id": "set_05_w1",
+          "title": "Task 1 – Email",
+          "prompt": "You bought a pair of shoes from an online shop, but there is a problem with them. Write an email to the shop. In your email:\n- say what you bought and when\n- explain the problem\n- say what you would like the shop to do",
+          "minWords": 80,
+          "maxWords": 100,
+          "tipsVi": [
+            "Đây là thư gửi cửa hàng nên dùng giọng trang trọng: 'Dear Sir or Madam,' và kết bằng 'Yours faithfully,'.",
+            "Nêu thông tin đơn hàng cụ thể (ngày mua, mã đơn, size, màu) để cửa hàng dễ kiểm tra.",
+            "Yêu cầu rõ ràng và lịch sự: 'I would like to...', 'Could you please...?'."
+          ],
+          "sampleAnswer": "Dear Sir or Madam,\n\nI am writing about a pair of white trainers that I ordered from your website on 3 March. My order number is 58217. The shoes arrived yesterday, but unfortunately there is a problem. I ordered size 39, but the box contains size 37, so they are much too small for me. There is also a mark on the left shoe. I would like to exchange them for a new pair in the correct size. Could you please tell me how to send them back?\n\nI look forward to hearing from you.\n\nYours faithfully,\nTran Thi Ngoc"
+        },
+        {
+          "id": "set_05_w2",
+          "title": "Task 2 – Paragraph",
+          "prompt": "Write a paragraph (120–150 words) on the following topic:\n'After graduation, would you prefer to work for a large company or a small company? Why?'",
+          "minWords": 120,
+          "maxWords": 150,
+          "tipsVi": [
+            "Câu chủ đề nêu thẳng lựa chọn: 'After graduation, I would prefer to work for a small company.'",
+            "Phát triển 2 lý do (cơ hội học hỏi, môi trường, lương thưởng, thăng tiến), mỗi lý do có ví dụ.",
+            "Dùng 'would' khi nói về dự định giả định trong tương lai."
+          ],
+          "sampleAnswer": "After graduation, I would prefer to work for a large company. Firstly, big companies usually offer better training. New employees often take part in courses and have an experienced manager to guide them, which is very useful for someone without much experience. For example, my cousin joined a large bank last year, and she has already completed three professional courses. Secondly, large companies tend to offer more stable salaries and benefits, such as health insurance and a bonus at the end of the year. This would help me support my parents and save some money. In addition, a well-known company name looks good on a CV. Of course, small companies can be more friendly and flexible, and you may get more responsibility early. However, for my first job, I think a large company is a safer choice."
+        }
+      ]
+    },
+    {
+      "id": "ex_speak_05",
+      "skill": "speaking",
+      "title": "Speaking",
+      "instructionsVi": "Phần thi nói gồm 3 phần: trả lời câu hỏi về công việc, mua sắm và giải trí, chọn cách tiêu một khoản tiền cho cuối tuần, và trình bày chủ đề về vai trò của giải trí.",
+      "durationMinutes": 12,
+      "tasks": [
+        {
+          "id": "set_05_s1",
+          "title": "Part 1 – Social interaction",
+          "prompt": "The examiner asks you some questions about work, shopping and free time.\n- What kind of job would you like to do after graduation?\n- Do you prefer shopping online or in shops? Why?\n- What do you usually do for fun at the weekend?",
+          "prepSeconds": 0,
+          "speakSeconds": 120,
+          "tipsVi": [
+            "Nói về công việc mơ ước bằng 'I'd like to...', 'I'm hoping to...' và nêu lý do.",
+            "Khi so sánh hai cách mua sắm, dùng so sánh hơn: cheaper, more convenient, easier to check.",
+            "Kể hoạt động cuối tuần bằng thì hiện tại đơn và trạng từ tần suất."
+          ],
+          "sampleAnswer": "After graduation, I'd like to work as a mobile app developer, maybe for a start-up. I enjoy creating things that people use every day, and I think I'd learn really fast in a young team. Later, I'm hoping to work abroad for a few years. As for shopping, it depends on what I'm buying. For small things like books or phone accessories, I usually shop online because it's cheaper and I can compare prices easily. But for clothes and shoes, I prefer going to a shop, because I want to try them on first. I've had some bad experiences with online clothes that didn't fit. At the weekend, I usually sleep in on Saturday, then meet my friends for coffee in the afternoon. On Sunday evening we sometimes go to the cinema or play board games at a café near my house."
+        },
+        {
+          "id": "set_05_s2",
+          "title": "Part 2 – Solution discussion",
+          "prompt": "Situation: Your friend has a free weekend and 500,000 dong to spend on entertainment. There are three options:\n- going to a live music concert\n- buying a new video game\n- taking a one-day cooking class\nWhich option do you think is the best? Explain why, and say why the other options are less suitable.",
+          "prepSeconds": 60,
+          "speakSeconds": 120,
+          "tipsVi": [
+            "Cân nhắc giá trị nhận được với số tiền 500.000 đồng: trải nghiệm, kỹ năng, thời gian sử dụng.",
+            "Nêu lựa chọn ở câu đầu, sau đó dùng 'Firstly', 'Also' để thêm lý do.",
+            "Khi bác bỏ phương án khác, nên công nhận một điểm tốt trước rồi mới nói hạn chế."
+          ],
+          "sampleAnswer": "I'd say the cooking class is the best way to spend the money. Firstly, it's not just entertainment, it's also a useful skill. After the class, my friend could cook healthy meals at home and save money on eating out, so in a way the class pays for itself. Secondly, it's a social activity. You cook with other people, chat and eat together at the end, so it's a fun way to meet new friends. A live concert would be exciting, of course, but it only lasts a few hours, and the tickets often cost more than five hundred thousand anyway. A new video game could give him many hours of fun, but he'd probably play it alone in his room, and he already spends a lot of time in front of screens. So I think the cooking class offers the most value for his money."
+        },
+        {
+          "id": "set_05_s3",
+          "title": "Part 3 – Topic development",
+          "prompt": "Topic: Entertainment helps people live a better life.\nYou can use the following ideas:\n- reducing stress\n- spending time with family and friends\n- learning new things\nFollow-up questions:\n- Do young people spend too much money on entertainment?\n- Is watching films at home better than going to the cinema?",
+          "prepSeconds": 60,
+          "speakSeconds": 150,
+          "tipsVi": [
+            "Định nghĩa ngắn gọn giải trí gồm những gì (phim, nhạc, thể thao, du lịch) để mở bài.",
+            "Mỗi ý gợi ý đưa một ví dụ cá nhân, ví dụ xem phim cùng gia đình cuối tuần.",
+            "Với câu hỏi phụ, có thể trả lời 'It depends...' rồi nêu cả hai mặt."
+          ],
+          "sampleAnswer": "I believe entertainment plays an important role in our lives. By entertainment, I mean things like films, music, games and festivals. First of all, it helps us reduce stress. After a long week of classes and work, watching a funny film or listening to music helps me relax and feel ready for the next week. Secondly, entertainment brings people together. In my family, we watch a football match together every weekend, and it's one of the few times we all sit in the same room without our phones. Thirdly, we can learn a lot from it. Documentaries, museums and even some video games teach us about history and other cultures. Do young people spend too much on it? Sometimes, yes, especially on concerts and milk tea, but many free activities are just as enjoyable. As for films, I think home is more comfortable and cheaper, but the cinema is better for big action films."
+        }
+      ]
+    }
+  ]
+}

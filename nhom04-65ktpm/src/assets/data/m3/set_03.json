@@ -1,0 +1,364 @@
+{
+  "id": "set_03",
+  "title": "Đề mẫu số 3",
+  "topic": "Sức khỏe và thể thao",
+  "description": "Đề luyện tập B1 đầy đủ 4 kỹ năng về khám bệnh, chơi thể thao, ăn uống lành mạnh và chăm sóc sức khỏe.",
+  "sections": [
+    {
+      "id": "ex_listen_03",
+      "skill": "listening",
+      "title": "Listening",
+      "instructionsVi": "Bạn sẽ nghe 4 đoạn hội thoại ngắn (mỗi đoạn 1 câu hỏi) và 1 chương trình phát thanh về sức khỏe (4 câu hỏi). Cẩn thận với những thông tin bị thay đổi hoặc bị từ chối trong hội thoại.",
+      "durationMinutes": 20,
+      "groups": [
+        {
+          "id": "set_03_l1",
+          "title": "Part 1 – Conversation 1",
+          "audio": "assets/audio/m3/set_03_l1.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "Good morning, Green Clinic. How can I help you?"},
+            {"speaker": "M", "text": "Hi, I'd like to see Dr Binh, please. I've had a sore throat for three days."},
+            {"speaker": "W", "text": "I'm sorry, Dr Binh is fully booked today. How about tomorrow at nine?"},
+            {"speaker": "M", "text": "I have an exam tomorrow morning. Is the afternoon possible?"},
+            {"speaker": "W", "text": "Let me check. Yes, there's a free appointment at half past three."},
+            {"speaker": "M", "text": "Great, I'll take it."}
+          ],
+          "questions": [
+            {
+              "id": "set_03_l01",
+              "prompt": "When will the man see the doctor?",
+              "options": ["Today at nine", "Tomorrow at nine", "Today at half past three", "Tomorrow at half past three"],
+              "answerIndex": 3,
+              "explanationVi": "Hôm nay bác sĩ kín lịch, 9 giờ sáng mai thì anh ấy bận thi, nên lễ tân tìm được lịch 'at half past three' vào chiều mai ('Is the afternoon possible?' là hỏi về ngày mai)."
+            }
+          ]
+        },
+        {
+          "id": "set_03_l2",
+          "title": "Part 1 – Conversation 2",
+          "audio": "assets/audio/m3/set_03_l2.m4a",
+          "transcript": [
+            {"speaker": "M", "text": "You look great. Are you still going to the gym every morning?"},
+            {"speaker": "W", "text": "No, I stopped. It was too crowded and boring. I've joined a swimming class instead."},
+            {"speaker": "M", "text": "Swimming? I thought you were afraid of water."},
+            {"speaker": "W", "text": "I used to be, but now I really enjoy it. I'm also thinking about trying yoga at weekends."},
+            {"speaker": "M", "text": "Good for you. Maybe I'll come with you some time."}
+          ],
+          "questions": [
+            {
+              "id": "set_03_l02",
+              "prompt": "What exercise does the woman do now?",
+              "options": ["She goes to the gym.", "She goes swimming.", "She does yoga.", "She goes running."],
+              "answerIndex": 1,
+              "explanationVi": "Cô ấy đã bỏ tập gym ('No, I stopped') và 'I've joined a swimming class instead'. Yoga mới chỉ là dự định ('I'm thinking about trying'), chưa phải việc cô ấy đang làm."
+            }
+          ]
+        },
+        {
+          "id": "set_03_l3",
+          "title": "Part 1 – Conversation 3",
+          "audio": "assets/audio/m3/set_03_l3.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "Are you ready to order?"},
+            {"speaker": "M", "text": "Yes. I'd like the seafood fried rice, please."},
+            {"speaker": "W", "text": "Sorry, we've run out of seafood today. The chicken fried rice is very popular."},
+            {"speaker": "M", "text": "Hmm, I'm not keen on chicken. What about the vegetable noodle soup?"},
+            {"speaker": "W", "text": "Yes, we have that."},
+            {"speaker": "M", "text": "Then I'll have that, and a glass of orange juice, please."}
+          ],
+          "questions": [
+            {
+              "id": "set_03_l03",
+              "prompt": "What will the man eat?",
+              "options": ["Seafood fried rice", "Chicken fried rice", "Vegetable noodle soup", "Chicken noodle soup"],
+              "answerIndex": 2,
+              "explanationVi": "Nhà hàng hết hải sản, anh ấy lại không thích gà ('I'm not keen on chicken'), nên cuối cùng gọi 'the vegetable noodle soup'."
+            }
+          ]
+        },
+        {
+          "id": "set_03_l4",
+          "title": "Part 1 – Conversation 4",
+          "audio": "assets/audio/m3/set_03_l4.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "Aren't you playing in the football match on Sunday?"},
+            {"speaker": "M", "text": "Unfortunately not. I hurt my ankle when I was running last week."},
+            {"speaker": "W", "text": "Oh no. Is it serious?"},
+            {"speaker": "M", "text": "Not really, but the doctor told me to rest for two weeks. So I'll just go and watch the match."},
+            {"speaker": "W", "text": "Well, get well soon!"}
+          ],
+          "questions": [
+            {
+              "id": "set_03_l04",
+              "prompt": "Why won't the man play in the match on Sunday?",
+              "options": ["He has hurt his ankle.", "He has to work on Sunday.", "The match has been cancelled.", "He doesn't enjoy football."],
+              "answerIndex": 0,
+              "explanationVi": "Anh ấy nói 'I hurt my ankle when I was running last week' và bác sĩ bảo nghỉ hai tuần. Trận đấu vẫn diễn ra vì anh ấy còn định 'go and watch the match'."
+            }
+          ]
+        },
+        {
+          "id": "set_03_l5",
+          "title": "Part 2 – Radio programme",
+          "audio": "assets/audio/m3/set_03_l5.m4a",
+          "transcript": [
+            {"speaker": "N", "text": "Hello, and welcome to Healthy Campus, our weekly health programme. Today I'm talking about eating well on a student budget."},
+            {"speaker": "N", "text": "Many students skip breakfast because they get up late. This is a big mistake. Without breakfast, it is much harder to concentrate in morning lectures. Even something simple, like a banana and a glass of milk, is better than nothing."},
+            {"speaker": "N", "text": "The second problem is instant noodles. They are cheap and quick, but they contain a lot of salt and very few vitamins. If you eat them, add an egg and some green vegetables."},
+            {"speaker": "N", "text": "My third tip is to cook with friends. Buying food together at the market and sharing the cooking is cheaper than eating out, and it's more fun too."},
+            {"speaker": "N", "text": "Finally, drink enough water. Many young people drink sweet milk tea every day instead, and one cup can contain as much sugar as five teaspoons. Try to keep it as a weekend treat."},
+            {"speaker": "N", "text": "Next week, our guest will be a sports coach, who will show you simple exercises you can do in your dorm room."}
+          ],
+          "questions": [
+            {
+              "id": "set_03_l05",
+              "prompt": "What is the main topic of today's programme?",
+              "options": ["Eating healthily without spending much money", "How to cook instant noodles", "The dangers of doing sport", "Choosing a good restaurant"],
+              "answerIndex": 0,
+              "explanationVi": "Người nói giới thiệu ngay từ đầu 'Today I'm talking about eating well on a student budget', tức ăn uống lành mạnh mà vẫn tiết kiệm. Mì gói chỉ là một ý nhỏ trong bài."
+            },
+            {
+              "id": "set_03_l06",
+              "prompt": "Why does the speaker say breakfast is important?",
+              "options": ["It helps students lose weight.", "It is the cheapest meal of the day.", "It helps students concentrate in the morning.", "It stops students from getting up late."],
+              "answerIndex": 2,
+              "explanationVi": "Bài nói giải thích 'Without breakfast, it is much harder to concentrate in morning lectures'. Việc dậy muộn là nguyên nhân khiến sinh viên bỏ bữa sáng, không phải lợi ích của bữa sáng."
+            },
+            {
+              "id": "set_03_l07",
+              "prompt": "What does the speaker suggest about instant noodles?",
+              "options": ["Students should never eat them.", "Students should add an egg and vegetables.", "Students should only eat them for breakfast.", "Students should cook them with less water."],
+              "answerIndex": 1,
+              "explanationVi": "Lời khuyên là 'If you eat them, add an egg and some green vegetables'. Người nói không cấm hẳn mì gói nên phương án 'never eat them' là sai."
+            },
+            {
+              "id": "set_03_l08",
+              "prompt": "What will happen on next week's programme?",
+              "options": ["A doctor will talk about milk tea.", "Students will cook together in the studio.", "The speaker will talk about drinking water.", "A sports coach will be the guest."],
+              "answerIndex": 3,
+              "explanationVi": "Câu cuối: 'Next week, our guest will be a sports coach'. Trà sữa và nước uống đã được nói đến trong chương trình hôm nay."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex_read_03",
+      "skill": "reading",
+      "title": "Reading",
+      "instructionsVi": "Phần 1: chọn từ hoặc cụm từ đúng để hoàn thành câu. Phần 2: đọc 4 văn bản ngắn (thông báo, tin nhắn, nhãn thuốc, email) và chọn ý đúng. Phần 3: đọc bài viết về tập thể dục và trả lời 4 câu hỏi.",
+      "durationMinutes": 25,
+      "groups": [
+        {
+          "id": "set_03_r1",
+          "title": "Part 1 – Choose the best word or phrase",
+          "passage": null,
+          "questions": [
+            {
+              "id": "set_03_r01",
+              "prompt": "You _____ eat so much fast food. It's bad for your health.",
+              "options": ["needn't to", "shouldn't", "don't should", "haven't to"],
+              "answerIndex": 1,
+              "explanationVi": "Để khuyên ai không nên làm gì, ta dùng 'shouldn't + V nguyên mẫu'. 'Needn't to' và 'don't should' sai ngữ pháp, còn 'haven't to' không tồn tại trong tiếng Anh chuẩn."
+            },
+            {
+              "id": "set_03_r02",
+              "prompt": "I have been going to the gym _____ three months, and I feel much fitter now.",
+              "options": ["since", "during", "from", "for"],
+              "answerIndex": 3,
+              "explanationVi": "Thì hiện tại hoàn thành tiếp diễn đi với 'for + khoảng thời gian' (for three months). 'Since' phải đi với mốc thời gian, ví dụ 'since September'."
+            },
+            {
+              "id": "set_03_r03",
+              "prompt": "Doctors advise people to cut _____ on sugar and salt.",
+              "options": ["down", "off", "out", "away"],
+              "answerIndex": 0,
+              "explanationVi": "Cụm 'cut down on something' nghĩa là cắt giảm lượng dùng thứ gì. 'Cut out' (bỏ hẳn) không đi với 'on'."
+            },
+            {
+              "id": "set_03_r04",
+              "prompt": "The more you exercise, the _____ you will sleep at night.",
+              "options": ["good", "best", "better", "well"],
+              "answerIndex": 2,
+              "explanationVi": "Cấu trúc so sánh kép 'The more..., the + so sánh hơn...'. Bổ nghĩa cho động từ 'sleep' là trạng từ 'well', dạng so sánh hơn của nó là 'better'."
+            }
+          ]
+        },
+        {
+          "id": "set_03_r2a",
+          "title": "Part 2 – Notice",
+          "passage": "SWIMMING POOL\nThe pool will be closed for cleaning every Monday morning until 12:00. Swimming caps must be worn at all times. Children under 10 must be with an adult.",
+          "questions": [
+            {
+              "id": "set_03_r05",
+              "prompt": "What does the notice say?",
+              "options": ["The pool is closed all day on Mondays.", "Children are not allowed in the pool.", "Everyone must wear a swimming cap.", "Swimming caps are sold at the desk."],
+              "answerIndex": 2,
+              "explanationVi": "Thông báo ghi 'Swimming caps must be worn at all times', tức ai cũng phải đội mũ bơi. Hồ chỉ đóng cửa sáng thứ Hai đến 12:00, và trẻ dưới 10 tuổi vẫn được bơi nếu có người lớn đi kèm."
+            }
+          ]
+        },
+        {
+          "id": "set_03_r2b",
+          "title": "Part 2 – Text message",
+          "passage": "Hi Linh, I can't come to badminton tonight because I've got a bad cold. Could you ask Hung to take my place? The court is already paid for. Quan",
+          "questions": [
+            {
+              "id": "set_03_r06",
+              "prompt": "What does Quan ask Linh to do?",
+              "options": ["Find someone to play instead of him", "Pay for the badminton court", "Cancel the court booking", "Bring him some medicine"],
+              "answerIndex": 0,
+              "explanationVi": "Quân nhờ 'Could you ask Hung to take my place?', tức tìm người chơi thay. Sân đã trả tiền rồi ('already paid for') nên không cần trả hay hủy."
+            }
+          ]
+        },
+        {
+          "id": "set_03_r2c",
+          "title": "Part 2 – Medicine label",
+          "passage": "Take one tablet three times a day after meals. Do not take more than six tablets in 24 hours. Not suitable for children under 12. Keep in a cool, dry place.",
+          "questions": [
+            {
+              "id": "set_03_r07",
+              "prompt": "What does the label say?",
+              "options": ["Take the tablets before eating.", "Children under 12 can take half a tablet.", "Take two tablets each time.", "Never take more than six tablets in a day."],
+              "answerIndex": 3,
+              "explanationVi": "Nhãn thuốc ghi 'Do not take more than six tablets in 24 hours'. Thuốc uống sau bữa ăn ('after meals'), mỗi lần 1 viên, và không dùng cho trẻ dưới 12 tuổi."
+            }
+          ]
+        },
+        {
+          "id": "set_03_r2d",
+          "title": "Part 2 – Email",
+          "passage": "Dear students,\nFrom next Monday, the university canteen will offer a healthy lunch menu with brown rice, fish and fresh vegetables for 35,000 VND. The normal menu will still be available. Please send us your feedback after trying it.\nCanteen Team",
+          "questions": [
+            {
+              "id": "set_03_r08",
+              "prompt": "What is the email mainly about?",
+              "options": ["The canteen will close next Monday.", "A new healthy lunch option", "Higher prices for all meals", "The normal menu will be removed."],
+              "answerIndex": 1,
+              "explanationVi": "Email thông báo căng tin sẽ có thêm 'a healthy lunch menu' từ thứ Hai tới. Thực đơn cũ vẫn giữ ('The normal menu will still be available') nên phương án D sai."
+            }
+          ]
+        },
+        {
+          "id": "set_03_r3",
+          "title": "Part 3 – Reading passage",
+          "passage": "Most people know that exercise is good for them, but many say they simply do not have time. Between classes, work and family, finding a free hour to go to the gym can feel impossible. However, recent research suggests that we may not need a whole hour at all.\n\nScientists have been studying what they call 'exercise snacks': very short periods of activity, often just one or two minutes long, spread through the day. Examples include climbing the stairs quickly instead of taking the lift, doing twenty squats while you wait for the kettle to boil, or walking fast to the bus stop. In one small study, adults who did three of these short sessions a day for six weeks became noticeably fitter than a group who did nothing.\n\nThe idea is attractive because it removes the most common excuse. Nobody is too busy for two minutes. It also costs nothing and needs no special equipment. For students who sit for long hours in lectures or in front of a computer, standing up and moving regularly can also improve concentration and reduce back pain.\n\nExperts warn, however, that exercise snacks are not a magic solution. They are a good starting point, but people who want to run a marathon or build strong muscles will still need longer, planned training. Health organisations continue to recommend about 150 minutes of moderate activity a week for adults.\n\nThe message, then, is not that the gym is unnecessary, but that every bit of movement counts. Starting small is far better than not starting at all.",
+          "questions": [
+            {
+              "id": "set_03_r09",
+              "prompt": "What is the main idea of the passage?",
+              "options": ["Very short periods of activity can improve fitness.", "Going to the gym is a waste of money.", "Students sit too long in lectures.", "Running a marathon needs special equipment."],
+              "answerIndex": 0,
+              "explanationVi": "Cả bài xoay quanh 'exercise snacks', những lần vận động 1–2 phút, và kết luận 'every bit of movement counts'. Tác giả còn nói rõ phòng gym không phải là vô ích."
+            },
+            {
+              "id": "set_03_r10",
+              "prompt": "What happened to the adults in the study who did three short sessions a day?",
+              "options": ["They lost a lot of weight.", "They had more back pain.", "They became fitter.", "They stopped going to the gym."],
+              "answerIndex": 2,
+              "explanationVi": "Đoạn 2 viết họ 'became noticeably fitter than a group who did nothing'. Bài không nhắc đến giảm cân, còn đau lưng thì giảm chứ không tăng."
+            },
+            {
+              "id": "set_03_r11",
+              "prompt": "The word 'excuse' in paragraph 3 is closest in meaning to:",
+              "options": ["a polite apology", "a reason people give for not doing something", "a kind of short exercise", "a health problem"],
+              "answerIndex": 1,
+              "explanationVi": "'Excuse' ở đây là cái cớ, lý do để không làm việc gì. Câu tiếp theo 'Nobody is too busy for two minutes' cho thấy cái cớ phổ biến nhất là 'không có thời gian'."
+            },
+            {
+              "id": "set_03_r12",
+              "prompt": "What is the writer's opinion of exercise snacks?",
+              "options": ["They can replace all other kinds of exercise.", "The research about them cannot be trusted.", "They are only suitable for older people.", "They are a useful start but not enough for every goal."],
+              "answerIndex": 3,
+              "explanationVi": "Tác giả gọi chúng là 'a good starting point' nhưng cũng nói 'not a magic solution', người muốn chạy marathon vẫn cần tập dài hơn. Vì vậy phương án A quá tuyệt đối."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex_write_03",
+      "skill": "writing",
+      "title": "Writing",
+      "instructionsVi": "Làm 2 bài viết. Bài 1: viết email 80–100 từ trả lời đủ 3 ý. Bài 2: viết đoạn văn 120–150 từ nêu quan điểm về một vấn đề sức khỏe.",
+      "durationMinutes": 40,
+      "tasks": [
+        {
+          "id": "set_03_w1",
+          "title": "Task 1 – Email",
+          "prompt": "Your friend Hoa wants to get fitter and has asked for your advice. Write an email to her. In your email:\n- suggest a sport or activity she could try\n- explain why it is good for her\n- offer to do it with her",
+          "minWords": 80,
+          "maxWords": 100,
+          "tipsVi": [
+            "Gợi ý bằng 'Why don't you try...?' hoặc 'You could...' để giọng văn thân thiện.",
+            "Giải thích lợi ích cụ thể: rẻ, không cần dụng cụ, gần nhà, giảm căng thẳng.",
+            "Lời đề nghị đi cùng nên có thời gian và địa điểm rõ ràng, ví dụ 'every Tuesday at 6 a.m. by the lake'."
+          ],
+          "sampleAnswer": "Hi Hoa,\n\nThanks for your email. I think you should try jogging. You don't need to join a gym or buy any expensive equipment, just a good pair of running shoes. Jogging is great for your heart, and it helps you sleep better too. It's also a nice way to relax after a long day of lectures. Start slowly, maybe twenty minutes, three times a week. If you like, we can go together. How about Tuesday and Thursday at six in the morning, around the lake near my house?\n\nTake care,\nVan"
+        },
+        {
+          "id": "set_03_w2",
+          "title": "Task 2 – Paragraph",
+          "prompt": "Write a paragraph (120–150 words) on the following topic:\n'Fast food is becoming more and more popular among young people. Do you think this is a problem? Why or why not?'",
+          "minWords": 120,
+          "maxWords": 150,
+          "tipsVi": [
+            "Mở đầu bằng câu trả lời rõ ràng 'Yes, I think it is a serious problem' hoặc quan điểm cân bằng.",
+            "Đưa ra lý do về sức khỏe và thói quen, kèm ví dụ quen thuộc (trà sữa, gà rán, đồ ăn giao tận nơi).",
+            "Câu kết có thể đưa ra một giải pháp ngắn gọn để đoạn văn trọn vẹn."
+          ],
+          "sampleAnswer": "In my opinion, the growing popularity of fast food among young people is a real problem. The main reason is health. Fried chicken, burgers and sweet drinks contain a lot of fat, salt and sugar, so eating them often can lead to weight gain and other illnesses later in life. I have noticed that many of my classmates order fast food through delivery apps three or four times a week because it is quick and easy. Another problem is that fast food slowly replaces family meals. Young people eat alone in front of their phones instead of sitting down with others. Of course, eating a burger once in a while is not harmful. However, I believe schools and parents should teach young people simple cooking skills, so that healthy food becomes just as convenient."
+        }
+      ]
+    },
+    {
+      "id": "ex_speak_03",
+      "skill": "speaking",
+      "title": "Speaking",
+      "instructionsVi": "Phần thi nói gồm 3 phần: trả lời câu hỏi về thói quen sức khỏe, chọn cách giúp một người bạn khỏe hơn, và trình bày chủ đề về sức khỏe của giới trẻ.",
+      "durationMinutes": 12,
+      "tasks": [
+        {
+          "id": "set_03_s1",
+          "title": "Part 1 – Social interaction",
+          "prompt": "The examiner asks you some questions about your health and habits.\n- How often do you do exercise?\n- What is your favourite food? Is it healthy?\n- What do you usually do when you feel stressed?",
+          "prepSeconds": 0,
+          "speakSeconds": 120,
+          "tipsVi": [
+            "Trả lời câu hỏi tần suất bằng cụm cụ thể: 'three times a week', 'every evening', 'hardly ever'.",
+            "Khi nói món ăn yêu thích, hãy tả ngắn gọn món đó gồm gì và vì sao bạn thích.",
+            "Có thể thừa nhận thói quen chưa tốt của mình, điều đó làm câu trả lời tự nhiên hơn."
+          ],
+          "sampleAnswer": "To be honest, I don't exercise as much as I should. I play football with my classmates once a week, usually on Saturday afternoon, and sometimes I go for a walk in the park in the evening. During exam time I hardly exercise at all. My favourite food is bun cha. It's grilled pork with rice noodles, fresh herbs and a sweet and sour sauce. I think it's fairly healthy because it has lots of vegetables, but the pork is a bit fatty, so I don't eat it every day. When I feel stressed, I usually listen to music or call my older sister. She always makes me laugh. If I have more time, I go for a bike ride around the lake, because being outside really helps me clear my head."
+        },
+        {
+          "id": "set_03_s2",
+          "title": "Part 2 – Solution discussion",
+          "prompt": "Situation: Your friend wants to lose some weight before the summer. There are three options:\n- joining a gym\n- following a strict diet\n- cycling to university every day\nWhich option do you think is the best? Explain why, and say why the other options are less suitable.",
+          "prepSeconds": 60,
+          "speakSeconds": 120,
+          "tipsVi": [
+            "Nêu lựa chọn rõ ràng ngay đầu, rồi giải thích bằng 2 lý do (chi phí, tính bền vững, thời gian).",
+            "Với phương án bị loại, chỉ ra nhược điểm cụ thể như 'expensive', 'hard to keep doing', 'unhealthy'.",
+            "Dùng cấu trúc điều kiện 'If she..., she will...' để nói về kết quả có thể xảy ra."
+          ],
+          "sampleAnswer": "I think the best option for my friend is cycling to university every day. First, it fits easily into her daily routine. She has to travel to class anyway, so she doesn't need to find extra time for exercise. If she cycles for thirty minutes each way, that's an hour of activity a day, which is quite a lot. Second, it's almost free, and it's better for the environment than riding a motorbike. Joining a gym is also a good idea, but membership is quite expensive for a student, and many people stop going after a few weeks. A strict diet is the option I like least. It might help her lose weight quickly, but it's hard to keep going, and she might feel tired or hungry all the time. Usually the weight comes back. So cycling is the healthiest and most realistic choice."
+        },
+        {
+          "id": "set_03_s3",
+          "title": "Part 3 – Topic development",
+          "prompt": "Topic: Young people should pay more attention to their health.\nYou can use the following ideas:\n- eating a balanced diet\n- doing regular exercise\n- getting enough sleep\nFollow-up questions:\n- Why do many students sleep too little?\n- What can universities do to help students stay healthy?",
+          "prepSeconds": 60,
+          "speakSeconds": 150,
+          "tipsVi": [
+            "Mỗi ý gợi ý nói 2–3 câu: vấn đề hiện tại của giới trẻ và lời khuyên.",
+            "Dùng 'should', 'it's important to', 'try to' để đưa ra lời khuyên một cách tự nhiên.",
+            "Câu hỏi phụ về giấc ngủ có thể nhắc đến điện thoại, deadline, làm thêm buổi tối."
+          ],
+          "sampleAnswer": "I believe young people really should pay more attention to their health, because the habits we build now will affect us for the rest of our lives. The first thing is diet. Many students live on instant noodles and milk tea because they're cheap and quick. It's important to eat more vegetables and fruit, and to cook at home when we can. The second point is exercise. We spend hours sitting in class and then more hours on our phones. Even thirty minutes of walking or playing badminton a day can make a big difference. Finally, sleep. A lot of my friends go to bed after two a.m. I think the main reasons are phones and social media, and also assignments that they leave until the last minute. As for universities, they could open the sports centre for free, offer cheap healthy meals in the canteen, and run short talks about managing time and stress."
+        }
+      ]
+    }
+  ]
+}
