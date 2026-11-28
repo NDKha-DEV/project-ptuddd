@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:tlu_b1_daily/app.dart';
+import 'package:tlu_b1_daily/features/assessment/presentation/providers/attempt_history_provider.dart';
 import 'package:tlu_b1_daily/features/auth/presentation/providers/auth_provider.dart';
+import 'package:tlu_b1_daily/features/exercises/presentation/providers/exercises_provider.dart';
 
 Session _session(String uid) {
   final user = User(
@@ -25,12 +28,21 @@ Session _session(String uid) {
   );
 }
 
-Widget _buildApp(AuthProvider auth) => ChangeNotifierProvider(
-      create: (_) => auth,
+Widget _buildApp(AuthProvider auth) => MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => auth),
+        ChangeNotifierProvider(create: (_) => ExercisesProvider()),
+        ChangeNotifierProxyProvider<AuthProvider, AttemptHistoryProvider>(
+          create: (_) => AttemptHistoryProvider(),
+          update: (_, auth, history) => history!..loadFor(auth.uid),
+        ),
+      ],
       child: const TluB1DailyApp(),
     );
 
 void main() {
+  setUp(() => SharedPreferences.setMockInitialValues({}));
+
   testWidgets('Không có session Supabase thì vào màn Login', (tester) async {
     final auth = AuthProvider(supabaseReady: false);
     await auth.initialize();
@@ -81,7 +93,7 @@ void main() {
 
     await tester.tap(find.text('Luyện tập'));
     await tester.pumpAndSettle();
-    expect(find.text('M3 - Bài tập và đánh giá'), findsOneWidget);
+    expect(find.text('Theo kỹ năng'), findsOneWidget);
 
     await tester.tap(find.text('Lộ trình'));
     await tester.pumpAndSettle();
