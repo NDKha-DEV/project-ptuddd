@@ -1,0 +1,362 @@
+{
+  "id": "set_02",
+  "title": "Đề mẫu số 2",
+  "topic": "Du lịch và giao thông",
+  "description": "Đề luyện tập B1 đầy đủ 4 kỹ năng về đặt vé, khách sạn, chuyến đi chơi và các phương tiện giao thông.",
+  "sections": [
+    {
+      "id": "ex_listen_02",
+      "skill": "listening",
+      "title": "Listening",
+      "instructionsVi": "Bạn sẽ nghe 4 đoạn hội thoại ngắn (mỗi đoạn 1 câu hỏi) và 1 bài nói của hướng dẫn viên du lịch (4 câu hỏi). Chú ý các chi tiết về giờ giấc, địa điểm và phương tiện.",
+      "durationMinutes": 20,
+      "groups": [
+        {
+          "id": "set_02_l1",
+          "title": "Part 1 – Conversation 1",
+          "audio": "assets/audio/m3/set_02_l1.m4a",
+          "transcript": [
+            {"speaker": "M", "text": "Good morning. I'd like a ticket to Hue on Friday, please."},
+            {"speaker": "W", "text": "There's a train at 7 a.m. and another at 7 p.m. The night train has sleeping cabins."},
+            {"speaker": "M", "text": "The morning one is cheaper, isn't it?"},
+            {"speaker": "W", "text": "Yes, but it arrives quite late, at around 8 p.m."},
+            {"speaker": "M", "text": "Then I'll take the night train. I can sleep on the way and save a night in a hotel."},
+            {"speaker": "W", "text": "Fine. A lower bed in a four-bed cabin?"},
+            {"speaker": "M", "text": "Yes, please."}
+          ],
+          "questions": [
+            {
+              "id": "set_02_l01",
+              "prompt": "Which train will the man take?",
+              "options": ["The 7 a.m. train on Friday", "The 7 p.m. train on Friday", "The 8 p.m. train on Friday", "The 7 a.m. train on Saturday"],
+              "answerIndex": 1,
+              "explanationVi": "Anh ấy quyết định 'I'll take the night train', tức chuyến 7 giờ tối thứ Sáu. Con số 8 giờ tối là giờ chuyến buổi sáng đến nơi, không phải giờ khởi hành."
+            }
+          ]
+        },
+        {
+          "id": "set_02_l2",
+          "title": "Part 1 – Conversation 2",
+          "audio": "assets/audio/m3/set_02_l2.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "My flight leaves at six tomorrow morning. What's the best way to get to the airport?"},
+            {"speaker": "M", "text": "The airport bus is cheap, but the first one leaves at five. That's too late for you."},
+            {"speaker": "W", "text": "What about a taxi?"},
+            {"speaker": "M", "text": "It's expensive at that time. Why don't I drive you? I get up early anyway."},
+            {"speaker": "W", "text": "Really? That's very kind of you. Thanks!"}
+          ],
+          "questions": [
+            {
+              "id": "set_02_l02",
+              "prompt": "How will the woman get to the airport?",
+              "options": ["By airport bus", "By taxi", "By motorbike taxi", "In the man's car"],
+              "answerIndex": 3,
+              "explanationVi": "Người đàn ông đề nghị 'Why don't I drive you?' và cô ấy nhận lời ('That's very kind of you'). Xe buýt sân bay chạy quá muộn còn taxi thì đắt, nên cả hai đều bị loại."
+            }
+          ]
+        },
+        {
+          "id": "set_02_l3",
+          "title": "Part 1 – Conversation 3",
+          "audio": "assets/audio/m3/set_02_l3.m4a",
+          "transcript": [
+            {"speaker": "W", "text": "Hello, I booked a double room for three nights, from the tenth to the thirteenth."},
+            {"speaker": "M", "text": "Yes, Ms Nga, I can see your booking here."},
+            {"speaker": "W", "text": "I'm afraid my plans have changed. Could I arrive one day later, on the eleventh, but still leave on the thirteenth?"},
+            {"speaker": "M", "text": "No problem. So that's two nights now. The price per night stays the same."},
+            {"speaker": "W", "text": "Perfect, thank you."}
+          ],
+          "questions": [
+            {
+              "id": "set_02_l03",
+              "prompt": "What does the woman want to do?",
+              "options": ["Shorten her stay by one night", "Change to a single room", "Stay one more night", "Cancel her booking"],
+              "answerIndex": 0,
+              "explanationVi": "Cô ấy muốn đến muộn một ngày ('arrive one day later') nhưng vẫn trả phòng ngày 13, nên từ 3 đêm còn 2 đêm ('So that's two nights now'). Cô ấy không đổi loại phòng cũng không hủy đặt phòng."
+            }
+          ]
+        },
+        {
+          "id": "set_02_l4",
+          "title": "Part 1 – Conversation 4",
+          "audio": "assets/audio/m3/set_02_l4.m4a",
+          "transcript": [
+            {"speaker": "M", "text": "So, where shall we go for the summer holiday? The beach in Nha Trang again?"},
+            {"speaker": "W", "text": "We went there last year. I'd prefer somewhere cooler, like Sa Pa or Da Lat."},
+            {"speaker": "M", "text": "Sa Pa is a long trip from here, and it might rain a lot in July."},
+            {"speaker": "W", "text": "Then Da Lat. We can rent bikes and visit the flower gardens."},
+            {"speaker": "M", "text": "OK, let's book it."}
+          ],
+          "questions": [
+            {
+              "id": "set_02_l04",
+              "prompt": "Where will they go for their holiday?",
+              "options": ["Nha Trang", "Sa Pa", "Da Lat", "Ha Long"],
+              "answerIndex": 2,
+              "explanationVi": "Sau khi loại Nha Trang (đã đi năm ngoái) và Sa Pa (xa, tháng 7 hay mưa), cô ấy chốt 'Then Da Lat' và anh ấy đồng ý 'let's book it'."
+            }
+          ]
+        },
+        {
+          "id": "set_02_l5",
+          "title": "Part 2 – Talk",
+          "audio": "assets/audio/m3/set_02_l5.m4a",
+          "transcript": [
+            {"speaker": "N", "text": "Good morning, everyone, and welcome to our day trip to Trang An. I'm Khoa, your guide for today. Our bus journey will take about two hours, and we'll stop once at a service station after an hour so you can use the toilets and buy snacks."},
+            {"speaker": "N", "text": "When we arrive, we'll take a boat tour through the caves and along the river. Each boat holds four passengers, and the trip lasts around three hours, so please bring a hat and some water. Life jackets are provided on every boat, and you must wear them the whole time."},
+            {"speaker": "N", "text": "Lunch is included in your ticket. We'll eat at a local restaurant at about half past twelve. The speciality there is goat meat, but there are vegetarian dishes too."},
+            {"speaker": "N", "text": "In the afternoon, you'll have free time to visit an old temple or rent a bicycle. Please be back at the bus by four thirty, because we want to avoid the evening traffic on the way back to Hanoi. If you get lost, just call the number on your ticket."}
+          ],
+          "questions": [
+            {
+              "id": "set_02_l05",
+              "prompt": "How long is the bus journey to Trang An?",
+              "options": ["One hour", "Three hours", "About two hours", "Four and a half hours"],
+              "answerIndex": 2,
+              "explanationVi": "Hướng dẫn viên nói 'Our bus journey will take about two hours'. 'Một tiếng' là thời điểm dừng nghỉ, còn 'ba tiếng' là thời gian đi thuyền."
+            },
+            {
+              "id": "set_02_l06",
+              "prompt": "What must passengers do on the boat?",
+              "options": ["Wear a life jacket all the time", "Bring their own life jacket", "Sit in groups of six", "Stay silent in the caves"],
+              "answerIndex": 0,
+              "explanationVi": "Bài nói có câu 'Life jackets are provided on every boat, and you must wear them the whole time.' Áo phao được phát sẵn nên không cần mang theo, và mỗi thuyền chở 4 người chứ không phải 6."
+            },
+            {
+              "id": "set_02_l07",
+              "prompt": "What does the guide say about lunch?",
+              "options": ["Passengers must pay for it separately.", "Only goat meat is served.", "It is eaten on the boat.", "It is included in the ticket price."],
+              "answerIndex": 3,
+              "explanationVi": "Câu 'Lunch is included in your ticket' cho thấy bữa trưa đã tính trong giá vé. Thịt dê chỉ là món đặc sản, nhà hàng vẫn có món chay ('there are vegetarian dishes too')."
+            },
+            {
+              "id": "set_02_l08",
+              "prompt": "Why should the group be back at the bus by four thirty?",
+              "options": ["The temple closes at four thirty.", "To avoid the evening traffic", "The bicycles must be returned then.", "The restaurant opens for dinner."],
+              "answerIndex": 1,
+              "explanationVi": "Lý do được nói rõ: 'because we want to avoid the evening traffic on the way back to Hanoi'. Bài nói không đề cập giờ đóng cửa của đền hay giờ trả xe đạp."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex_read_02",
+      "skill": "reading",
+      "title": "Reading",
+      "instructionsVi": "Phần 1: chọn từ hoặc cụm từ đúng để hoàn thành câu. Phần 2: đọc 4 văn bản ngắn (biển báo, tin nhắn, thông báo, email) và chọn ý đúng. Phần 3: đọc bài viết về phong cách du lịch và trả lời 4 câu hỏi.",
+      "durationMinutes": 25,
+      "groups": [
+        {
+          "id": "set_02_r1",
+          "title": "Part 1 – Choose the best word or phrase",
+          "passage": null,
+          "questions": [
+            {
+              "id": "set_02_r01",
+              "prompt": "By the time we got to the station, the train _____.",
+              "options": ["had already left", "has already left", "already leaves", "is already leaving"],
+              "answerIndex": 0,
+              "explanationVi": "Hành động tàu rời đi xảy ra trước một mốc trong quá khứ ('By the time we got...'), nên dùng quá khứ hoàn thành 'had already left'."
+            },
+            {
+              "id": "set_02_r02",
+              "prompt": "We decided to travel _____ coach because all the flights were fully booked.",
+              "options": ["in", "with", "by", "on"],
+              "answerIndex": 2,
+              "explanationVi": "Khi nói về phương tiện đi lại mà không có mạo từ, ta dùng 'by': by coach, by train, by plane. 'On' chỉ dùng khi có mạo từ, ví dụ 'on the coach'."
+            },
+            {
+              "id": "set_02_r03",
+              "prompt": "Could you tell me how long it _____ to get to the old town from here?",
+              "options": ["spends", "costs", "lasts", "takes"],
+              "answerIndex": 3,
+              "explanationVi": "Cấu trúc 'It takes + thời gian + to do something' dùng để hỏi mất bao lâu. 'Spend' cần chủ ngữ là người, 'cost' nói về tiền."
+            },
+            {
+              "id": "set_02_r04",
+              "prompt": "On your last day, please remember to check _____ of your room before 12 o'clock.",
+              "options": ["in", "out", "off", "up"],
+              "answerIndex": 1,
+              "explanationVi": "'Check out of a room/hotel' là trả phòng, hợp với ngữ cảnh 'On your last day'. 'Check in' là nhận phòng khi mới đến."
+            }
+          ]
+        },
+        {
+          "id": "set_02_r2a",
+          "title": "Part 2 – Sign",
+          "passage": "PLATFORM 3 – Buses to Hai Phong\nBecause of road works, all buses to Hai Phong will leave from Platform 7 from Monday 4 to Friday 8 November. Tickets bought online are still valid. Please ask at the information desk if you need help.",
+          "questions": [
+            {
+              "id": "set_02_r05",
+              "prompt": "What does the sign say?",
+              "options": ["Buses to Hai Phong are cancelled next week.", "Online tickets cannot be used.", "The information desk is closed.", "Buses will use a different platform for five days."],
+              "answerIndex": 3,
+              "explanationVi": "Từ thứ Hai 4 đến thứ Sáu 8/11 (5 ngày), xe 'will leave from Platform 7' thay vì bến số 3. Xe không bị hủy và vé mua online vẫn dùng được ('still valid')."
+            }
+          ]
+        },
+        {
+          "id": "set_02_r2b",
+          "title": "Part 2 – Text message",
+          "passage": "Mum, my flight is delayed by two hours because of the storm. I'll land at about 10 instead of 8. Don't wait at the airport. I'll take a taxi home. Love, Vy",
+          "questions": [
+            {
+              "id": "set_02_r06",
+              "prompt": "What does Vy want her mother to do?",
+              "options": ["Pick her up at 10", "Not come to the airport", "Book a taxi for her", "Call the airline"],
+              "answerIndex": 1,
+              "explanationVi": "Vy viết 'Don't wait at the airport. I'll take a taxi home', tức mẹ không cần ra sân bay. Vy tự bắt taxi chứ không nhờ mẹ đặt xe."
+            }
+          ]
+        },
+        {
+          "id": "set_02_r2c",
+          "title": "Part 2 – Hotel notice",
+          "passage": "BREAKFAST\nBreakfast is served in the garden restaurant from 6:30 to 9:30. Guests on the Room Only rate can buy breakfast for 120,000 VND. Please show your room key to our staff.",
+          "questions": [
+            {
+              "id": "set_02_r07",
+              "prompt": "What does the notice say?",
+              "options": ["Some guests have to pay extra for breakfast.", "Breakfast is free for all guests.", "Breakfast is served in the rooms.", "Breakfast finishes at 10:30."],
+              "answerIndex": 0,
+              "explanationVi": "Khách đặt giá 'Room Only' (chỉ thuê phòng) phải trả thêm 120.000 đồng cho bữa sáng, nên không phải ai cũng được miễn phí. Bữa sáng phục vụ ở nhà hàng sân vườn và kết thúc lúc 9:30."
+            }
+          ]
+        },
+        {
+          "id": "set_02_r2d",
+          "title": "Part 2 – Email",
+          "passage": "Dear Mr Hai,\nThank you for booking with Green Trails Travel. Your trekking tour starts on 15 March. Please note that the minimum age is 16 and good walking shoes are essential. Full payment is due 7 days before departure.\nBest regards,\nThu",
+          "questions": [
+            {
+              "id": "set_02_r08",
+              "prompt": "What must Mr Hai do before the tour?",
+              "options": ["Buy walking shoes from the company", "Bring a child under 16", "Pay the full price one week before", "Arrive on 7 March"],
+              "answerIndex": 2,
+              "explanationVi": "Email ghi 'Full payment is due 7 days before departure', tức phải thanh toán đủ trước một tuần. Số 7 là số ngày, không phải ngày 7 tháng 3, và trẻ dưới 16 tuổi không được tham gia."
+            }
+          ]
+        },
+        {
+          "id": "set_02_r3",
+          "title": "Part 3 – Reading passage",
+          "passage": "For many people, a holiday means flying to a famous city, taking hundreds of photos and rushing from one sight to the next. But a growing number of young travellers are choosing a different style, often called 'slow travel'.\n\nThe idea is simple: instead of visiting five places in five days, you stay longer in one place and get to know it properly. Slow travellers often rent a room in a local home, shop at the market and eat where local people eat. Many of them prefer trains and buses to planes, because the journey itself becomes part of the experience. Watching rice fields and mountains through a train window, they say, is far more memorable than sitting in an airport.\n\nSlow travel can also be cheaper. Weekly rents are usually lower than hotel prices, and cooking some of your own meals saves a lot of money. In addition, it is kinder to the environment, since trains and buses produce much less pollution per passenger than planes.\n\nOf course, this style does not suit everyone. Office workers with only a few days off may feel they do not have enough time. Some people also enjoy the excitement of seeing many places on one trip, and there is nothing wrong with that.\n\nStill, it is worth trying at least once. Next time you plan a holiday, consider choosing one destination and staying a little longer. You may come home less tired and with better stories to tell.",
+          "questions": [
+            {
+              "id": "set_02_r09",
+              "prompt": "What is the passage mainly about?",
+              "options": ["Why planes are better than trains", "What slow travel is and why people try it", "How to find cheap hotels in big cities", "Why office workers cannot go on holiday"],
+              "answerIndex": 1,
+              "explanationVi": "Bài viết giải thích 'slow travel' là gì (ở lâu một nơi, sống như người địa phương) và nêu lợi ích của nó. Các phương án khác chỉ là chi tiết nhỏ hoặc trái với nội dung bài."
+            },
+            {
+              "id": "set_02_r10",
+              "prompt": "Why do slow travellers often prefer trains and buses?",
+              "options": ["They are faster than planes.", "Planes are always fully booked.", "Tickets include free meals.", "The journey becomes part of the experience."],
+              "answerIndex": 3,
+              "explanationVi": "Đoạn 2 viết 'because the journey itself becomes part of the experience'. Bài không nói tàu xe nhanh hơn máy bay, thực tế slow travel chấp nhận đi chậm."
+            },
+            {
+              "id": "set_02_r11",
+              "prompt": "The word 'memorable' in paragraph 2 is closest in meaning to:",
+              "options": ["expensive", "comfortable", "worth remembering", "tiring"],
+              "answerIndex": 2,
+              "explanationVi": "'Memorable' (từ gốc 'memory') nghĩa là đáng nhớ. Câu văn so sánh cảnh ruộng lúa, núi non qua cửa sổ tàu với việc ngồi chờ ở sân bay, cho thấy trải nghiệm trên tàu đáng nhớ hơn."
+            },
+            {
+              "id": "set_02_r12",
+              "prompt": "What is the writer's main purpose?",
+              "options": ["To encourage readers to try slow travel", "To complain about airports", "To advertise a travel company", "To warn people about the dangers of travelling"],
+              "answerIndex": 0,
+              "explanationVi": "Đoạn cuối khuyên người đọc 'it is worth trying at least once... consider choosing one destination', nên mục đích là khuyến khích thử slow travel. Bài không quảng cáo công ty nào."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex_write_02",
+      "skill": "writing",
+      "title": "Writing",
+      "instructionsVi": "Làm 2 bài viết. Bài 1: viết email 80–100 từ trả lời đủ 3 ý. Bài 2: viết đoạn văn 120–150 từ nêu quan điểm cá nhân có lý do và ví dụ.",
+      "durationMinutes": 40,
+      "tasks": [
+        {
+          "id": "set_02_w1",
+          "title": "Task 1 – Email",
+          "prompt": "Your friend Jake from Australia is visiting Vietnam next month and wants to spend two days in your hometown. Write an email to him. In your email:\n- suggest the best way to travel to your hometown\n- recommend some places to visit\n- tell him what clothes to bring",
+          "minWords": 80,
+          "maxWords": 100,
+          "tipsVi": [
+            "Dùng các cấu trúc gợi ý: 'I think you should...', 'Why don't you...?', 'It's a good idea to...'.",
+            "Nêu lý do cho từng gợi ý (rẻ hơn, nhanh hơn, cảnh đẹp) để email thuyết phục hơn.",
+            "Phần quần áo nên gắn với thời tiết tháng đó, ví dụ 'It's quite cold in December, so bring a jacket.'"
+          ],
+          "sampleAnswer": "Hi Jake,\n\nI'm so happy you're coming to my hometown, Nam Dinh! The best way to get here from Hanoi is by coach. It takes about two hours and the tickets are cheap. I'll meet you at the bus station. There are a few places you'll love. The Tran Temple is beautiful, and Thinh Long beach is only an hour away. We can also try the famous beef noodle soup at the market. It's quite cold here in December, so bring a warm jacket and some comfortable shoes.\n\nSee you soon,\nNam"
+        },
+        {
+          "id": "set_02_w2",
+          "title": "Task 2 – Paragraph",
+          "prompt": "Write a paragraph (120–150 words) on the following topic:\n'Some people prefer to travel alone, while others prefer to travel with a group of friends. Which do you prefer, and why?'",
+          "minWords": 120,
+          "maxWords": 150,
+          "tipsVi": [
+            "Câu đầu nêu rõ lựa chọn: 'I prefer travelling with a group of friends.'",
+            "Phát triển 2 lý do có ví dụ từ chuyến đi thật của bạn, dùng thì quá khứ đơn khi kể lại.",
+            "Có thể nhắc ưu điểm của lựa chọn kia bằng 'Although...' để bài cân bằng hơn."
+          ],
+          "sampleAnswer": "I prefer travelling with a group of friends rather than travelling alone. The main reason is that it makes the trip more fun. When something goes wrong, like a late bus or a rainy day, we can laugh about it together instead of feeling bored or lonely. Last summer, my friends and I went to Quy Nhon, and our best memories were the long conversations on the beach at night. Another reason is cost. When we share a room, a taxi or a big meal, everyone pays much less. It is also safer, especially in places where you do not speak the language. Although travelling alone gives you more freedom to choose where to go, I think sharing new experiences with people I care about is the best part of any journey."
+        }
+      ]
+    },
+    {
+      "id": "ex_speak_02",
+      "skill": "speaking",
+      "title": "Speaking",
+      "instructionsVi": "Phần thi nói gồm 3 phần: trả lời câu hỏi về thói quen đi lại và du lịch, chọn phương án cho một chuyến đi, và trình bày một chủ đề về giao thông.",
+      "durationMinutes": 12,
+      "tasks": [
+        {
+          "id": "set_02_s1",
+          "title": "Part 1 – Social interaction",
+          "prompt": "The examiner asks you some questions about travel and transport.\n- How do you usually travel to university?\n- Where did you go on your last holiday?\n- Do you prefer holidays in the mountains or at the beach? Why?",
+          "prepSeconds": 0,
+          "speakSeconds": 120,
+          "tipsVi": [
+            "Câu hỏi về kỳ nghỉ trước cần dùng thì quá khứ đơn (went, stayed, visited).",
+            "Khi nói sở thích, dùng 'I prefer... because...' hoặc 'I'd rather...'.",
+            "Thêm một chi tiết nhỏ cụ thể (thời gian, người đi cùng, món ăn) để câu trả lời sinh động."
+          ],
+          "sampleAnswer": "I usually go to university by motorbike. It takes about twenty minutes, but in the rush hour it can be nearly forty because of the traffic. When it rains heavily, I sometimes take the bus instead. My last holiday was in June. I went to Phong Nha with my cousins for four days. We visited some amazing caves and swam in a really clear river. The food was simple but delicious, especially the grilled chicken. Honestly, I prefer holidays in the mountains to holidays at the beach. I don't like the hot sun very much, and I get sunburnt easily. In the mountains the air is fresh and cool, and I love hiking and taking photos of the views. Beaches are also nice, but they're often very crowded in the summer."
+        },
+        {
+          "id": "set_02_s2",
+          "title": "Part 2 – Solution discussion",
+          "prompt": "Situation: You and three friends are planning a three-day trip from Hanoi to Da Nang. You have a limited budget. There are three options:\n- going by plane\n- taking the overnight train\n- taking a sleeper coach\nWhich option do you think is the best? Explain why, and say why the other options are less suitable.",
+          "prepSeconds": 60,
+          "speakSeconds": 120,
+          "tipsVi": [
+            "Bám vào điều kiện đề bài (3 ngày, ngân sách hạn chế) khi lập luận.",
+            "So sánh các phương án bằng so sánh hơn: cheaper, faster, more comfortable than...",
+            "Kết luận lại lựa chọn của mình bằng một câu ngắn gọn ở cuối bài."
+          ],
+          "sampleAnswer": "I think we should go by plane. At first it seems like the most expensive option, but if we book early, budget airlines often have very cheap tickets, sometimes almost the same price as the train. The biggest advantage is time. The flight takes just over an hour, so we can spend all three days in Da Nang instead of on the road. The overnight train sounds romantic, and we'd save one night in a hotel, but the trip takes around sixteen hours. That's a lot of time for a short holiday, and a good sleeping cabin isn't cheap either. The sleeper coach is usually the cheapest, but it's not very comfortable for such a long distance, and some of us get carsick easily. So, if we buy tickets a few weeks ahead, flying is definitely the best choice for us."
+        },
+        {
+          "id": "set_02_s3",
+          "title": "Part 3 – Topic development",
+          "prompt": "Topic: Public transport in big cities should be improved.\nYou can use the following ideas:\n- reducing traffic jams\n- saving money for people\n- making the city cleaner\nFollow-up questions:\n- Why do many people still prefer motorbikes to buses?\n- What should the city do first to improve public transport?",
+          "prepSeconds": 60,
+          "speakSeconds": 150,
+          "tipsVi": [
+            "Mở bài bằng một câu đồng ý hoặc không đồng ý, rồi lần lượt nói từng ý gợi ý.",
+            "Dẫn chứng bằng trải nghiệm thật ở thành phố bạn sống (tắc đường giờ cao điểm, xe buýt muộn).",
+            "Khi trả lời câu hỏi phụ, có thể đề xuất giải pháp cụ thể: thêm tuyến, làn đường riêng, giá vé sinh viên."
+          ],
+          "sampleAnswer": "I completely agree that public transport in big cities like Hanoi should be improved. First of all, it would reduce traffic jams. Every morning, thousands of motorbikes fill the streets, and a ten-minute trip can take half an hour. If more people took buses or the metro, the roads would be much less crowded. Secondly, good public transport saves people money. A monthly bus pass for students is very cheap compared with petrol and parking fees. Finally, fewer private vehicles means cleaner air, which is good for everyone's health. So why do people still prefer motorbikes? I think it's mainly about convenience. A motorbike takes you from door to door, while buses can be late and stops are sometimes far from home. In my opinion, the city should first add more bus routes and give buses their own lanes, so they become faster and more reliable."
+        }
+      ]
+    }
+  ]
+}
