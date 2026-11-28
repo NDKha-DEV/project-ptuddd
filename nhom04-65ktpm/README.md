@@ -119,4 +119,5 @@ flutter test               # chạy test
 ## Tài Liệu
 
 - `docs/De_cuong_cuoi_ky_SpeakEnglish_Nhom4.docx` - Đề cương đồ án.
+- `docs/M3_Bai_Tap_Va_Danh_Gia.md` - M3: ngân hàng đề, mã bài tập, dữ liệu kết quả cho M4/M5.
 - `docs/M4_Dac_Ta_Thiet_Ke_Lo_Trinh_Hoc_Tap.md` - Đặc tả M4.
