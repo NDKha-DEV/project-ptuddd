@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:tlu_b1_daily/features/exercises/data/models/exam_models.dart';
+import 'package:tlu_b1_daily/features/exercises/data/repositories/question_bank_repository.dart';
 
 Question _q(String id, int answer) => Question(
   id: id,
@@ -85,3 +88,10 @@ ExamSet fixtureSet(int n) {
     ],
   );
 }
+
+QuestionBankRepository fixtureRepository() => QuestionBankRepository(
+  loader: (path) async {
+    final n = QuestionBankRepository.setAssets.indexOf(path) + 1;
+    return jsonEncode(fixtureSet(n).toJson());
+  },
+);
