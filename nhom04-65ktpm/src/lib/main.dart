@@ -2,36 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
-import 'core/services/firebase_bootstrap.dart';
+import 'core/services/supabase_bootstrap.dart';
 import 'features/auth/presentation/providers/auth_provider.dart';
 import 'features/learning_path/data/repositories/learning_path_repository.dart';
 import 'features/learning_path/presentation/providers/learning_path_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final firebaseReady = await FirebaseBootstrap.init();
+  final supabaseReady = await SupabaseBootstrap.init();
+  final auth = AuthProvider(supabaseReady: supabaseReady);
+  await auth.initialize();
 
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => AuthProvider(firebaseReady: firebaseReady),
-        ),
+        ChangeNotifierProvider(create: (_) => auth),
         ChangeNotifierProxyProvider<AuthProvider, LearningPathProvider>(
           create: (_) => LearningPathProvider(
-            repository: LearningPathRepository(firebaseReady: firebaseReady),
+            repository: LearningPathRepository(supabaseReady: supabaseReady),
           ),
           update: (_, auth, pathProvider) {
             final provider =
                 pathProvider ??
                 LearningPathProvider(
                   repository: LearningPathRepository(
-                    firebaseReady: firebaseReady,
+                    supabaseReady: supabaseReady,
                   ),
                 );
-            if (auth.isSignedIn) {
-              Future.microtask(() => provider.syncUid(auth.uid));
-            }
+            Future.microtask(() => provider.syncUid(auth.uid));
             return provider;
           },
         ),

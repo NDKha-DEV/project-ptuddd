@@ -1,26 +1,268 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-/// Trạng thái đăng nhập dùng cho go_router redirect.
-///
-/// Hiện là bản tạm: `signInAsGuest` cho phép vào app khi chưa có Firebase.
-/// M1 thay bằng FirebaseAuth (email/mật khẩu, Google, quên mật khẩu).
+import '../../../../core/constants/app_constants.dart';
+
 class AuthProvider extends ChangeNotifier {
-  AuthProvider({required this.firebaseReady});
+  AuthProvider({
+    required this.supabaseReady,
+    Stream<AuthState>? authStateStream,
+    this.oauthTimeout = defaultOauthTimeout,
+  }) {
+    final stream = authStateStream ??
+        (supabaseReady ? Supabase.instance.client.auth.onAuthStateChange : null);
+    _authSubscription = stream?.listen(
+      _applyAuthState,
+      onError: _handleAuthError,
+    );
+  }
 
-  final bool firebaseReady;
+  static const defaultOauthTimeout = Duration(minutes: 2);
 
-  String? _uid;
+  final bool supabaseReady;
+  final Duration oauthTimeout;
 
-  String? get uid => _uid;
-  bool get isSignedIn => _uid != null;
+  StreamSubscription<AuthState>? _authSubscription;
+  Timer? _oauthTimeoutTimer;
+  User? _user;
+  bool _isInitializing = true;
+  bool _isLoading = true;
+  bool _oauthInFlight = false;
+  String? _error;
+  String? _notice;
 
-  void signInAsGuest() {
-    _uid = 'guest';
+  User? get user => _user;
+  String? get uid => _user?.id;
+  bool get isSignedIn => _user != null;
+  bool get isInitializing => _isInitializing;
+  bool get isLoading => _isLoading;
+  bool get isGoogleSignInPending => _oauthInFlight;
+  String? get error => _error;
+  String? get notice => _notice;
+
+  Future<void> initialize() async {
+    if (!supabaseReady) {
+      _isInitializing = false;
+      _isLoading = false;
+      notifyListeners();
+      return;
+    }
+
+    try {
+      final session = Supabase.instance.client.auth.currentSession;
+      _user = session?.user;
+      _error = null;
+    } catch (e) {
+      _error = _authMessage(e);
+    } finally {
+      _isInitializing = false;
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<bool> signInWithPassword({
+    required String email,
+    required String password,
+  }) async {
+    if (_isLoading) return false;
+    if (!supabaseReady) {
+      _error = 'Chưa cấu hình Supabase.';
+      _notice = null;
+      notifyListeners();
+      return false;
+    }
+
+    _startAction();
+    try {
+      final response = await Supabase.instance.client.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      if (response.session == null) {
+        _error = 'Đăng nhập không thành công. Vui lòng thử lại.';
+        return false;
+      }
+      _user = response.session!.user;
+      _clearMessages();
+      return true;
+    } catch (e) {
+      _error = _authMessage(e);
+      return false;
+    } finally {
+      _finishAction();
+    }
+  }
+
+  Future<bool> signUp({
+    required String email,
+    required String password,
+  }) async {
+    if (_isLoading) return false;
+    if (!supabaseReady) {
+      _error = 'Chưa cấu hình Supabase.';
+      _notice = null;
+      notifyListeners();
+      return false;
+    }
+
+    _startAction();
+    try {
+      final response = await Supabase.instance.client.auth.signUp(
+        email: email,
+        password: password,
+      );
+      if (response.session != null) {
+        _user = response.session!.user;
+        _clearMessages();
+        return true;
+      }
+      _error = null;
+      _notice = response.user == null
+          ? 'Đăng ký chưa thành công. Vui lòng thử lại.'
+          : 'Đăng ký thành công. Vui lòng xác nhận email trước khi đăng nhập.';
+      return false;
+    } catch (e) {
+      _error = _authMessage(e);
+      return false;
+    } finally {
+      _finishAction();
+    }
+  }
+
+  Future<bool> signInWithGoogle() async {
+    if (_isLoading || _oauthInFlight) return false;
+    if (!supabaseReady) {
+      _error = 'Chưa cấu hình Supabase.';
+      _notice = null;
+      notifyListeners();
+      return false;
+    }
+
+    _oauthInFlight = true;
+    _startAction();
+    try {
+      final launched = await Supabase.instance.client.auth.signInWithOAuth(
+        OAuthProvider.google,
+        redirectTo: AppConstants.oauthRedirectTo,
+      );
+      if (!launched) {
+        _error = 'Không mở được trình duyệt để đăng nhập Google.';
+        _clearOAuthPending();
+        return false;
+      }
+      _notice = 'Đã mở Google. Quay lại ứng dụng để hoàn tất đăng nhập.';
+      _oauthTimeoutTimer?.cancel();
+      _oauthTimeoutTimer = Timer(oauthTimeout, _onOAuthTimeout);
+      return true;
+    } catch (e) {
+      _error = _authMessage(e);
+      _clearOAuthPending();
+      return false;
+    } finally {
+      _finishAction();
+    }
+  }
+
+  Future<void> signOut() async {
+    if (!supabaseReady) return;
+
+    _isLoading = true;
+    _error = null;
+    _notice = null;
+    notifyListeners();
+
+    try {
+      await Supabase.instance.client.auth.signOut();
+    } catch (e) {
+      _error = _authMessage(e);
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  void _applyAuthState(AuthState state) {
+    _user = state.session?.user;
+    _clearOAuthPending();
+    _clearMessages();
+    _isInitializing = false;
+    _isLoading = false;
     notifyListeners();
   }
 
-  void signOut() {
-    _uid = null;
+  void _handleAuthError(Object error) {
+    _error = _authMessage(error);
+    _clearOAuthPending();
+    _notice = null;
+    _isInitializing = false;
+    _isLoading = false;
     notifyListeners();
+  }
+
+  void _startAction() {
+    _isLoading = true;
+    _clearMessages();
+    notifyListeners();
+  }
+
+  void _finishAction() {
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  void _onOAuthTimeout() {
+    if (!_oauthInFlight) return;
+    _oauthInFlight = false;
+    _error = null;
+    _notice =
+        'Đã hết thời gian chờ trong ứng dụng. Nếu cửa sổ Google vẫn mở, hãy hoàn tất hoặc đóng; phiên có thể được cập nhật khi quay lại.';
+    notifyListeners();
+  }
+
+  void _clearOAuthPending() {
+    _oauthInFlight = false;
+    _oauthTimeoutTimer?.cancel();
+    _oauthTimeoutTimer = null;
+  }
+
+  void _clearMessages() {
+    _error = null;
+    _notice = null;
+  }
+
+  String _authMessage(Object error) {
+    if (error is! AuthException) return error.toString();
+    switch (error.code) {
+      case 'invalid_login_credentials':
+        return 'Email hoặc mật khẩu không đúng.';
+      case 'email_exists':
+        return 'Email này đã được đăng ký.';
+      case 'email_not_confirmed':
+        return 'Vui lòng xác nhận email trước khi đăng nhập.';
+      case 'weak_password':
+        return 'Mật khẩu quá yếu. Vui lòng chọn mật khẩu khác.';
+      case 'over_email_send_rate_limit':
+        return 'Gửi email quá nhanh. Vui lòng thử lại sau.';
+      case 'access_denied':
+        return 'Đăng nhập Google đã bị hủy.';
+      case 'bad_oauth_state':
+      case 'bad_oauth_callback':
+        return 'Liên kết đăng nhập Google không hợp lệ. Vui lòng thử lại.';
+      case 'oauth_provider_not_supported':
+      case 'provider_disabled':
+        return 'Google OAuth chưa được cấu hình trên Supabase.';
+      default:
+        return error.message;
+    }
+  }
+
+  @override
+  void dispose() {
+    _authSubscription?.cancel();
+    _oauthTimeoutTimer?.cancel();
+    super.dispose();
   }
 }

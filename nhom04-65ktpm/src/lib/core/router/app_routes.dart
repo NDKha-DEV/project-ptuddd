@@ -4,6 +4,7 @@ class AppRoutes {
   AppRoutes._();
 
   static const login = '/login';
+  static const register = '/register';
 
   // Tab chính
   static const home = '/home'; // M5 - Daily You
